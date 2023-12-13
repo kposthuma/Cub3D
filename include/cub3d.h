@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/13 12:01:22 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/13 14:52:37 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@
 # include <math.h>
 # include <stdbool.h>
 
-typedef enum e_flag {
+# ifndef ALLOWED
+#  define ALLOWED "10 NESW"
+# endif
+
+typedef enum e_flag
+{
 	C_COLOR = 0,
 	F_COLOR = 1,
 	N_TEXTURE = 2,
@@ -44,5 +49,6 @@ void	clear_list_pre(t_data **head);
 t_data	*newnode(void *cont);
 void	clear_node(t_data **head, t_data *node);
 void	add_node(t_data **head, t_data *node);
-
+// map3d.c
+bool	validate_map(t_data **head);
 #endif

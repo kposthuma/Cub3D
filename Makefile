@@ -6,7 +6,7 @@
 #    By: lvan-gef <lvan-gef@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/09/30 23:59:06 by lvan-gef      #+#    #+#                  #
-#    Updated: 2023/12/12 18:00:47 by kposthum      ########   odam.nl          #
+#    Updated: 2023/12/13 14:25:08 by kposthum      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ LIBFT := ./libft/libft.a
 SRCS := main.c\
 		error3d.c\
 		parse3d.c\
-		list3d.c
+		list3d.c\
+		map3d.c
 		
 OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)\
 

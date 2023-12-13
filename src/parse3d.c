@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 17:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/13 13:55:33 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/13 14:53:37 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,9 @@ t_data	**parse_file(int fd)
 	assign_flag(head);
 	clear_empty_line(head);
 	if (!count_flag(head))
-		return (errmsg("incorrect number of elements"),
-			clear_list_pre(head), NULL);
+		return (errmsg("incorrect number of elements"), clear_list_pre(head), NULL);
+	if (!validate_map(head))
+		return (errmsg("invalid map"), clear_list_pre(head), NULL);
 	return (head);
 }
 
