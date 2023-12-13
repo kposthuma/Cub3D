@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:00:15 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/12 19:01:29 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/13 13:44:47 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,13 @@ void	add_node(t_data **head, t_data *node)
 	t_data	*temp;
 
 	temp = *head;
-	while (temp->next != NULL)
-		temp = temp->next;
-	temp->next = node;
+	if (!temp)
+		*head = node;
+	else
+	{
+		while (temp->next != NULL)
+			temp = temp->next;
+		temp->next = node;
+		node->prev = temp;
+	}
 }

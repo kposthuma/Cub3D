@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 17:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/12 19:02:55 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/13 13:55:33 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,11 @@ t_data	**head_init(int fd)
 
 	head = ft_calloc(1, sizeof(t_data *));
 	line = get_next_line(fd);
-	node = newnode((void *)line);
-	*head = node;
 	while (line != NULL)
 	{
-		free(line);
-		line = get_next_line(fd);
 		node = newnode((void *)line);
 		add_node(head, node);
+		line = get_next_line(fd);
 	}
 	return (head);
 }
@@ -56,24 +53,25 @@ void	assign_flag(t_data **head)
 	t_data	*temp;
 	char	*str;
 
-	while (temp != NULL && temp->prev->flag != MAP_START)
+	temp = *head;
+	while (temp != NULL && (temp->prev == NULL || temp->prev->flag != MAP_START))
 	{
 		str = (char *)temp->cont;
 		while (*str && ft_isspace(*str) == 1)
 			str++;
 		if (*str == '\0' || ft_strlen(str) < 5)
 			temp->flag = TO_CLEAR;
-		else if (str[0] == 'N' && str[1] == 'O' && str[2] == ' ')
+		else if (ft_strncmp(str, "NO ", 3) == 0)
 			temp->flag = N_TEXTURE;
-		else if (str[0] == 'S' && str[1] == 'O' && str[2] == ' ')
+		else if (ft_strncmp(str, "SO ", 3) == 0)
 			temp->flag = S_TEXTURE;
-		else if (str[0] == 'E' && str[1] == 'A' && str[2] == ' ')
+		else if (ft_strncmp(str, "EA ", 3) == 0)
 			temp->flag = E_TEXTURE;
-		else if (str[0] == 'W' && str[1] == 'E' && str[2] == ' ')
+		else if (ft_strncmp(str, "WE ", 3) == 0)
 			temp->flag = W_TEXTURE;
-		else if (str[0] == 'F' && str[1] == ' ')
+		else if (ft_strncmp(str, "F ", 2) == 0)
 			temp->flag = F_COLOR;
-		else if (str[0] == 'C' && str[1] == ' ')
+		else if (ft_strncmp(str, "C ", 2) == 0)
 			temp->flag = C_COLOR;
 		else
 			temp->flag = MAP_START;
@@ -96,15 +94,42 @@ void	clear_empty_line(t_data **head)
 	}
 }
 
+bool	count_flag(t_data **head)
+{
+	int		i;
+	size_t	check;
+	t_data	*node;
+
+	i = C_COLOR;
+	while (i <= MAP_START)
+	{
+		node = *head;
+		check = 0;
+		while (node != NULL && (node->prev == NULL || node->prev->flag != MAP_START))
+		{
+			if (node->flag == i)
+				check++;
+			node = node->next;
+		}
+		if (check != 1)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 t_data	**parse_file(int fd)
 {
 	t_data	**head;
 
 	head = head_init(fd);
+	if ((*head)->cont == NULL)
+		return (errmsg("Empty file."), free(head), NULL);
 	assign_flag(head);
 	clear_empty_line(head);
-	if (!count_flag(head)) //make this funcion i guess
-		return (NULL);
+	if (!count_flag(head))
+		return (errmsg("incorrect number of elements"),
+			clear_list_pre(head), NULL);
 	return (head);
 }
 

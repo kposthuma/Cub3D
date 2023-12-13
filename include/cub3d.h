@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/12 18:52:09 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/13 12:01:22 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,9 @@ void	errmsg(char *msg);
 // parse3d.c
 t_data	**parse_input(int count, char **arg);
 // list3d.c
+void	clear_list_pre(t_data **head);
+t_data	*newnode(void *cont);
+void	clear_node(t_data **head, t_data *node);
+void	add_node(t_data **head, t_data *node);
 
 #endif
