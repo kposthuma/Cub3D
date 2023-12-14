@@ -6,7 +6,7 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2023/12/14 13:51:56 by kposthum      ########   odam.nl          #
+#    Updated: 2023/12/14 18:47:44 by kposthum      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ $(LIBFT):
 	@$(MAKE) -C ./libft
 
 $(LIBMLX):
+	@git clone https://github.com/codam-coding-college/MLX42.git MLX42
 	@cmake ./MLX42 -B ./MLX42/build && make -C ./MLX42/build -j4
 
 clean:
