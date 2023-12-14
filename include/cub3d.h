@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/14 13:49:06 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/14 19:35:49 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 
 # ifndef ALLOWED
 #  define ALLOWED "10 NESW"
+# endif
+
+# ifndef FLOOR
+#  define FLOOR '0'
+# endif
+
+# ifndef WALL
+#  define WALL '1'
 # endif
 
 typedef enum e_flag
@@ -45,6 +53,13 @@ typedef struct s_data
 	struct s_data	*next;
 	struct s_data	*prev;
 }	t_data;
+
+typedef struct s_location
+{
+	size_t	x;
+	size_t	y;
+}	t_location;
+
 // err3d.c
 void	errmsg(char *msg);
 // parse3d.c
