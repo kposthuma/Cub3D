@@ -6,7 +6,7 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2023/12/14 18:49:43 by kposthum      ########   odam.nl          #
+#    Updated: 2023/12/14 19:01:09 by kposthum      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)\
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
+$(NAME): $(LIBFT) $(LIBMLX) $(OBJS)
 	@echo Making $(NAME)
 	@$(CC) $(OBJS) $(HEADERS) $(LIBFT) $(LIBMLX) -Iinclude -ldl -lglfw -pthread -lm -o $(NAME)
 
@@ -46,6 +46,8 @@ $(LIBFT):
 	@$(MAKE) -C ./libft
 
 $(LIBMLX):
+	@git submodule init
+	@git submodule update
 	@cmake ./MLX42 -B ./MLX42/build && make -C ./MLX42/build -j4
 
 clean:
