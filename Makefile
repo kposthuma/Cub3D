@@ -3,10 +3,10 @@
 #                                                         ::::::::             #
 #    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
-#    By: lvan-gef <lvan-gef@student.codam.nl>         +#+                      #
+#    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2023/09/30 23:59:06 by lvan-gef      #+#    #+#                  #
-#    Updated: 2023/12/13 14:25:08 by kposthum      ########   odam.nl          #
+#    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
+#    Updated: 2023/12/14 13:51:56 by kposthum      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,9 @@ CC := cc -Wall -Werror -Wextra -g3
 SRCDIR := ./src
 OBJDIR := ./obj
 
-HEADERS := -I ./libft/include -I ./include
+HEADERS := -I ./libft/include -I ./include -I ./MLX42/include
 LIBFT := ./libft/libft.a
+LIBMLX := ./MLX42/build/libmlx42.a
 
 SRCS := main.c\
 		error3d.c\
@@ -32,9 +33,9 @@ OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)\
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
 	@echo Making $(NAME)
-	@$(CC) $(OBJS) $(HEADERS) $(LIBFT) $(LIBS) -o $(NAME)
+	@$(CC) $(OBJS) $(HEADERS) $(LIBFT) $(LIBMLX) -Iinclude -ldl -lglfw -pthread -lm -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(OBJDIR)
@@ -44,10 +45,14 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 $(LIBFT):
 	@$(MAKE) -C ./libft
 
+$(LIBMLX):
+	@cmake ./MLX42 -B ./MLX42/build && make -C ./MLX42/build -j4
+
 clean:
 	@echo Removing object files $(NAME)
 	@rm -f $(OBJS)
 	@rm -rf $(OBJDIR)
+	@rm -rf ./MLX42/build
 	@$(MAKE) clean -C ./libft
 
 fclean: clean

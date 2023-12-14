@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/13 14:52:37 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/14 13:49:06 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include <libft.h>
 # include <math.h>
 # include <stdbool.h>
+# include <MLX42/MLX42.h>
+# include <MLX42/MLX42_Int.h>
+# include <glad/glad.h>
+# include <KHR/khrplatform.h>
+# include <lodepng/lodepng.h>
 
 # ifndef ALLOWED
 #  define ALLOWED "10 NESW"
@@ -49,6 +54,7 @@ void	clear_list_pre(t_data **head);
 t_data	*newnode(void *cont);
 void	clear_node(t_data **head, t_data *node);
 void	add_node(t_data **head, t_data *node);
+void	set_flag_rest(t_data *node);
 // map3d.c
 bool	validate_map(t_data **head);
 #endif

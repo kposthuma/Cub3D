@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 17:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/13 14:53:37 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/14 13:54:54 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	assign_flag(t_data **head)
 	char	*str;
 
 	temp = *head;
-	while (temp != NULL && (temp->prev == NULL || temp->prev->flag != MAP_START))
+	while (temp != NULL && (temp->prev == NULL
+			|| temp->prev->flag != MAP_START))
 	{
 		str = (char *)temp->cont;
 		while (*str && ft_isspace(*str) == 1)
@@ -105,7 +106,8 @@ bool	count_flag(t_data **head)
 	{
 		node = *head;
 		check = 0;
-		while (node != NULL && (node->prev == NULL || node->prev->flag != MAP_START))
+		while (node != NULL && (node->prev == NULL
+				|| node->prev->flag != MAP_START))
 		{
 			if (node->flag == i)
 				check++;
@@ -128,7 +130,8 @@ t_data	**parse_file(int fd)
 	assign_flag(head);
 	clear_empty_line(head);
 	if (!count_flag(head))
-		return (errmsg("incorrect number of elements"), clear_list_pre(head), NULL);
+		return (errmsg("incorrect number of elements"),
+			clear_list_pre(head), NULL);
 	if (!validate_map(head))
 		return (errmsg("invalid map"), clear_list_pre(head), NULL);
 	return (head);
