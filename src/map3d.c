@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/13 14:00:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/16 21:04:30 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/16 21:26:08 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,37 +37,32 @@ bool	player(char **map)
 	return (true);
 }
 
-t_location	*find_loc(char **map, char *arr)
+t_location	find_loc(char **map, char *arr)
 {
 	t_location	loc;
-	size_t		i;
-	size_t		j;
 
-	i = 0;
-	while (map[i])
+	loc.y = 0;
+	while (map[loc.y])
 	{
-		j = 0;
-		while (map[i][j])
+		loc.x = 0;
+		while (map[loc.y][loc.x])
 		{
-			if (strchr(arr, map[i][j]) != NULL)
-			{
-				loc.x = i;
-				loc.y = j;
-				return (&loc);
-			}
-			j++;
+			if (strchr(arr, map[loc.y][loc.x]) != NULL)
+				return (loc);
+			loc.x++;
 		}
-		i++;
+		loc.y++;
 	}
-	return (NULL);
+	return (loc);
 }
 
 bool	_check_map(char **map, size_t x, size_t y)
 {
-	map[y][x] = WALL;
-	if (map[y][x + 1] == FLOOR)
+	ft_printf("values? x=%u y=%u\n", x, y);
+	map[y][x] = '1';
+	if (map[y][x + 1] == '0')
 		return (_check_map(map, x + 1, y));
-	if (map[y + 1][x] == FLOOR)
+	if (map[y + 1][x] == '0')
 		return (_check_map(map, x, y + 1));
 	if (map[y][x + 1] == ' ' || map[y + 1][x] == ' '
 		|| !map[y][x + 1] || !map[y + 1][x])
@@ -77,14 +72,14 @@ bool	_check_map(char **map, size_t x, size_t y)
 
 bool	check_map(char **map)
 {
-	t_location *loc;
+	t_location loc;
 
 	loc = find_loc(map, "NESW");
-	while (loc != NULL)
+	while (loc.y != strofstrlen(map) + 1)
 	{
-		if (loc->x == 0 || loc->y == 0)
+		if (loc.x == 0 || loc.y == 0)
 			return (false);
-		if (!_check_map(map, loc->x, loc->y));
+		if (!_check_map(map, loc.x, loc.y))
 			return (false);
 		loc = find_loc(map, "0");
 	}
