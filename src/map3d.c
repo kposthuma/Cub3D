@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/13 14:00:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/14 19:38:43 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/16 21:04:30 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	player(char **map)
 	return (true);
 }
 
-t_location	find_player(char **map)
+t_location	*find_loc(char **map, char *arr)
 {
 	t_location	loc;
 	size_t		i;
@@ -49,38 +49,44 @@ t_location	find_player(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'E'
-				|| map[i][j] == 'S' || map[i][j] == 'W')
-				break ;
+			if (strchr(arr, map[i][j]) != NULL)
+			{
+				loc.x = i;
+				loc.y = j;
+				return (&loc);
+			}
 			j++;
 		}
 		i++;
 	}
-	loc.x = i;
-	loc.y = j;
-	return (loc);
+	return (NULL);
+}
+
+bool	_check_map(char **map, size_t x, size_t y)
+{
+	map[y][x] = WALL;
+	if (map[y][x + 1] == FLOOR)
+		return (_check_map(map, x + 1, y));
+	if (map[y + 1][x] == FLOOR)
+		return (_check_map(map, x, y + 1));
+	if (map[y][x + 1] == ' ' || map[y + 1][x] == ' '
+		|| !map[y][x + 1] || !map[y + 1][x])
+		return (false);
+	return (true);
 }
 
 bool	check_map(char **map)
 {
-	size_t	x;
-	size_t	y;
+	t_location *loc;
 
-	y = 0;
-	while (map[y])
+	loc = find_loc(map, "NESW");
+	while (loc != NULL)
 	{
-		x = 0;
-		while (map[y][x])
-		{
-			if ((x == 0 && map[y][x] == FLOOR) || (y == 0 && map[y][x] == FLOOR)
-				|| (map[y][x] == FLOOR && map[y][x + 1] == '\0')
-				|| (map[y][x] == FLOOR && map[y + 1] == NULL)
-				|| (map[y][x] == FLOOR && map[y][x + 1] == ' ')
-				|| (map[y][x] == FLOOR && map[y + 1][x] == ' '))
-				return (false);
-			x++;
-		}
-		y++;
+		if (loc->x == 0 || loc->y == 0)
+			return (false);
+		if (!_check_map(map, loc->x, loc->y));
+			return (false);
+		loc = find_loc(map, "0");
 	}
 	return (true);
 }
