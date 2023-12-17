@@ -6,7 +6,7 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2023/12/14 19:01:09 by kposthum      ########   odam.nl          #
+#    Updated: 2023/12/17 16:33:46 by koen          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRCS := main.c\
 		error3d.c\
 		parse3d.c\
 		list3d.c\
-		map3d.c
+		map3d.c\
+		color_texture3d.c
 		
 OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)\
 

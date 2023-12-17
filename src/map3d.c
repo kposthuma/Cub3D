@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/13 14:00:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/17 15:20:17 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/17 16:29:32 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ char	**make_map(t_data *start)
 		i++;
 		start = start->next;
 	}
-	print_charpp(map);
+	// print_charpp(map);
 	return (map);
 }
 
@@ -180,7 +180,11 @@ bool	validate_map(t_data **head)
 	while (node->flag != MAP_START)
 		node = node->next;
 	map = make_map(node);
+	print_charpp(map);
+	if (!_validate_map(map))
+		return (false);
+	map = make_map(node);
 	free((char *)node->cont);
 	node->cont = (void *)map;
-	return (_validate_map((char **)node->cont));
+	return (true);
 }

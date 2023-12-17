@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 17:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/14 13:54:54 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/17 16:33:48 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ t_data	**parse_file(int fd)
 			clear_list_pre(head), NULL);
 	if (!validate_map(head))
 		return (errmsg("invalid map"), clear_list_pre(head), NULL);
+	
 	return (head);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/14 19:35:49 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/17 16:38:21 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,7 @@ void	add_node(t_data **head, t_data *node);
 void	set_flag_rest(t_data *node);
 // map3d.c
 bool	validate_map(t_data **head);
+// color_texture.c
+bool	validate_color(t_data **head, int flag);
+bool	validate_texure(t_data **head, int flag);
 #endif
