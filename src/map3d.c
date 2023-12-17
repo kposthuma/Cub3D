@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/13 14:00:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/17 16:29:32 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/17 19:34:32 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ static bool	_validate_map(char **map)
 		return (false);
 	if (!check_map(map))
 		return (false);
-	ft_printf("OK!\n");
 	return (true);
 }
 

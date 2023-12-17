@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/17 16:38:21 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/17 19:33:49 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ typedef struct s_location
 	size_t	y;
 }	t_location;
 
+typedef struct	s_img_data
+{
+	mlx_texture_t	*texture;
+	mlx_image_t		*image;
+}	t_img_data;
+
 // err3d.c
 void	errmsg(char *msg);
 // parse3d.c
@@ -74,5 +80,5 @@ void	set_flag_rest(t_data *node);
 bool	validate_map(t_data **head);
 // color_texture.c
 bool	validate_color(t_data **head, int flag);
-bool	validate_texure(t_data **head, int flag);
+bool	validate_texture(t_data **head, int flag);
 #endif
