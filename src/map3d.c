@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/13 14:00:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/16 21:26:08 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/17 15:20:17 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,18 @@ t_location	find_loc(char **map, char *arr)
 
 bool	_check_map(char **map, size_t x, size_t y)
 {
-	ft_printf("values? x=%u y=%u\n", x, y);
+	// ft_printf("values? x=%u y=%u\n", x, y);
 	map[y][x] = '1';
 	if (map[y][x + 1] == '0')
-		return (_check_map(map, x + 1, y));
+	{
+		if (!_check_map(map, x + 1, y))
+			return (false);
+	}
 	if (map[y + 1][x] == '0')
-		return (_check_map(map, x, y + 1));
+	{
+		if (!_check_map(map, x, y + 1))
+			return (false);
+	}
 	if (map[y][x + 1] == ' ' || map[y + 1][x] == ' '
 		|| !map[y][x + 1] || !map[y + 1][x])
 		return (false);
@@ -75,7 +81,7 @@ bool	check_map(char **map)
 	t_location loc;
 
 	loc = find_loc(map, "NESW");
-	while (loc.y != strofstrlen(map) + 1)
+	while (loc.y != strofstrlen(map))
 	{
 		if (loc.x == 0 || loc.y == 0)
 			return (false);
@@ -92,6 +98,7 @@ static bool	_validate_map(char **map)
 		return (false);
 	if (!check_map(map))
 		return (false);
+	ft_printf("OK!\n");
 	return (true);
 }
 
