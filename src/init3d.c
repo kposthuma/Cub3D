@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   init3d.c                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
+/*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/12/12 16:53:26 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/18 19:10:17 by koen          ########   odam.nl         */
+/*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
+/*   Updated: 2023/12/18 18:56:21 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-int	main(int argc, char **argv)
+t_cub3d	*cub3d_init(mlx_t *mlx, t_data **head)
 {
-	t_data	**head;
-	mlx_t	*mlx;
 	t_cub3d	*cub3d;
 
-	head = parse_input(argc, argv);
-	if (head == NULL)
-		return (1);
-	mlx = mlx_init(100, 100, "cub3d", false);
-	cub3d = cub3d_init(mlx, head);
-	destroy_cub3d(cub3d);
+	cub3d = ft_calloc(1, sizeof(t_cub3d));
+	cub3d->mlx = mlx;
+	cub3d->data = head;
+	return (cub3d);
 }

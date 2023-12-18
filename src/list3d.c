@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:00:15 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/14 13:48:33 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/18 19:08:34 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,21 @@ void	clear_list_pre(t_data **head)
 	free(head);
 }
 
-void	free_cont(t_data *node)
+void	free_cont(mlx_t *mlx, t_data *node)
 {
 	if (node->flag >= N_TEXTURE && node->flag <= W_TEXTURE)
-		mlx_delete_texture((mlx_texture_t *)node->cont);
+	{
+		mlx_delete_texture(((t_img_data *)node->cont)->texture);
+		mlx_delete_image(mlx, ((t_img_data *)node->cont)->image);
+		free((t_img_data *)node->cont);
+	}
 	else if (node->flag == MAP_START)
 		ft_free((char **)node->cont);
-	else
+	else if (node->flag != C_COLOR || node->flag != F_COLOR)
 		free((char *)node->cont);
 }
 
-void	clear_list_post(t_data **head)
+void	clear_list_post(mlx_t *mlx, t_data **head)
 {
 	t_data	*node;
 	t_data	*temp;
@@ -48,7 +52,7 @@ void	clear_list_post(t_data **head)
 	{
 		temp = node;
 		node = node->next;
-		free_cont(temp);
+		free_cont(mlx, temp);
 		free(temp);
 	}
 	free(head);
