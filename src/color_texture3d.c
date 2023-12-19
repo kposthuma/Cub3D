@@ -6,17 +6,24 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/17 16:32:53 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/17 19:38:30 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/19 14:37:47 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
+void	trim_nl(char *str)
+{
+	if (str[ft_strlen(str) - 1] == '\n')
+		str[ft_strlen(str) - 1] = '\0';
+}
+
 bool	validate_value(char **val)
 {
-	static size_t	i = 0;
-	size_t			j;
+	size_t	i;
+	size_t	j;
 
+	i = 0;
 	val[2][ft_strlen(val[2]) - 1] = '\0';
 	while (val[i])
 	{
@@ -76,6 +83,7 @@ bool	validate_texture(t_data **head, int flag)
 	while (ft_isspace(*str) == 1)
 		str++;
 	img = ft_calloc(1, sizeof(t_img_data));
+	trim_nl(str);
 	img->texture = mlx_load_png(str);
 	if (!img->texture)
 		return (free(img), false);

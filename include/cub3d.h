@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/18 19:07:08 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/19 15:34:56 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,6 @@
 # include <glad/glad.h>
 # include <KHR/khrplatform.h>
 # include <lodepng/lodepng.h>
-
-# ifndef ALLOWED
-#  define ALLOWED "10 NESW"
-# endif
-
-# ifndef FLOOR
-#  define FLOOR '0'
-# endif
-
-# ifndef WALL
-#  define WALL '1'
-# endif
 
 typedef enum e_flag
 {

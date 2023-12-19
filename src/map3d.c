@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/13 14:00:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/17 19:34:32 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/19 15:36:09 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_location	find_loc(char **map, char *arr)
 
 bool	_check_map(char **map, size_t x, size_t y)
 {
-	// ft_printf("values? x=%u y=%u\n", x, y);
 	map[y][x] = '1';
 	if (map[y][x + 1] == '0')
 	{
@@ -78,7 +77,7 @@ bool	_check_map(char **map, size_t x, size_t y)
 
 bool	check_map(char **map)
 {
-	t_location loc;
+	t_location	loc;
 
 	loc = find_loc(map, "NESW");
 	while (loc.y != strofstrlen(map))
@@ -166,7 +165,6 @@ char	**make_map(t_data *start)
 		i++;
 		start = start->next;
 	}
-	// print_charpp(map);
 	return (map);
 }
 
