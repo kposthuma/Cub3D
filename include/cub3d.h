@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/19 15:34:56 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/19 17:06:23 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_location
 	size_t	y;
 }	t_location;
 
-typedef struct	s_img_data
+typedef struct s_img_data
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;
@@ -56,8 +56,10 @@ typedef struct	s_img_data
 
 typedef struct s_cub3d
 {
-	t_data	**data;
-	mlx_t	*mlx;
+	t_data		**data;
+	mlx_t		*mlx;
+	mlx_image_t	*ceiling;
+	mlx_image_t	*floor;
 }	t_cub3d;
 
 

@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/17 16:32:53 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/19 14:37:47 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/19 18:17:46 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ bool	validate_color(t_data **head, int flag)
 	t_data		*node;
 	char		*str;
 	char		**val;
-	int			arr[3];
-	static int	i = 0;
+	int			*arr;
+	int			i;
 
 	node = *head;
 	while (node->flag != flag)
@@ -57,17 +57,18 @@ bool	validate_color(t_data **head, int flag)
 	while (ft_isspace(*str) == 1)
 		str++;
 	val = ft_split(str, ',');
-	if (strofstrlen(val) != 3 || !validate_value(val))
+	if (!val || strofstrlen(val) != 3 || !validate_value(val))
 		return (ft_free(val), false);
 	free((char *)node->cont);
+	arr = ft_calloc(3 , sizeof(int));
+	i = 0;
 	while (i < 3)
 	{
 		arr[i] = ft_atoi(val[i]);
 		i++;
 	}
-	ft_free(val);
 	node->cont = (void *)arr;
-	return (true);
+	return (ft_free(val), true);
 }
 
 bool	validate_texture(t_data **head, int flag)
