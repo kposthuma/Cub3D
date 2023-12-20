@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:00:15 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/19 15:35:29 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/20 18:13:24 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void	free_cont(mlx_t *mlx, t_data *node)
 	}
 	else if (node->flag == MAP_START)
 		ft_free((char **)node->cont);
-	else if (node->flag != C_COLOR && node->flag != F_COLOR)
+	else if (node->flag == C_COLOR && node->flag == F_COLOR)
+		free((int *)node->cont);
+	else
 		free((char *)node->cont);
 }
 

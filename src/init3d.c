@@ -6,11 +6,49 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/19 18:28:25 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/20 18:44:03 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+
+int	get_r(int rgba)
+{
+	return ((rgba >> 24) & 0xFF);
+}
+
+int	get_g(int rgba)
+{
+	return ((rgba >> 16) & 0xFF);
+}
+
+int	get_b(int rgba)
+{
+	return ((rgba >> 8) & 0xFF);
+}
+
+int	get_a(int rgba)
+{
+	return (rgba & 0xFF);
+}
+
+void	set_color(mlx_image_t *image, int rgba, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size)
+	{
+		image->pixels[i] = get_r(rgba);
+		i += sizeof(int8_t);
+		image->pixels[i] = get_g(rgba);
+		i += sizeof(int8_t);
+		image->pixels[i] = get_b(rgba);
+		i += sizeof(int8_t);
+		image->pixels[i] = get_a(rgba);
+		i += sizeof(int8_t);
+	}
+}
 
 int	get_rgba(int r, int g, int b, int a)
 {
@@ -28,11 +66,9 @@ mlx_image_t	*get_ceiling(mlx_t *mlx, t_data **head)
 	while (node->flag != C_COLOR)
 		node = node->next;
 	value = (int *)node->cont;
-	ft_printf("ceiling value?<%i><%i><%i>\n", value[0], value[1], value[2]);
-	rgba = get_rgba(value[0], value[1], value[2], 0);
-	ft_printf("rgba value?<%i>\n", rgba);
+	rgba = get_rgba(value[0], value[1], value[2], 255);
 	ceiling = mlx_new_image(mlx, mlx->width, (mlx->height / 2));
-	ft_memset(ceiling->pixels, 255, ceiling->height * ceiling->width * sizeof(int32_t));
+	set_color(ceiling, rgba, ceiling->height * ceiling->width * sizeof(int32_t));
 	mlx_image_to_window(mlx, ceiling, 0, 0);
 	return (ceiling);
 }
@@ -48,11 +84,9 @@ mlx_image_t	*get_floor(mlx_t *mlx, t_data **head)
 	while (node->flag != F_COLOR)
 		node = node->next;
 	value = (int *)node->cont;
-	ft_printf("floor value?<%i><%i><%i>\n", value[0], value[1], value[2]);
-	rgba = get_rgba(value[0], value[1], value[2], 0);
-	ft_printf("rgba value?<%i>\n", rgba);
+	rgba = get_rgba(value[0], value[1], value[2], 255);
 	floor = mlx_new_image(mlx, mlx->width, mlx->height / 2 + 1);
-	ft_memset(floor->pixels, 200, floor->height * floor->width * sizeof(int32_t));
+	set_color(floor, rgba, floor->height * floor->width * sizeof(int32_t));
 	mlx_image_to_window(mlx, floor, 0, mlx->height / 2);
 	return (floor);
 }
