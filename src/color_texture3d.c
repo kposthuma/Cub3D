@@ -6,17 +6,12 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/17 16:32:53 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/19 18:17:46 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/21 17:41:59 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	trim_nl(char *str)
-{
-	if (str[ft_strlen(str) - 1] == '\n')
-		str[ft_strlen(str) - 1] = '\0';
-}
 
 bool	validate_value(char **val)
 {

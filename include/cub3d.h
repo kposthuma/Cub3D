@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/19 17:06:23 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/21 17:41:13 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,31 @@ typedef struct s_cub3d
 
 
 // err3d.c
-void	errmsg(char *msg);
+void		errmsg(char *msg);
 // parse3d.c
-t_data	**parse_input(int count, char **arg);
+t_data		**parse_input(int count, char **arg);
+void		set_flag_rest(t_data *node);
 // list3d.c
-void	clear_list_pre(t_data **head);
-void	clear_list_post(mlx_t *mlx, t_data **head);
-t_data	*newnode(void *cont);
-void	clear_node(t_data **head, t_data *node);
-void	add_node(t_data **head, t_data *node);
-void	set_flag_rest(t_data *node);
+t_data		*newnode(void *cont);
+void		clear_node(t_data **head, t_data *node);
+void		add_node(t_data **head, t_data *node);
 // map3d.c
-bool	validate_map(t_data **head);
+bool		validate_map(t_data **head);
+// maputils3d.c
+bool		player(char **map);
+t_location	find_loc(char **map, char *arr);
 // color_texture3d.c
-bool	validate_color(t_data **head, int flag);
-bool	validate_texture(t_data **head, int flag);
+bool		validate_color(t_data **head, int flag);
+bool		validate_texture(t_data **head, int flag);
+size_t		determine_height(t_data **start);
+size_t		determine_length(t_data **start);
 // init3d.c
-t_cub3d	*cub3d_init(mlx_t *mlx, t_data **head);
+t_cub3d		*cub3d_init(mlx_t *mlx, t_data **head);
 // destroy3d.c
-void	destroy_cub3d(t_cub3d *cub3d);
+void		destroy_cub3d(t_cub3d *cub3d);
+void		clear_list_pre(t_data **head);
+void		clear_list_post(mlx_t *mlx, t_data **head);
+// utils3d.c
+void		trim_nl(char *line);
 
 #endif

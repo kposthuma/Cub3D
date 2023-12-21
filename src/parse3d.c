@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 17:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/19 18:14:34 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/21 17:37:41 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,16 @@ void	assign_flag(t_data **head)
 	}
 }
 
+void	set_flag_rest(t_data *node)
+{
+	node = node->next;
+	while (node != NULL)
+	{
+		node->flag = TO_CLEAR;
+		node = node->next;
+	}
+}
+
 void	clear_empty_line(t_data **head)
 {
 	t_data	*node;
@@ -137,7 +147,8 @@ t_data	**parse_file(int fd)
 	if (!(validate_color(head, C_COLOR) && validate_color(head, F_COLOR)))
 		return (errmsg("invalid color value"), NULL);
 	if (!(validate_texture(head, N_TEXTURE) && validate_texture(head, E_TEXTURE)
-		&& validate_texture(head, S_TEXTURE) && validate_texture(head, W_TEXTURE)))
+			&& validate_texture(head, S_TEXTURE)
+			&& validate_texture(head, W_TEXTURE)))
 		return (errmsg("invalid texture path"), NULL);
 	ft_printf("OK!\n");
 	return (head);
