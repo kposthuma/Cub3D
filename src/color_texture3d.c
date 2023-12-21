@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/17 16:32:53 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/21 17:52:56 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/21 19:19:57 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ bool	validate_value(char **val)
 	{
 		if (ft_strlen(val[i]) > 3
 			|| (ft_atoi(val[i]) > 255 && ft_atoi(val[i]) < 0))
-			return (ft_printf("here\n"), false);
+			return (false);
 		j = 0;
 		while (val[i][j])
 		{
 			if (ft_isdigit(val[i][j]) == 0)
-				return (ft_printf("this\n"), false);
+				return (false);
 			j++;
 		}
 		i++;
