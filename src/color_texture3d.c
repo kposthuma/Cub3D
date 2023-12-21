@@ -6,12 +6,11 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/17 16:32:53 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/21 17:41:59 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/21 17:52:56 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
 
 bool	validate_value(char **val)
 {
@@ -55,7 +54,7 @@ bool	validate_color(t_data **head, int flag)
 	if (!val || strofstrlen(val) != 3 || !validate_value(val))
 		return (ft_free(val), false);
 	free((char *)node->cont);
-	arr = ft_calloc(3 , sizeof(int));
+	arr = ft_calloc(3, sizeof(int));
 	i = 0;
 	while (i < 3)
 	{

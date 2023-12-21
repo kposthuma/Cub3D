@@ -6,12 +6,11 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/13 14:00:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/21 17:41:41 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/21 17:43:35 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
 
 bool	_check_map(char **map, size_t x, size_t y)
 {

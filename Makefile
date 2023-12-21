@@ -6,7 +6,7 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2023/12/21 17:38:27 by kposthum      ########   odam.nl          #
+#    Updated: 2023/12/21 17:48:40 by kposthum      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ LIBMLX := ./MLX42/build/libmlx42.a
 SRCS := main.c\
 		error3d.c\
 		parse3d.c\
+		flag3d.c\
 		list3d.c\
 		map3d.c\
 		maputils3d.c\

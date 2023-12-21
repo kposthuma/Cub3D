@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/21 17:41:13 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/21 17:49:57 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ typedef struct s_cub3d
 void		errmsg(char *msg);
 // parse3d.c
 t_data		**parse_input(int count, char **arg);
+// flag3d.c
+void		assign_flag(t_data **head);
 void		set_flag_rest(t_data *node);
+bool		count_flag(t_data **head);
 // list3d.c
 t_data		*newnode(void *cont);
 void		clear_node(t_data **head, t_data *node);
