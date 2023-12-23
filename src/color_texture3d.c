@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/17 16:32:53 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/21 19:19:57 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/23 20:11:47 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,13 @@ bool	validate_value(char **val)
 
 bool	validate_color(t_data **head, int flag)
 {
-	t_data		*node;
-	char		*str;
-	char		**val;
-	int			*arr;
-	int			i;
+	t_data	*node;
+	char	*str;
+	char	**val;
+	int		*arr;
+	int		i;
 
-	node = *head;
-	while (node->flag != flag)
-		node = node->next;
+	node = find_node(head, flag);
 	str = (char *)node->cont + 1;
 	while (ft_isspace(*str) == 1)
 		str++;

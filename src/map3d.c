@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/13 14:00:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/21 17:43:35 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/23 20:00:46 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,7 @@ bool	validate_map(t_data **head)
 	t_data	*node;
 	char	**map;
 
-	node = *head;
-	while (node->flag != MAP_START)
-		node = node->next;
+	node = find_node(head, MAP_START);
 	map = make_map(node);
 	print_charpp(map);
 	if (!_validate_map(map))

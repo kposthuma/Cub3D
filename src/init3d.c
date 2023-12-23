@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/21 17:47:49 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/23 20:07:10 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,37 +30,22 @@ void	set_color(mlx_image_t *image, int *value, size_t size)
 	}
 }
 
-mlx_image_t	*get_ceiling(mlx_t *mlx, t_data **head)
+mlx_image_t	*get_background(mlx_t *mlx, t_data **head, bool where, int flag)
 {
-	mlx_image_t	*ceiling;
+	mlx_image_t	*image;
 	t_data		*node;
 	int			*value;
 
-	node = *head;
-	while (node->flag != C_COLOR)
-		node = node->next;
+	node = find_node(head, flag);
 	value = (int *)node->cont;
-	ceiling = mlx_new_image(mlx, mlx->width, (mlx->height / 2));
-	set_color(ceiling, value,
-		ceiling->height * ceiling->width * sizeof(int32_t));
-	mlx_image_to_window(mlx, ceiling, 0, 0);
-	return (ceiling);
-}
-
-mlx_image_t	*get_floor(mlx_t *mlx, t_data **head)
-{
-	mlx_image_t	*floor;
-	t_data		*node;
-	int			*value;
-
-	node = *head;
-	while (node->flag != F_COLOR)
-		node = node->next;
-	value = (int *)node->cont;
-	floor = mlx_new_image(mlx, mlx->width, mlx->height / 2 + 1);
-	set_color(floor, value, floor->height * floor->width * sizeof(int32_t));
-	mlx_image_to_window(mlx, floor, 0, mlx->height / 2);
-	return (floor);
+	image = mlx_new_image(mlx, mlx->width, (mlx->height / 2));
+	set_color(image, value,
+		image->height * image->width * sizeof(int32_t));
+	if (!where)
+		mlx_image_to_window(mlx, image, 0, 0);
+	else
+		mlx_image_to_window(mlx, image, 0, mlx->height / 2);
+	return (image);
 }
 
 t_cub3d	*cub3d_init(mlx_t *mlx, t_data **head)
@@ -68,8 +53,8 @@ t_cub3d	*cub3d_init(mlx_t *mlx, t_data **head)
 	t_cub3d		*cub3d;
 
 	cub3d = ft_calloc(1, sizeof(t_cub3d));
-	cub3d->floor = get_floor(mlx, head);
-	cub3d->ceiling = get_ceiling(mlx, head);
+	cub3d->floor = get_background(mlx, head, true, F_COLOR);
+	cub3d->ceiling = get_background(mlx, head, false, C_COLOR);
 	cub3d->mlx = mlx;
 	cub3d->data = head;
 	mlx_loop(mlx);

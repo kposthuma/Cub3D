@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/21 17:49:57 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/23 19:59:42 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # include <glad/glad.h>
 # include <KHR/khrplatform.h>
 # include <lodepng/lodepng.h>
+
+# ifndef PI
+#  define PI 3.14159265359
+# endif
 
 typedef enum e_flag
 {
@@ -72,6 +76,7 @@ void		assign_flag(t_data **head);
 void		set_flag_rest(t_data *node);
 bool		count_flag(t_data **head);
 // list3d.c
+t_data		*find_node(t_data **head, int flag);
 t_data		*newnode(void *cont);
 void		clear_node(t_data **head, t_data *node);
 void		add_node(t_data **head, t_data *node);
