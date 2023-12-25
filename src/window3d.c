@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   window3d.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
+/*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/12/12 16:53:26 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/25 20:11:57 by koen          ########   odam.nl         */
+/*   Created: 2023/12/25 20:11:23 by koen          #+#    #+#                 */
+/*   Updated: 2023/12/25 20:17:06 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-int	main(int argc, char **argv)
+void test(t_cub3d *cub3d)
 {
-	t_data	**head;
-	mlx_t	*mlx;
-	t_cub3d	*cub3d;
-
-	head = parse_input(argc, argv);
-	if (head == NULL)
-		return (1);
-	mlx = mlx_init(1600, 900, "cub3d", false);
-	cub3d = cub3d_init(mlx, head);
-	test(cub3d);
-	destroy_cub3d(cub3d);
+	mlx_image_to_window(cub3d->mlx, cub3d->ceiling, 0, 0);
+	mlx_image_to_window(cub3d->mlx, cub3d->floor, 0, cub3d->mlx->height / 2);
+	mlx_loop(cub3d->mlx);
 }

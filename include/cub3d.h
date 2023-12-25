@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/23 19:59:42 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/25 20:12:56 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,20 @@ typedef struct s_img_data
 	mlx_image_t		*image;
 }	t_img_data;
 
+typedef struct s_player
+{
+	t_location	start;
+	float		angle;
+}	t_player;
+
+
 typedef struct s_cub3d
 {
 	t_data		**data;
 	mlx_t		*mlx;
 	mlx_image_t	*ceiling;
 	mlx_image_t	*floor;
+	t_player	*player;
 }	t_cub3d;
 
 
@@ -98,5 +106,7 @@ void		clear_list_pre(t_data **head);
 void		clear_list_post(mlx_t *mlx, t_data **head);
 // utils3d.c
 void		trim_nl(char *line);
+// window3d.c
+void		test(t_cub3d *cub3d);
 
 #endif
