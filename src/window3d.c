@@ -6,11 +6,26 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/25 20:11:23 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/28 17:47:40 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/28 19:57:04 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+// WIP
+void	move_player(mlx_key_data_t keydata, void *param)
+{
+	t_cub3d	*cub3d;
+
+	cub3d = (t_cub3d *)param;
+	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT) && keydata.key == MLX_KEY_UP)
+		move_forwards(cub3d);
+	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT) && keydata.key == MLX_KEY_DOWN)
+		move_backwards(cub3d);
+	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT) && keydata.key == MLX_KEY_LEFT)
+		turn_left(cub3d);
+	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT) && keydata.key == MLX_KEY_RIGHT)
+		turn_right(cub3d);
+}
 
 void	test_draw_map(mlx_t *mlx, mlx_image_t *wall, mlx_image_t *tile, t_data **data)
 {
@@ -64,6 +79,6 @@ void test(t_cub3d *cub3d)
 	test_draw_map(cub3d->mlx, wall, tile, cub3d->data);
 	mlx_image_to_window(cub3d->mlx, player, (cub3d->player->start.x * 100) + 45,
 		(cub3d->player->start.y * 100) + 45);
-	
+	mlx_key_hook(cub3d->mlx, &move_player, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
 }

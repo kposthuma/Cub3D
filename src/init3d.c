@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/25 20:13:28 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/28 19:20:19 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ t_player	*init_player(t_data **head)
 	player = ft_calloc(1, sizeof(t_player));
 	player->start = find_loc(map, "NESW");
 	player->angle  = determine_angle(map, player->start);
+	player->location[0] = player->start.x * BLOCKSIZE + BLOCKSIZE / 2;
+	player->location[1] = player->start.y * BLOCKSIZE + BLOCKSIZE / 2;
 	return (player);
 }
 
