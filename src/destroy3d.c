@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 19:00:02 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/21 17:52:37 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/28 14:41:42 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	destroy_cub3d(t_cub3d *cub3d)
 {
 	clear_list_post(cub3d->mlx, cub3d->data);
+	mlx_delete_image(cub3d->mlx, cub3d->ceiling);
+	mlx_delete_image(cub3d->mlx, cub3d->floor);
 	mlx_terminate(cub3d->mlx);
 	free(cub3d);
 }

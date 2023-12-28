@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/25 20:12:56 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/28 14:53:57 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_img_data
 typedef struct s_player
 {
 	t_location	start;
+	float		location[2];
 	float		angle;
 }	t_player;
 
@@ -100,6 +101,7 @@ size_t		determine_height(t_data **start);
 size_t		determine_length(t_data **start);
 // init3d.c
 t_cub3d		*cub3d_init(mlx_t *mlx, t_data **head);
+void		set_color(mlx_image_t *image, int *value, size_t size);
 // destroy3d.c
 void		destroy_cub3d(t_cub3d *cub3d);
 void		clear_list_pre(t_data **head);
