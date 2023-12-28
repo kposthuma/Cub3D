@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   color3d.c                                          :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
+/*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/12/21 17:44:24 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/21 17:44:46 by kposthum      ########   odam.nl         */
+/*   Created: 2023/12/28 15:10:47 by koen          #+#    #+#                 */
+/*   Updated: 2023/12/28 15:10:50 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
