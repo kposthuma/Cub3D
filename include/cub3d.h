@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/28 14:53:57 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/29 19:27:33 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 
 # ifndef PI
 #  define PI 3.14159265359
+# endif
+
+# ifndef BLOCKSIZE
+#  define BLOCKSIZE 100
+# endif
+
+# ifndef STEPSIZE
+#  define STEPSIZE 10
 # endif
 
 typedef enum e_flag
@@ -110,5 +118,6 @@ void		clear_list_post(mlx_t *mlx, t_data **head);
 void		trim_nl(char *line);
 // window3d.c
 void		test(t_cub3d *cub3d);
-
+// keyhooks3d.c
+void	move_player(mlx_key_data_t keydata, void *param);
 #endif

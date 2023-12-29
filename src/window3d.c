@@ -11,21 +11,6 @@
 /* ************************************************************************** */
 
 #include <cub3d.h>
-// WIP
-void	move_player(mlx_key_data_t keydata, void *param)
-{
-	t_cub3d	*cub3d;
-
-	cub3d = (t_cub3d *)param;
-	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT) && keydata.key == MLX_KEY_UP)
-		move_forwards(cub3d);
-	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT) && keydata.key == MLX_KEY_DOWN)
-		move_backwards(cub3d);
-	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT) && keydata.key == MLX_KEY_LEFT)
-		turn_left(cub3d);
-	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT) && keydata.key == MLX_KEY_RIGHT)
-		turn_right(cub3d);
-}
 
 void	test_draw_map(mlx_t *mlx, mlx_image_t *wall, mlx_image_t *tile, t_data **data)
 {

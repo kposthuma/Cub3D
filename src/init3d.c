@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/28 19:20:19 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/29 18:41:05 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 float	determine_angle(char **map, t_location loc)
 {
 	if (map[loc.y][loc.x] == 'N')
-		return (PI / 2);
-	if (map[loc.y][loc.x] == 'E')
 		return (0);
+	if (map[loc.y][loc.x] == 'E')
+		return (PI / 2);
 	if (map[loc.y][loc.x] == 'S')
-		return (PI + PI / 2);
-	if (map[loc.y][loc.x] == 'W')
 		return (PI);
+	if (map[loc.y][loc.x] == 'W')
+		return (3 * PI / 2);
 	else
 		return (-1);
 }
