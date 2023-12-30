@@ -6,11 +6,12 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/29 18:42:05 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/30 12:08:26 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/30 16:11:35 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+#include <stdio.h>
 
 float	calc_angle(float angle)
 {
@@ -24,24 +25,22 @@ float	calc_angle(float angle)
 		return (angle - (3 * PI / 2));
 }
 
-float	determine_x(float theta, float angle)
+void	determine_xy(float theta, t_player *player)
 {
-	float	dx;
+	float	temp;
 
-	dx = STEPSIZE * sin(theta);
-	if (angle > PI)
-		dx *= -1;
-	return (dx);
-}
-
-float	determine_y(float theta, float angle)
-{
-	float	dy;
-
-	dy = STEPSIZE * cos(theta);
-	if (angle < PI / 2 || angle > (3 * PI / 2))
-		dy *= -1;
-	return (dy);
+	player->dx = STEPSIZE * sin(theta);
+	if (player->angle > PI)
+		player->dx *= -1;
+	player->dy = STEPSIZE * cos(theta);
+	if (player->angle < PI / 2 || player->angle > (3 * PI / 2))
+		player->dy *= -1;
+	if (player->dx * player->dy > 0)
+	{
+		temp = player->dx;
+		player->dx = player->dy;
+		player->dy = temp;
+	}
 }
 
 void	walk_player(t_cub3d *cub3d, bool forward)
@@ -49,8 +48,7 @@ void	walk_player(t_cub3d *cub3d, bool forward)
 	float	theta;
 
 	theta = calc_angle(cub3d->player->angle);
-	cub3d->player->dx = determine_x(theta, cub3d->player->angle);
-	cub3d->player->dy = determine_y(theta, cub3d->player->angle);
+	determine_xy(theta, cub3d->player);
 	if (forward)
 	{
 		cub3d->player->location[0] += cub3d->player->dx;
@@ -69,9 +67,9 @@ void	walk_player(t_cub3d *cub3d, bool forward)
 void	turn_player(t_cub3d *cub3d, bool left)
 {
 	if (!left)
-		cub3d->player->angle += 0.5;
+		cub3d->player->angle += (PI / 6);
 	else
-		cub3d->player->angle -= 0.5;
+		cub3d->player->angle -= (PI / 6);
 	if (cub3d->player->angle >= (2 * PI))
 		cub3d->player->angle -= (2 * PI);
 	else if (cub3d->player->angle < 0)
