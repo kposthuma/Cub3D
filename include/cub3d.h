@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/30 12:02:03 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/31 15:59:20 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 
 # ifndef PI
 #  define PI 3.14159265359
+# endif
+
+# ifndef HEIGHT
+#  define HEIGHT 900
+# endif
+
+# ifndef WIDTH
+#  define WIDTH 1600
 # endif
 
 # ifndef BLOCKSIZE
@@ -66,6 +74,12 @@ typedef struct s_img_data
 	mlx_image_t		*image;
 }	t_img_data;
 
+typedef struct s_ray
+{
+	float	len;
+	float	dl;
+}	t_ray;
+
 typedef struct s_player
 {
 	mlx_image_t	*test;
@@ -74,6 +88,7 @@ typedef struct s_player
 	float		angle;
 	float		dx;
 	float		dy;
+	t_ray		ray[80];
 }	t_player;
 
 typedef struct s_cub3d

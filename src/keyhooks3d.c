@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/29 18:42:05 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/30 16:11:35 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/30 20:15:51 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,14 @@ void	walk_player(t_cub3d *cub3d, bool forward)
 
 	theta = calc_angle(cub3d->player->angle);
 	determine_xy(theta, cub3d->player);
-	if (forward)
+	if (!forward)
 	{
-		cub3d->player->location[0] += cub3d->player->dx;
-		cub3d->player->location[1] += cub3d->player->dy;
-	}
-	else
-	{
-		cub3d->player->location[0] -= cub3d->player->dx;
-		cub3d->player->location[1] -= cub3d->player->dy;
 		cub3d->player->dx *= -1;
 		cub3d->player->dy *= -1;
 	}
-	// maybe check for walls?
+	cub3d->player->location[0] += cub3d->player->dx;
+	cub3d->player->location[1] += cub3d->player->dy;
+	// check for walls
 }
 
 void	turn_player(t_cub3d *cub3d, bool left)
