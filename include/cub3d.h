@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/31 15:59:20 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/31 19:36:00 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@
 
 # ifndef STEPSIZE
 #  define STEPSIZE 10
+# endif
+
+# ifndef RAYS
+#  define RAYS 80
 # endif
 
 typedef enum e_flag
@@ -78,6 +82,7 @@ typedef struct s_ray
 {
 	float	len;
 	float	dl;
+	float	angle;
 }	t_ray;
 
 typedef struct s_player
@@ -88,7 +93,7 @@ typedef struct s_player
 	float		angle;
 	float		dx;
 	float		dy;
-	t_ray		ray[80];
+	t_ray		ray[RAYS];
 }	t_player;
 
 typedef struct s_cub3d

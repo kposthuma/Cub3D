@@ -6,11 +6,29 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/30 12:00:09 by kposthum      ########   odam.nl         */
+/*   Updated: 2023/12/31 19:56:36 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+
+void	init_rays(t_player *player)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < RAYS)
+	{
+		player->ray[i].len = 0; //calculate !!
+		player->ray[i].dl = 0;
+		player->ray[i].angle = player->angle - (PI / 3) + (i * PI * 2 / 3);
+		if (player->ray[i].angle < 0)
+			player->ray[i].angle += (2 * PI);
+		if (player->ray[i].angle > (2 * PI))
+			player->ray[i].angle -= (2 * PI);
+		i++;
+	}
+}
 
 float	determine_angle(char **map, t_location loc)
 {
@@ -28,12 +46,10 @@ float	determine_angle(char **map, t_location loc)
 
 t_player	*init_player(t_data **head)
 {
-	t_data		*node;
 	char		**map;
 	t_player	*player;
 
-	node = find_node(head, MAP_START);
-	map = (char **)node->cont;
+	map = (char **)(find_node(head, MAP_START))->cont;
 	player = ft_calloc(1, sizeof(t_player));
 	player->start = find_loc(map, "NESW");
 	player->angle = determine_angle(map, player->start);
@@ -41,25 +57,8 @@ t_player	*init_player(t_data **head)
 	player->location[1] = player->start.y * BLOCKSIZE + BLOCKSIZE / 2;
 	player->dx = 0;
 	player->dy = 0;
+	init_rays(player);
 	return (player);
-}
-
-void	set_color(mlx_image_t *image, int *value, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < size)
-	{
-		image->pixels[i] = value[0];
-		i += sizeof(int8_t);
-		image->pixels[i] = value[1];
-		i += sizeof(int8_t);
-		image->pixels[i] = value[2];
-		i += sizeof(int8_t);
-		image->pixels[i] = 255;
-		i += sizeof(int8_t);
-	}
 }
 
 mlx_image_t	*get_background(mlx_t *mlx, t_data **head, int flag)

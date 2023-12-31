@@ -6,11 +6,29 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/17 16:32:53 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/23 20:11:47 by koen          ########   odam.nl         */
+/*   Updated: 2023/12/31 19:39:31 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+
+void	set_color(mlx_image_t *image, int *value, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size)
+	{
+		image->pixels[i] = value[0];
+		i += sizeof(int8_t);
+		image->pixels[i] = value[1];
+		i += sizeof(int8_t);
+		image->pixels[i] = value[2];
+		i += sizeof(int8_t);
+		image->pixels[i] = 255;
+		i += sizeof(int8_t);
+	}
+}
 
 bool	validate_value(char **val)
 {
