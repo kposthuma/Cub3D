@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/31 19:36:00 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/01 14:21:47 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # endif
 
 # ifndef RAYS
-#  define RAYS 80
+#  define RAYS WIDTH / 20
 # endif
 
 typedef enum e_flag
@@ -81,7 +81,6 @@ typedef struct s_img_data
 typedef struct s_ray
 {
 	float	len;
-	float	dl;
 	float	angle;
 }	t_ray;
 
@@ -143,4 +142,6 @@ void		test(t_cub3d *cub3d);
 void		move_player(mlx_key_data_t keydata, void *param);
 // display3d.c
 void		redisplay(void *param);
+// ray3d.c
+float		ray_len(t_player *player, size_t i, char **map)
 #endif

@@ -6,26 +6,25 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/31 19:56:36 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/01 14:10:46 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	init_rays(t_player *player)
+void	init_rays(t_player *player, char **map)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < RAYS)
 	{
-		player->ray[i].len = 0; //calculate !!
-		player->ray[i].dl = 0;
 		player->ray[i].angle = player->angle - (PI / 3) + (i * PI * 2 / 3);
 		if (player->ray[i].angle < 0)
 			player->ray[i].angle += (2 * PI);
 		if (player->ray[i].angle > (2 * PI))
 			player->ray[i].angle -= (2 * PI);
+		player->ray[i].len = ray_len(player, i, map);
 		i++;
 	}
 }
@@ -57,7 +56,7 @@ t_player	*init_player(t_data **head)
 	player->location[1] = player->start.y * BLOCKSIZE + BLOCKSIZE / 2;
 	player->dx = 0;
 	player->dy = 0;
-	init_rays(player);
+	init_rays(player, map);
 	return (player);
 }
 

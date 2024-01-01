@@ -6,7 +6,7 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2023/12/30 11:22:35 by kposthum      ########   odam.nl          #
+#    Updated: 2024/01/01 14:09:25 by koen          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS := main.c\
 		maputils3d.c\
 		color_texture3d.c\
 		init3d.c\
+		ray3d.c\
 		window3d.c\
 		keyhooks3d.c\
 		display3d.c\
