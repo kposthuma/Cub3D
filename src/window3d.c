@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/25 20:11:23 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/01 17:15:23 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/01 19:30:54 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ void	test(t_cub3d *cub3d)
 	
 	cub3d->player->test = mlx_new_image(cub3d->mlx, BLOCKSIZE / 10,
 			BLOCKSIZE / 10);
-	cub3d->player->raydot = mlx_new_image(cub3d->mlx, 1, 1);
+	cub3d->player->raydot = mlx_new_image(cub3d->mlx, 2, 2);
 	set_color(cub3d->player->test, val,
 		(BLOCKSIZE / 10) * (BLOCKSIZE / 10) * sizeof(int32_t));
 	set_color(cub3d->player->raydot, val1,
-		1 * 1 * sizeof(int32_t));
+		2 * 2 * sizeof(int32_t));
 	set_color2(wall, val2,
 		(BLOCKSIZE - 2) * (BLOCKSIZE - 2) * sizeof(int32_t));
 	set_color2(tile, val3,
@@ -77,6 +77,12 @@ void	test(t_cub3d *cub3d)
 	mlx_image_to_window(cub3d->mlx, cub3d->player->test,
 		(cub3d->player->start.x * BLOCKSIZE) + BLOCKSIZE / 2 - BLOCKSIZE / 20,
 		(cub3d->player->start.y * BLOCKSIZE) + BLOCKSIZE / 2 - BLOCKSIZE / 20);
+	for (size_t r = 0; r < RAYS; r++)
+	{
+		// printf("test\n");
+		mlx_image_to_window(cub3d->mlx, cub3d->player->raydot,
+			cub3d->player->ray[r].x, cub3d->player->ray[r].y);
+	}
 	mlx_key_hook(cub3d->mlx, &move_player, (void *)cub3d);
 	mlx_loop_hook(cub3d->mlx, &redisplay, (void *)cub3d);
 	mlx_loop(cub3d->mlx);

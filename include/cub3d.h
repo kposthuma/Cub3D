@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/01 17:40:51 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/01 19:05:30 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ typedef struct s_ray
 {
 	float	len;
 	float	angle;
+	float	x;
+	float	y;
 }	t_ray;
 
 typedef struct s_player

@@ -6,11 +6,33 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/01 14:10:46 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/01 19:33:20 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+
+void	init_ray_coordinates(t_player *player, size_t i)
+{
+	float	temp;
+
+	player->ray[i].x = player->ray[i].len * sin(player->ray[i].angle);
+	if (player->angle < PI)
+		player->dx *= -1;
+	player->ray[i].y = player->ray[i].len * cos(player->ray[i].angle);
+	if (player->angle > PI / 2 || player->angle < (3 * PI / 2))
+		player->dy *= -1;
+	if (player->dx * player->dy > 0)
+	{
+		temp = player->ray[i].x;
+		player->ray[i].x = player->ray[i].y;
+		player->ray[i].y = temp;
+	}
+	printf("test ray: x<%f>y<%f>\n", player->ray[i].x, player->ray[i].y);
+	player->ray[i].x += player->location[0];
+	player->ray[i].y += player->location[1];
+	printf("test ray: x<%f>y<%f>\n", player->ray[i].x, player->ray[i].y);
+}
 
 void	init_rays(t_player *player, char **map)
 {
@@ -25,6 +47,7 @@ void	init_rays(t_player *player, char **map)
 		if (player->ray[i].angle > (2 * PI))
 			player->ray[i].angle -= (2 * PI);
 		player->ray[i].len = ray_len(player, i, map);
+		init_ray_coordinates(player, i);
 		i++;
 	}
 }
