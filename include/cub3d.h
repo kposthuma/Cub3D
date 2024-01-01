@@ -6,13 +6,14 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/01 17:08:56 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/01 17:40:51 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <stdio.h>
 # include <libft.h>
 # include <math.h>
 # include <stdbool.h>
