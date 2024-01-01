@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/25 20:11:23 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/31 15:53:28 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/01 17:15:23 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,31 @@ void	set_color2(mlx_image_t *image, int *value, size_t size)
 
 void	test(t_cub3d *cub3d)
 {
-	mlx_image_t	*player = mlx_new_image(cub3d->mlx, BLOCKSIZE / 10,
-			BLOCKSIZE / 10);
 	mlx_image_t	*wall = mlx_new_image(cub3d->mlx, (BLOCKSIZE) - 2,
 			(BLOCKSIZE) - 2);
 	mlx_image_t	*tile = mlx_new_image(cub3d->mlx, (BLOCKSIZE) - 2,
 			(BLOCKSIZE) - 2);
 	int			val[3] = {50, 50, 255};
+	int			val1[3] = {50, 255, 50};
 	int			val2[3] = {0, 0, 0};
 	int			val3[3] = {250, 250, 250};
-
-	set_color(player, val,
+	
+	cub3d->player->test = mlx_new_image(cub3d->mlx, BLOCKSIZE / 10,
+			BLOCKSIZE / 10);
+	cub3d->player->raydot = mlx_new_image(cub3d->mlx, 1, 1);
+	set_color(cub3d->player->test, val,
 		(BLOCKSIZE / 10) * (BLOCKSIZE / 10) * sizeof(int32_t));
+	set_color(cub3d->player->raydot, val1,
+		1 * 1 * sizeof(int32_t));
 	set_color2(wall, val2,
 		(BLOCKSIZE - 2) * (BLOCKSIZE - 2) * sizeof(int32_t));
 	set_color2(tile, val3,
 		(BLOCKSIZE - 2)	* (BLOCKSIZE - 2) * sizeof(int32_t));
-	cub3d->player->test = player;
+	
 	mlx_image_to_window(cub3d->mlx, cub3d->ceiling, 0, 0);
 	mlx_image_to_window(cub3d->mlx, cub3d->floor, 0, cub3d->mlx->height / 2);
 	test_draw_map(cub3d->mlx, wall, tile, cub3d->data);
-	mlx_image_to_window(cub3d->mlx, player,
+	mlx_image_to_window(cub3d->mlx, cub3d->player->test,
 		(cub3d->player->start.x * BLOCKSIZE) + BLOCKSIZE / 2 - BLOCKSIZE / 20,
 		(cub3d->player->start.y * BLOCKSIZE) + BLOCKSIZE / 2 - BLOCKSIZE / 20);
 	mlx_key_hook(cub3d->mlx, &move_player, (void *)cub3d);

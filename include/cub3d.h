@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/01 14:21:47 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/01 17:08:56 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_player
 	float		angle;
 	float		dx;
 	float		dy;
+	mlx_image_t	*raydot;
 	t_ray		ray[RAYS];
 }	t_player;
 
@@ -143,5 +144,5 @@ void		move_player(mlx_key_data_t keydata, void *param);
 // display3d.c
 void		redisplay(void *param);
 // ray3d.c
-float		ray_len(t_player *player, size_t i, char **map)
+float		ray_len(t_player *player, size_t i, char **map);
 #endif
