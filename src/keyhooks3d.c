@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/29 18:42:05 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/30 20:15:51 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/03 17:27:32 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	determine_xy(float theta, t_player *player)
 	}
 }
 
+	// check for walls
 void	walk_player(t_cub3d *cub3d, bool forward)
 {
 	float	theta;
@@ -56,7 +57,7 @@ void	walk_player(t_cub3d *cub3d, bool forward)
 	}
 	cub3d->player->location[0] += cub3d->player->dx;
 	cub3d->player->location[1] += cub3d->player->dy;
-	// check for walls
+	cub3d->moved = true;
 }
 
 void	turn_player(t_cub3d *cub3d, bool left)
@@ -69,6 +70,7 @@ void	turn_player(t_cub3d *cub3d, bool left)
 		cub3d->player->angle -= (2 * PI);
 	else if (cub3d->player->angle < 0)
 		cub3d->player->angle += (2 * PI);
+	cub3d->moved = true;
 }
 
 void	move_player(mlx_key_data_t keydata, void *param)

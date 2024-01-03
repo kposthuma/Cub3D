@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/01 14:07:57 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/01 17:49:15 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/03 16:37:06 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,22 @@ float	collision_left(t_player *player, size_t i, char **map)
 	size_t	y;
 	float	dx;
 	float	dy;
+	float	theta;
 
-	x = (size_t)player->location[0] / BLOCKSIZE;
+	x = (size_t)(player->location[0] / (float)BLOCKSIZE);
+	theta = calc_angle(player->ray[i].angle);
 	while (x > 0)
 	{
-		dx = player->location[0] - x;
+		dx = (player->location[0] - x * BLOCKSIZE);
 		if (player->ray[i].angle > (3 * PI / 2))
 		{
-			dy = tan(player->ray[i].angle) * dx;
-			y = (player->location[1] - dy) / BLOCKSIZE;
+			dy = (dx * tan(theta));
+			y = (size_t)((player->location[1] - dy) / (float)BLOCKSIZE);
 		}
 		else
 		{
-			dy = dx / tan(player->ray[i].angle);
-			y = (player->location[1] + dy) / BLOCKSIZE;
+			dy = (dx / tan(theta));
+			y = (size_t)((player->location[1] + dy) / (float)BLOCKSIZE);
 		}
 		if (y > strofstrlen(map))
 			break ;
@@ -48,20 +50,22 @@ float	collision_right(t_player *player, size_t i, char **map)
 	size_t	y;
 	float	dx;
 	float	dy;
+	float	theta;
 
-	x = (size_t)player->location[0] / BLOCKSIZE;
+	x = (size_t)(player->location[0] / (float)BLOCKSIZE) + 1;
+	theta = calc_angle(player->ray[i].angle);
 	while (x < ft_strlen(map[0]))
 	{
-		dx = player->location[0] - x;
+		dx = (player->location[0] - x * BLOCKSIZE);
 		if (player->ray[i].angle < (PI / 2))
 		{
-			dy = tan(player->ray[i].angle) * dx;
-			y = (player->location[1] - dy) / BLOCKSIZE;
+			dy = (dx * tan(theta));
+			y = (size_t)((player->location[1] - dy) / (float)BLOCKSIZE);
 		}
 		else
 		{
-			dy = dx / tan(player->ray[i].angle);
-			y = (player->location[1] + dy) / BLOCKSIZE;
+			dy = (dx / tan(theta));
+			y = (size_t)((player->location[1] + dy) / (float)BLOCKSIZE);
 		}
 		if (y > strofstrlen(map))
 			break ;
@@ -74,25 +78,26 @@ float	collision_right(t_player *player, size_t i, char **map)
 
 float	collision_down(t_player *player, size_t i, char **map)
 {
-
 	size_t	x;
 	size_t	y;
 	float	dx;
 	float	dy;
+	float	theta;
 
-	y = (size_t)player->location[0] / BLOCKSIZE;
+	y = (size_t)(player->location[1] / (float)BLOCKSIZE) + 1;
+	theta = calc_angle(player->ray[i].angle);
 	while (y < strofstrlen(map))
 	{
-		dy = player->location[0] - y;
+		dy = (player->location[1] - y * BLOCKSIZE);
 		if (player->ray[i].angle > PI)
 		{
-			dx = tan(player->ray[i].angle) * dy;
-			x = (player->location[1] - dx) / BLOCKSIZE;
+			dx = (dy * tan(theta));
+			x = (size_t)((player->location[0] - dx) / (float)BLOCKSIZE);
 		}
 		else
 		{
-			dx = dy / tan(player->ray[i].angle);
-			x = (player->location[1] + dx) / BLOCKSIZE;
+			dx = (dy / tan(theta));
+			x = (size_t)((player->location[0] + dx) / (float)BLOCKSIZE);
 		}
 		if (x > ft_strlen(map[y]))
 			break ;
@@ -109,20 +114,22 @@ float	collision_up(t_player *player, size_t i, char **map)
 	size_t	y;
 	float	dx;
 	float	dy;
+	float	theta;
 
-	y = (size_t)player->location[0] / BLOCKSIZE;
+	y = (size_t)(player->location[1] / (float)BLOCKSIZE);
+	theta = calc_angle(player->ray[i].angle);
 	while (y > 0)
 	{
-		dy = player->location[0] - y;
+		dy = (player->location[1] - y * BLOCKSIZE);
 		if (player->ray[i].angle > PI)
 		{
-			dx = tan(player->ray[i].angle) * dy;
-			x = (player->location[1] - dx) / BLOCKSIZE;
+			dx = (dy / tan(theta));
+			x = (size_t)((player->location[0] - dx) / (float)BLOCKSIZE);
 		}
 		else
 		{
-			dx = dy / tan(player->ray[i].angle);
-			x = (player->location[1] + dx) / BLOCKSIZE;
+			dx = (dy * tan(theta));
+			x = (size_t)((player->location[0] + dx) / (float)BLOCKSIZE);
 		}
 		if (x > ft_strlen(map[y]))
 			break ;
@@ -130,7 +137,7 @@ float	collision_up(t_player *player, size_t i, char **map)
 			return (sqrt(pow(dx, 2) + pow(dy, 2)));
 		y--;
 	}
-	return (HEIGHT);
+	return (WIDTH);
 }
 
 float	ray_len(t_player *player, size_t i, char **map)
@@ -146,7 +153,7 @@ float	ray_len(t_player *player, size_t i, char **map)
 		x = collision_right(player, i, map);
 	if (player->ray[i].angle == (PI / 2)
 		|| player->ray[i].angle == (3 * PI / 2))
-		y = HEIGHT;
+		y = WIDTH;
 	else if (player->ray[i].angle > (PI / 2)
 		&& player->ray[i].angle < (3 * PI / 2))
 		y = collision_down(player, i, map);

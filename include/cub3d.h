@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/01 19:05:30 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/03 17:27:08 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # endif
 
 # ifndef RAYS
-#  define RAYS WIDTH / 20
+#  define RAYS 80
 # endif
 
 typedef enum e_flag
@@ -106,6 +106,7 @@ typedef struct s_cub3d
 	mlx_image_t	*ceiling;
 	mlx_image_t	*floor;
 	t_player	*player;
+	bool		moved;
 }	t_cub3d;
 
 // err3d.c
@@ -134,6 +135,7 @@ size_t		determine_length(t_data **start);
 // init3d.c
 t_cub3d		*cub3d_init(mlx_t *mlx, t_data **head);
 void		set_color(mlx_image_t *image, int *value, size_t size);
+void		init_rays(t_player *player, char **map);
 // destroy3d.c
 void		destroy_cub3d(t_cub3d *cub3d);
 void		clear_list_pre(t_data **head);
@@ -143,6 +145,7 @@ void		trim_nl(char *line);
 // window3d.c
 void		test(t_cub3d *cub3d);
 // keyhooks3d.c
+float		calc_angle(float angle);
 void		move_player(mlx_key_data_t keydata, void *param);
 // display3d.c
 void		redisplay(void *param);
