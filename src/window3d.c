@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/25 20:11:23 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/03 14:35:35 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/03 18:19:27 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	test(t_cub3d *cub3d)
 	mlx_image_t	*tile = mlx_new_image(cub3d->mlx, (BLOCKSIZE) - 2,
 			(BLOCKSIZE) - 2);
 	static int	val[3] = {50, 50, 255};
-	static int	val1[3] = {50, 255, 50};
+	static int	val1[3] = {50, 255, 255};
 	static int	val2[3] = {0, 0, 0};
 	static int	val3[3] = {250, 250, 250};
 
