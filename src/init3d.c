@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/03 17:24:57 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/03 18:43:16 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	init_ray_coordinates(t_player *player, size_t i)
 {
+	// float	temp;
+
 	player->ray[i].x = player->ray[i].len * sin(player->ray[i].angle);
-	if (player->angle < PI)
-		player->ray[i].x *= -1;
+	// if (player->ray[i].angle < PI)
+	// 	player->ray[i].x *= -1;
 	player->ray[i].y = player->ray[i].len * cos(player->ray[i].angle);
-	if (player->angle > PI / 2 || player->angle < (3 * PI / 2))
+	if (player->ray[i].angle > PI / 2 || player->ray[i].angle < (3 * PI / 2))
 		player->ray[i].y *= -1;
 	player->ray[i].x += player->location[0];
 	player->ray[i].y += player->location[1];
@@ -38,6 +40,7 @@ void	init_rays(t_player *player, char **map)
 		if (player->ray[i].angle > (2 * PI))
 			player->ray[i].angle -= (2 * PI);
 		player->ray[i].len = ray_len(player, i, map);
+		printf("ray[%lu].len <%f>\n", i, player->ray[i].len);
 		init_ray_coordinates(player, i);
 		i++;
 	}

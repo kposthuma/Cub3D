@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/01 14:07:57 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/03 18:18:33 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/03 18:24:56 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ float	collision_right(t_player *player, size_t i, char **map)
 		dx = (player->location[0] - x * BLOCKSIZE);
 		if (player->ray[i].angle < (PI / 2))
 		{
-			dy = (dx * tan(theta));
+			dy = (dx / tan(theta));
 			y = (size_t)((player->location[1] - dy) / (float)BLOCKSIZE);
 		}
 		else
 		{
-			dy = (dx / tan(theta));
+			dy = (dx * tan(theta));
 			y = (size_t)((player->location[1] + dy) / (float)BLOCKSIZE);
 		}
 		if (y >= strofstrlen(map))
