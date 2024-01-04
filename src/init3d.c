@@ -6,25 +6,11 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/03 18:43:16 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/04 12:23:49 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
-void	init_ray_coordinates(t_player *player, size_t i)
-{
-	// float	temp;
-
-	player->ray[i].x = player->ray[i].len * sin(player->ray[i].angle);
-	// if (player->ray[i].angle < PI)
-	// 	player->ray[i].x *= -1;
-	player->ray[i].y = player->ray[i].len * cos(player->ray[i].angle);
-	if (player->ray[i].angle > PI / 2 || player->ray[i].angle < (3 * PI / 2))
-		player->ray[i].y *= -1;
-	player->ray[i].x += player->location[0];
-	player->ray[i].y += player->location[1];
-}
 
 void	init_rays(t_player *player, char **map)
 {
@@ -40,8 +26,10 @@ void	init_rays(t_player *player, char **map)
 		if (player->ray[i].angle > (2 * PI))
 			player->ray[i].angle -= (2 * PI);
 		player->ray[i].len = ray_len(player, i, map);
-		printf("ray[%lu].len <%f>\n", i, player->ray[i].len);
-		init_ray_coordinates(player, i);
+		player->ray[i].x = player->ray[i].len * cos(player->ray[i].angle);
+		player->ray[i].y = player->ray[i].len * sin(player->ray[i].angle);
+		player->ray[i].x += player->location[0];
+		player->ray[i].y += player->location[1];
 		i++;
 	}
 }
@@ -49,13 +37,13 @@ void	init_rays(t_player *player, char **map)
 float	determine_angle(char **map, t_location loc)
 {
 	if (map[loc.y][loc.x] == 'N')
-		return (0);
-	if (map[loc.y][loc.x] == 'E')
-		return (PI / 2);
-	if (map[loc.y][loc.x] == 'S')
-		return (PI);
-	if (map[loc.y][loc.x] == 'W')
 		return (3 * PI / 2);
+	if (map[loc.y][loc.x] == 'E')
+		return (0);
+	if (map[loc.y][loc.x] == 'S')
+		return (PI / 2);
+	if (map[loc.y][loc.x] == 'W')
+		return (PI);
 	else
 		return (-1);
 }

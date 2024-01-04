@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/29 18:42:05 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/03 17:27:32 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/04 11:17:06 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,16 @@ float	calc_angle(float angle)
 		return (angle - (3 * PI / 2));
 }
 
-void	determine_xy(float theta, t_player *player)
+void	determine_xy(t_player *player)
 {
-	float	temp;
-
-	player->dx = STEPSIZE * sin(theta);
-	if (player->angle > PI)
-		player->dx *= -1;
-	player->dy = STEPSIZE * cos(theta);
-	if (player->angle < PI / 2 || player->angle > (3 * PI / 2))
-		player->dy *= -1;
-	if (player->dx * player->dy > 0)
-	{
-		temp = player->dx;
-		player->dx = player->dy;
-		player->dy = temp;
-	}
+	player->dx = STEPSIZE * cos(player->angle);
+	player->dy = STEPSIZE * sin(player->angle);
 }
 
 	// check for walls
 void	walk_player(t_cub3d *cub3d, bool forward)
 {
-	float	theta;
-
-	theta = calc_angle(cub3d->player->angle);
-	determine_xy(theta, cub3d->player);
+	determine_xy(cub3d->player);
 	if (!forward)
 	{
 		cub3d->player->dx *= -1;

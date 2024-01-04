@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/25 20:11:23 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/03 18:19:27 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/04 12:25:49 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void	test_draw_map(mlx_t *mlx, mlx_image_t *wall,
 	mlx_image_t *tile, t_data **data)
 {
-	t_data	*node = find_node(data, MAP_START);
-	char	**map = (char **)node->cont;
+	char	**map = (char **)(find_node(data, MAP_START)->cont);
 
 	for (size_t y = 0; map[y]; y++)
 	{
