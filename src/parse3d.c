@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 17:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/04 18:41:38 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/04 20:55:31 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_data	**parse_file(int fd)
 	if (!(validate_texture(head, N_TEXTURE) && validate_texture(head, E_TEXTURE)
 			&& validate_texture(head, S_TEXTURE)
 			&& validate_texture(head, W_TEXTURE)))
-		return (errmsg("invalid texture path"), clear_list_t(head), NULL);
+		return (errmsg("invalid texture path"), clear_list_three(head), NULL);
 	return (head);
 }
 
