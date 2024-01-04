@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/04 12:19:44 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/04 18:46:24 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,14 @@ typedef struct s_img_data
 	mlx_image_t		*image;
 }	t_img_data;
 
+typedef struct t_background
+{
+	int			r;
+	int			g;
+	int			b;
+	mlx_image_t	*image;
+}	t_background;
+
 typedef struct s_ray
 {
 	float	len;
@@ -141,6 +149,7 @@ void		init_rays(t_player *player, char **map);
 // destroy3d.c
 void		destroy_cub3d(t_cub3d *cub3d);
 void		clear_list_pre(t_data **head);
+void		clear_list_two(t_data **head);
 void		clear_list_post(mlx_t *mlx, t_data **head);
 // utils3d.c
 void		trim_nl(char *line);

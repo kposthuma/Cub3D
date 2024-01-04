@@ -6,20 +6,29 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 19:00:02 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/28 14:41:42 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/04 18:44:00 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
+void	destroy_player(t_cub3d *cub3d)
+{
+	mlx_delete_image(cub3d->mlx, cub3d->player->test);
+	mlx_delete_image(cub3d->mlx, cub3d->player->raydot);
+	free(cub3d->player);
+}
+
 void	destroy_cub3d(t_cub3d *cub3d)
 {
 	clear_list_post(cub3d->mlx, cub3d->data);
+	destroy_player(cub3d);
 	mlx_delete_image(cub3d->mlx, cub3d->ceiling);
 	mlx_delete_image(cub3d->mlx, cub3d->floor);
 	mlx_terminate(cub3d->mlx);
 	free(cub3d);
 }
+
 
 void	clear_list_pre(t_data **head)
 {
@@ -32,6 +41,47 @@ void	clear_list_pre(t_data **head)
 		temp = node;
 		node = node->next;
 		free((char *)temp->cont);
+		free(temp);
+	}
+	free(head);
+}
+
+void	clear_list_two(t_data **head)
+{
+	t_data	*temp;
+	t_data	*node;
+
+	node = *head;
+	while (node != NULL)
+	{
+		temp = node;
+		node = node->next;
+		if (temp->flag == MAP_START)
+			ft_free((char **)temp->cont);
+		else
+			free((char *)temp->cont);
+		free(temp);
+	}
+	free(head);
+}
+
+void	clear_list_three(t_data **head)
+{
+	t_data	*temp;
+	t_data	*node;
+
+	node = *head;
+	while (node != NULL)
+	{
+		temp = node;
+		node = node->next;
+		if (node->flag >= N_TEXTURE && node->flag <= W_TEXTURE
+			&& node->cont != NULL)
+			mlx_delete_texture(((t_img_data *)node->cont)->texture);
+		if (temp->flag == MAP_START)
+			ft_free((char **)temp->cont);
+		else
+			free((char *)temp->cont);
 		free(temp);
 	}
 	free(head);

@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/29 18:42:05 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/04 11:17:06 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/04 16:43:44 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,6 @@ void	move_player(mlx_key_data_t keydata, void *param)
 	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
 		&& keydata.key == MLX_KEY_RIGHT)
 		turn_player(cub3d, false);
+	if (keydata.key == MLX_KEY_ESCAPE)
+		mlx_close_window(cub3d->mlx);
 }

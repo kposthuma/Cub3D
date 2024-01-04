@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 17:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/21 17:50:08 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/04 18:41:38 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,14 @@ t_data	**head_init(int fd)
 	t_data	*node;
 
 	head = ft_calloc(1, sizeof(t_data *));
+	if (head == NULL)
+		return (errmsg("Memory error."), NULL);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		node = newnode((void *)line);
+		if (node == NULL)
+			return (errmsg("Memory error."), clear_list_pre(head), NULL);
 		add_node(head, node);
 		line = get_next_line(fd);
 	}
@@ -68,6 +72,8 @@ t_data	**parse_file(int fd)
 	t_data	**head;
 
 	head = head_init(fd);
+	if (!head || !(*head))
+		return (free(head), NULL);
 	if ((*head)->cont == NULL)
 		return (errmsg("Empty file."), free(head), NULL);
 	assign_flag(head);
@@ -78,12 +84,11 @@ t_data	**parse_file(int fd)
 	if (!validate_map(head))
 		return (errmsg("invalid map"), clear_list_pre(head), NULL);
 	if (!(validate_color(head, C_COLOR) && validate_color(head, F_COLOR)))
-		return (errmsg("invalid color value"), NULL);
+		return (errmsg("invalid color value"), clear_list_two(head), NULL);
 	if (!(validate_texture(head, N_TEXTURE) && validate_texture(head, E_TEXTURE)
 			&& validate_texture(head, S_TEXTURE)
 			&& validate_texture(head, W_TEXTURE)))
-		return (errmsg("invalid texture path"), NULL);
-	ft_printf("OK!\n");
+		return (errmsg("invalid texture path"), clear_list_t(head), NULL);
 	return (head);
 }
 

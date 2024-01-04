@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/17 16:32:53 by koen          #+#    #+#                 */
-/*   Updated: 2023/12/31 19:39:31 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/04 14:27:54 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,15 @@ bool	validate_value(char **val)
 {
 	size_t	i;
 	size_t	j;
+	char	*temp;
 
 	i = 0;
 	val[2][ft_strlen(val[2]) - 1] = '\0';
 	while (val[i])
 	{
+		temp = val[i];
+		val[i] = ft_strtrim(val[i], "\t\n\v\f\r ");
+		free(temp);
 		if (ft_strlen(val[i]) > 3
 			|| (ft_atoi(val[i]) > 255 && ft_atoi(val[i]) < 0))
 			return (false);
