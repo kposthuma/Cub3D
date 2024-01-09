@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/04 12:23:49 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/09 13:59:21 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,9 @@ t_player	*init_player(t_data **head)
 mlx_image_t	*get_background(mlx_t *mlx, t_data **head, int flag)
 {
 	mlx_image_t	*image;
-	t_data		*node;
 	int			*value;
 
-	node = find_node(head, flag);
-	value = (int *)node->cont;
+	value = (int *)((find_node(head, flag))->cont);
 	image = mlx_new_image(mlx, mlx->width, (mlx->height / 2));
 	set_color(image, value,
 		image->height * image->width * sizeof(int32_t));

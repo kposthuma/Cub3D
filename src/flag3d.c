@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/21 17:48:16 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/21 17:52:17 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/09 14:14:23 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	_assign_flag(t_data *temp, char *str)
 {
-	if (*str == '\0' || ft_strlen(str) < 5)
+	if (*str == '\0')
 		temp->flag = TO_CLEAR;
 	else if (ft_strncmp(str, "NO ", 3) == 0)
 		temp->flag = N_TEXTURE;
