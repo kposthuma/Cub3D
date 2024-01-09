@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/09 13:59:21 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/09 19:30:10 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	init_rays(t_player *player, char **map)
 		player->ray[i].y = player->ray[i].len * sin(player->ray[i].angle);
 		player->ray[i].x += player->location[0];
 		player->ray[i].y += player->location[1];
+		player->ray[i].wall_height
+			= player->ray[i].len / (float)BLOCKSIZE * player->plane_dist;
 		i++;
 	}
 }
@@ -61,6 +63,8 @@ t_player	*init_player(t_data **head)
 	player->location[1] = player->start.y * BLOCKSIZE + BLOCKSIZE / 2;
 	player->dx = 0;
 	player->dy = 0;
+	player->height = BLOCKSIZE / 2;
+	player->plane_dist = WIDTH / 2 / tan(1 / 3 * PI);
 	init_rays(player, map);
 	return (player);
 }

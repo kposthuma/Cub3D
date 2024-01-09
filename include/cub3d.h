@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/04 20:56:21 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/09 19:22:11 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_ray
 	float	angle;
 	float	x;
 	float	y;
+	float	wall_height;
 }	t_ray;
 
 typedef struct s_player
@@ -105,6 +106,8 @@ typedef struct s_player
 	float		angle;
 	float		dx;
 	float		dy;
+	float		height;
+	float		plane_dist;
 	mlx_image_t	*raydot;
 	t_ray		ray[RAYS];
 }	t_player;
