@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 19:00:02 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/04 18:44:00 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/10 17:14:15 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	destroy_player(t_cub3d *cub3d)
 {
-	mlx_delete_image(cub3d->mlx, cub3d->player->test);
-	mlx_delete_image(cub3d->mlx, cub3d->player->raydot);
 	free(cub3d->player);
 }
 

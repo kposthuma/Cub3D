@@ -6,12 +6,21 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/29 18:42:05 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/10 14:09:17 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/10 18:05:21 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 #include <stdio.h>
+
+float	round_value(float angle, float val, bool x)
+{
+	if (((angle < PI / 2 || angle > 3 / 2 * PI) && x == true)
+		|| (angle < PI && x == false))
+		return (floor(val));
+	else
+		return (ceil(val));
+}
 
 float	calc_angle(float angle)
 {
@@ -31,16 +40,30 @@ void	determine_xy(t_player *player)
 	player->dy = STEPSIZE * sin(player->angle);
 }
 
-	// check for walls
 void	walk_player(t_cub3d *cub3d, bool forward)
 {
+	char	**map;
+	float	tempx;
+	float	tempy;
+
 	determine_xy(cub3d->player);
+	map = (char **)((find_node(cub3d->data, MAP_START))->cont);
 	if (!forward)
 	{
 		cub3d->player->dx *= -1;
 		cub3d->player->dy *= -1;
 	}
+	tempx = cub3d->player->location[0] + cub3d->player->dx;
+	if (map[(size_t)cub3d->player->location[1] / BLOCKSIZE]
+		[(size_t)(tempx) / BLOCKSIZE]
+		== '1')
+		cub3d->player->dx = 0;
 	cub3d->player->location[0] += cub3d->player->dx;
+	tempy = cub3d->player->location[1] + cub3d->player->dy;
+	if (map
+		[(size_t)(tempy) / BLOCKSIZE]
+		[(size_t)cub3d->player->location[0] / BLOCKSIZE] == '1')
+		cub3d->player->dy = 0;
 	cub3d->player->location[1] += cub3d->player->dy;
 	cub3d->moved = true;
 }

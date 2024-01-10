@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/10 15:39:42 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/10 17:30:39 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,12 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	mlx_image_t	*test;
 	t_location	start;
 	float		location[2];
 	float		angle;
 	float		dx;
 	float		dy;
-	float		height;
 	float		plane_dist;
-	mlx_image_t	*raydot;
 	t_ray		ray[RAYS];
 }	t_player;
 
