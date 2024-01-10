@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/29 18:42:05 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/04 16:43:44 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/10 14:09:17 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	walk_player(t_cub3d *cub3d, bool forward)
 void	turn_player(t_cub3d *cub3d, bool left)
 {
 	if (!left)
-		cub3d->player->angle += (PI / 6);
+		cub3d->player->angle += (PI / 12);
 	else
-		cub3d->player->angle -= (PI / 6);
+		cub3d->player->angle -= (PI / 12);
 	if (cub3d->player->angle >= (2 * PI))
 		cub3d->player->angle -= (2 * PI);
 	else if (cub3d->player->angle < 0)

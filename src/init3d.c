@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/09 19:30:10 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/10 15:33:09 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,15 @@ void	init_rays(t_player *player, char **map)
 		if (player->ray[i].angle > (2 * PI))
 			player->ray[i].angle -= (2 * PI);
 		player->ray[i].len = ray_len(player, i, map);
+		player->ray[i].corr_len = player->ray[i].len
+			* cos((((float)i / (float)RAYS * PI / 3) - (PI / 6)));
 		player->ray[i].x = player->ray[i].len * cos(player->ray[i].angle);
 		player->ray[i].y = player->ray[i].len * sin(player->ray[i].angle);
 		player->ray[i].x += player->location[0];
 		player->ray[i].y += player->location[1];
 		player->ray[i].wall_height
-			= player->ray[i].len / (float)BLOCKSIZE * player->plane_dist;
+			= (float)BLOCKSIZE / player->ray[i].corr_len * 1000;
+		player->ray[i].slice = NULL;
 		i++;
 	}
 }

@@ -6,13 +6,13 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2024/01/09 14:18:21 by cbijman       ########   odam.nl          #
+#    Updated: 2024/01/10 15:25:35 by kposthum      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub3d
-CC := cc -Wall -Werror -Wextra -g3
-# CC := cc -Wall -Werror -Wextra -g3 -fsanitize=address
+# CC := cc -Wall -Werror -Wextra -g3
+CC := cc -Wall -Werror -Wextra -g3 -fsanitize=leak
 
 SRCDIR := ./src
 OBJDIR := ./obj
