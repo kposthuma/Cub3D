@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/11 13:45:26 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/11 17:12:31 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # endif
 
 # ifndef RAYS
-#  define RAYS 320
+#  define RAYS 400
 # endif
 
 typedef enum e_flag
@@ -63,10 +63,10 @@ typedef enum e_flag
 
 typedef enum e_wall
 {
-	EAST = 0,
-	SOUTH = 1,
-	WEST = 2,
-	NORTH = 3,
+	NORTH = 2,
+	EAST = 3,
+	SOUTH = 4,
+	WEST = 5,
 }	t_wall;
 
 typedef struct s_data
@@ -172,7 +172,7 @@ void		draw_slices(mlx_t *mlx, t_player *player);
 // keyhooks3d.c
 void		move_player(mlx_key_data_t keydata, void *param);
 // display3d.c
-void		redisplay(void *param);
+void		redisplay(t_cub3d *cub3d);
 // ray3d.c
 float		ray_len(t_player *player, size_t i, char **map);
 #endif
