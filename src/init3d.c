@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/10 19:08:50 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/11 13:34:49 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	init_rays(t_player *player, char **map)
 			/ player->ray[i].corr_len * (player->plane_dist);
 		if (player->ray[i].wall_height > HEIGHT)
 			player->ray[i].wall_height = HEIGHT;
-		player->ray[i].slice = NULL;
+		player->ray[i].slice_old = NULL;
 		i++;
 	}
 }
@@ -95,6 +95,6 @@ t_cub3d	*cub3d_init(mlx_t *mlx, t_data **head)
 	cub3d->mlx = mlx;
 	cub3d->data = head;
 	cub3d->player = init_player(head);
-	cub3d->moved = false;
+	cub3d->moved = true;
 	return (cub3d);
 }

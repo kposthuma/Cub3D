@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 19:00:02 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/10 17:14:15 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/11 11:58:56 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	destroy_cub3d(t_cub3d *cub3d)
 	mlx_terminate(cub3d->mlx);
 	free(cub3d);
 }
-
 
 void	clear_list_pre(t_data **head)
 {

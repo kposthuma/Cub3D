@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:53:26 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/31 15:39:45 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/11 13:45:42 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	main(int argc, char **argv)
 		return (1);
 	mlx = mlx_init(WIDTH, HEIGHT, "cub3d", false);
 	cub3d = cub3d_init(mlx, head);
-	test(cub3d);
+	init_window(cub3d);
 	destroy_cub3d(cub3d);
 }

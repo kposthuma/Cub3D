@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/01 14:07:57 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/10 14:07:45 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/11 14:12:56 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,25 @@ float	collision_up(t_player *player, size_t i, char **map)
 	return (FLT_MAX);
 }
 
+void	determine_wall(t_player *player, size_t i, float x, float y)
+{
+	if (x < y)
+	{
+		if (player->ray[i].angle > (PI / 2)
+			&& player->ray[i].angle < (3 * PI / 2))
+			player->ray[i].wall = WEST;
+		else
+			player->ray[i].wall = EAST;
+	}
+	else
+	{
+		if (player->ray[i].angle < PI)
+			player->ray[i].wall = SOUTH;
+		else
+			player->ray[i].wall = NORTH;
+	}
+}
+
 float	ray_len(t_player *player, size_t i, char **map)
 {
 	float	x;
@@ -134,6 +153,7 @@ float	ray_len(t_player *player, size_t i, char **map)
 		y = collision_down(player, i, map);
 	else
 		y = collision_up(player, i, map);
+	determine_wall(player, i, x, y);
 	if (x < y)
 		return (x);
 	else

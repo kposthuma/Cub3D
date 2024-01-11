@@ -6,38 +6,24 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/29 18:42:05 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/10 18:05:21 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/11 13:30:22 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-#include <stdio.h>
 
-float	round_value(float angle, float val, bool x)
+void	determine_xy(t_player *player, bool hor)
 {
-	if (((angle < PI / 2 || angle > 3 / 2 * PI) && x == true)
-		|| (angle < PI && x == false))
-		return (floor(val));
+	if (hor)
+	{
+		player->dx = STEPSIZE * cos(player->angle);
+		player->dy = STEPSIZE * sin(player->angle);
+	}
 	else
-		return (ceil(val));
-}
-
-float	calc_angle(float angle)
-{
-	if (angle < (PI / 2))
-		return (angle);
-	if (angle < PI)
-		return (angle - (PI / 2));
-	if (angle < (3 * PI / 2))
-		return (angle - PI);
-	else
-		return (angle - (3 * PI / 2));
-}
-
-void	determine_xy(t_player *player)
-{
-	player->dx = STEPSIZE * cos(player->angle);
-	player->dy = STEPSIZE * sin(player->angle);
+	{
+		player->dx = STEPSIZE * sin(player->angle);
+		player->dy = STEPSIZE * -cos(player->angle);
+	}
 }
 
 void	walk_player(t_cub3d *cub3d, bool forward)
@@ -46,9 +32,37 @@ void	walk_player(t_cub3d *cub3d, bool forward)
 	float	tempx;
 	float	tempy;
 
-	determine_xy(cub3d->player);
+	determine_xy(cub3d->player, true);
 	map = (char **)((find_node(cub3d->data, MAP_START))->cont);
 	if (!forward)
+	{
+		cub3d->player->dx *= -1;
+		cub3d->player->dy *= -1;
+	}
+	tempx = cub3d->player->location[0] + cub3d->player->dx;
+	if (map[(size_t)cub3d->player->location[1] / BLOCKSIZE]
+		[(size_t)(tempx) / BLOCKSIZE]
+		== '1')
+		cub3d->player->dx = 0;
+	cub3d->player->location[0] += cub3d->player->dx;
+	tempy = cub3d->player->location[1] + cub3d->player->dy;
+	if (map
+		[(size_t)(tempy) / BLOCKSIZE]
+		[(size_t)cub3d->player->location[0] / BLOCKSIZE] == '1')
+		cub3d->player->dy = 0;
+	cub3d->player->location[1] += cub3d->player->dy;
+	cub3d->moved = true;
+}
+
+void	strafe_player(t_cub3d *cub3d, bool left)
+{
+	char	**map;
+	float	tempx;
+	float	tempy;
+
+	determine_xy(cub3d->player, false);
+	map = (char **)((find_node(cub3d->data, MAP_START))->cont);
+	if (!left)
 	{
 		cub3d->player->dx *= -1;
 		cub3d->player->dy *= -1;
@@ -87,11 +101,17 @@ void	move_player(mlx_key_data_t keydata, void *param)
 
 	cub3d = (t_cub3d *)param;
 	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-		&& keydata.key == MLX_KEY_UP)
+		&& keydata.key == MLX_KEY_W)
 		walk_player(cub3d, true);
 	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-		&& keydata.key == MLX_KEY_DOWN)
+		&& keydata.key == MLX_KEY_S)
 		walk_player(cub3d, false);
+	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+		&& keydata.key == MLX_KEY_A)
+		strafe_player(cub3d, true);
+	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+		&& keydata.key == MLX_KEY_D)
+		strafe_player(cub3d, false);
 	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
 		&& keydata.key == MLX_KEY_LEFT)
 		turn_player(cub3d, true);

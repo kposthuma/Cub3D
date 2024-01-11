@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/10 19:10:18 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/11 13:45:26 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <lodepng/lodepng.h>
 
 # ifndef PI
-#  define PI 3.14159265359
+#  define PI 3.14159265358979323846
 # endif
 
 # ifndef HEIGHT
@@ -38,15 +38,15 @@
 # endif
 
 # ifndef BLOCKSIZE
-#  define BLOCKSIZE 100
+#  define BLOCKSIZE 128
 # endif
 
 # ifndef STEPSIZE
-#  define STEPSIZE 10
+#  define STEPSIZE 16
 # endif
 
 # ifndef RAYS
-#  define RAYS 160
+#  define RAYS 320
 # endif
 
 typedef enum e_flag
@@ -60,6 +60,14 @@ typedef enum e_flag
 	MAP_START = 6,
 	TO_CLEAR = 7,
 }	t_flag;
+
+typedef enum e_wall
+{
+	EAST = 0,
+	SOUTH = 1,
+	WEST = 2,
+	NORTH = 3,
+}	t_wall;
 
 typedef struct s_data
 {
@@ -97,7 +105,9 @@ typedef struct s_ray
 	float		x;
 	float		y;
 	float		wall_height;
-	mlx_image_t	*slice;
+	uint8_t		wall;
+	mlx_image_t	*slice_old;
+	mlx_image_t	*slice_new;
 }	t_ray;
 
 typedef struct s_player
@@ -157,10 +167,9 @@ void		clear_list_post(mlx_t *mlx, t_data **head);
 // utils3d.c
 void		trim_nl(char *line);
 // window3d.c
-void		test(t_cub3d *cub3d);
-void		test_draw_slices(mlx_t *mlx, t_player *player);
+void		init_window(t_cub3d *cub3d);
+void		draw_slices(mlx_t *mlx, t_player *player);
 // keyhooks3d.c
-float		calc_angle(float angle);
 void		move_player(mlx_key_data_t keydata, void *param);
 // display3d.c
 void		redisplay(void *param);
