@@ -22,17 +22,13 @@ static bool	_init_data_struct(t_data **data, char **map)
 {
 	t_data	*tmp;
 	size_t	index;
-
+	
 	index = 0;
-	while (map[index])
-	{
-		tmp = newnode(map[index]);
-		if (!tmp)
-			return (false);
-		tmp->flag = MAP_START;
-		add_node(data, tmp);
-		index++;
-	}
+	tmp = newnode(&map[index]);
+	if (!tmp)
+		return (false);
+	tmp->flag = MAP_START;
+	add_node(data, tmp);
 	return (true);
 }
 
@@ -58,18 +54,12 @@ t_data	*read_map_from_file(char *filename)
 		return (NULL);
 
 	/* more dumb shit */
-	int *c1 = ft_calloc(3, sizeof(int));
-	c1[0] = 120;
-	c1[1] = 120;
-	c1[2] = 120;
+	int c1[3] = { 120, 120, 120 };
 	tmp = newnode((void *)c1);
 	tmp->flag = C_COLOR;
 	add_node(&head, tmp);
 
-	int *c2 = ft_calloc(3, sizeof(int));
-	c1[0] = 120;
-	c1[1] = 120;
-	c1[2] = 120;
+	int c2[3] = { 120, 120, 120 };
 	tmp = newnode((void *)c2);
 	tmp->flag = F_COLOR;
 	add_node(&head, tmp);
