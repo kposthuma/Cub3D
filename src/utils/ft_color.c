@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   window3d.c                                         :+:    :+:            */
+/*   color3d.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/12/25 20:11:23 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/11 15:19:27 by cbijman       ########   odam.nl         */
+/*   Created: 2023/12/28 15:10:47 by koen          #+#    #+#                 */
+/*   Updated: 2024/01/08 17:49:00 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "cub3d.h"
 
-void	init_window(t_cub3d *cub3d)
+int	get_r(int rgba)
 {
-	mlx_image_to_window(cub3d->mlx, cub3d->assets->ceiling, 0, 0);
-	mlx_image_to_window(cub3d->mlx, cub3d->assets->floor, 0, cub3d->mlx->height / 2);
-	mlx_key_hook(cub3d->mlx, &move_player, (void *)cub3d);
-	mlx_loop_hook(cub3d->mlx, &redisplay, (void *)cub3d);
-	mlx_loop(cub3d->mlx);
+	return ((rgba >> 24) & 0xFF);
+}
+
+int	get_g(int rgba)
+{
+	return ((rgba >> 16) & 0xFF);
+}
+
+int	get_b(int rgba)
+{
+	return ((rgba >> 8) & 0xFF);
+}
+
+int	get_a(int rgba)
+{
+	return (rgba & 0xFF);
+}
+
+int	get_rgba(int r, int g, int b, int a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
 }

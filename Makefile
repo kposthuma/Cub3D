@@ -6,51 +6,64 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2024/01/10 15:25:35 by kposthum      ########   odam.nl          #
+#    Updated: 2024/01/11 15:08:26 by cbijman       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub3d
-# CC := cc -Wall -Werror -Wextra -g3
-CC := cc -Wall -Werror -Wextra -g3 -fsanitize=leak
+#CC := cc -g3 #-Wall -Werror -Wextra
+CC := cc -g3 -fsanitize=address #-Wall -Werror -Wextra 
 
-SRCDIR := ./src
-OBJDIR := ./obj
+SRC_DIR = ./src
+OBJ_DIR = ./obj
 
-HEADERS := -I ./libft/include -I ./include -I ./MLX42/include
-LIBFT := ./libft/libft.a
-LIBMLX := ./MLX42/build/libmlx42.a
+HEADERS = -I ./libft/include -I ./include -I ./MLX42/include
+LIBFT = ./libft/libft.a
+LIBMLX = ./MLX42/build/libmlx42.a
 
-SRCS := main.c\
-		error3d.c\
-		parse3d.c\
-		flag3d.c\
-		list3d.c\
-		map3d.c\
-		maputils3d.c\
-		color_texture3d.c\
-		init3d.c\
-		ray3d.c\
-		window3d.c\
-		keyhooks3d.c\
-		display3d.c\
-		destroy3d.c\
-		utils3d.c
-		
-OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)\
+FILES	=	ft_strmapiteri \
+			ft_isempty \
+			ft_access \
+			error \
+			ft_color \
+			ft_realloc \
+			flag3d \
+			maputils3d \
+			main \
+			window3d \
+			list3d \
+			destroy3d \
+			keyhooks3d \
+			parse3d \
+			display3d \
+			ray3d \
+			map3d \
+			init3d \
+			color_texture3d \
+			parser \
+			reader \
+			flags \
+			validation \
+			validation_utils \
+			utils3d \
 
-.PHONY: libft gnl clean fclean all re
+vpath %.c	$(SRC_DIR) \
+			$(SRC_DIR)/parser \
+			$(SRC_DIR)/renderer \
+			$(SRC_DIR)/utils \
+
+SRC 	= ${addsuffix .c, $(FILES)}
+OBJ 	= ${patsubst %.c, $(OBJ_DIR)/%.o, $(SRC)}
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(LIBMLX) $(OBJS)
-	@echo Making $(NAME)
-	@$(CC) $(OBJS) $(HEADERS) $(LIBFT) $(LIBMLX) -Iinclude -ldl -lglfw -pthread -lm -o $(NAME)
-
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(OBJDIR)
-	@echo Compiling $<
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@$(CC) $(HEADERS) -c $< -o $@
+	@echo Compiling $<
+
+$(NAME): $(LIBFT) $(LIBMLX) $(OBJ)
+	@echo Making $(NAME)
+	@$(CC) $(OBJ) $(HEADERS) $(LIBFT) $(LIBMLX) -ldl -lglfw -pthread -lm -o $(NAME)
 
 $(LIBFT):
 	@$(MAKE) -C ./libft
@@ -58,12 +71,15 @@ $(LIBFT):
 $(LIBMLX):
 	@git submodule init
 	@git submodule update
-	@cmake ./MLX42 -B ./MLX42/build && make -C ./MLX42/build -j4
+	@cmake ./MLX42 -B ./MLX42/build
+	@make -C ./MLX42/build -j4
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 clean:
 	@echo Removing object files $(NAME)
-	@rm -f $(OBJS)
-	@rm -rf $(OBJDIR)
+	@rm -rf $(OBJ_DIR)
 	@rm -rf ./MLX42/build
 	@$(MAKE) clean -C ./libft
 
@@ -73,3 +89,5 @@ fclean: clean
 	@$(MAKE) fclean -C ./libft
 
 re: fclean all
+
+.PHONY: fclean all clean re

@@ -1,4 +1,7 @@
 *.o
 libft/libft.a
 cub3d
-sup.sup
+
+# Folders
+**/.vscode
+**/obj

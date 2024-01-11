@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   cub3d.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
+/*   Updated: 2024/01/11 13:45:26 by kposthum      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -14,7 +26,7 @@
 # include <lodepng/lodepng.h>
 
 # ifndef PI
-#  define PI 3.14159265359
+#  define PI 3.14159265358979323846
 # endif
 
 # ifndef HEIGHT
@@ -26,15 +38,15 @@
 # endif
 
 # ifndef BLOCKSIZE
-#  define BLOCKSIZE 100
+#  define BLOCKSIZE 128
 # endif
 
 # ifndef STEPSIZE
-#  define STEPSIZE 10
+#  define STEPSIZE 16
 # endif
 
 # ifndef RAYS
-#  define RAYS 160
+#  define RAYS 320
 # endif
 
 typedef enum e_flag
@@ -48,6 +60,14 @@ typedef enum e_flag
 	MAP_START = 6,
 	TO_CLEAR = 7,
 }	t_flag;
+
+typedef enum e_wall
+{
+	EAST = 0,
+	SOUTH = 1,
+	WEST = 2,
+	NORTH = 3,
+}	t_wall;
 
 typedef struct s_data
 {
@@ -85,7 +105,9 @@ typedef struct s_ray
 	float		x;
 	float		y;
 	float		wall_height;
-	mlx_image_t	*slice;
+	uint8_t		wall;
+	mlx_image_t	*slice_old;
+	mlx_image_t	*slice_new;
 }	t_ray;
 
 typedef struct s_player
@@ -99,22 +121,12 @@ typedef struct s_player
 	t_ray		ray[RAYS];
 }	t_player;
 
-typedef	struct s_assets
-{
-	mlx_image_t	*north;
-	mlx_image_t	*east;
-	mlx_image_t	*south;
-	mlx_image_t	*west;
-	mlx_image_t	*floor;
-	mlx_image_t	*ceiling;
-}	t_assets;
-
 typedef struct s_cub3d
 {
-	mlx_t		*mlx;
 	t_data		**data;
-	t_assets	*assets;
-	char		**map;
+	mlx_t		*mlx;
+	mlx_image_t	*ceiling;
+	mlx_image_t	*floor;
 	t_player	*player;
 	bool		moved;
 }	t_cub3d;
@@ -155,27 +167,12 @@ void		clear_list_post(mlx_t *mlx, t_data **head);
 // utils3d.c
 void		trim_nl(char *line);
 // window3d.c
-void		test(t_cub3d *cub3d);
-void		test_draw_slices(mlx_t *mlx, t_player *player);
+void		init_window(t_cub3d *cub3d);
+void		draw_slices(mlx_t *mlx, t_player *player);
 // keyhooks3d.c
-float		calc_angle(float angle);
 void		move_player(mlx_key_data_t keydata, void *param);
 // display3d.c
 void		redisplay(void *param);
 // ray3d.c
 float		ray_len(t_player *player, size_t i, char **map);
-
-int			ft_strmapiteri(char **arr, int (*f)(char *, int));
-int			ft_access(char *filename);
-int			ft_isempty(char *str);
-char		**read_from_file(int fd);
-void		*ft_realloc(void *ptr, size_t oldsize, size_t size);
-char		**import_map(char *filename);
-char		*find_flag(char **arr, const char *flag_type);
-
-int			check_map(char **map);
-int			find_player(char *str, int index);
-t_data		*read_map_from_file(char *filename);
-int			validate_flag(char **arr, const char *flag_type);
-
 #endif
