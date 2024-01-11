@@ -6,11 +6,21 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/30 11:17:39 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/11 17:16:13 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/11 18:50:37 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+
+
+//wip coloring pixels the right way I hope
+void	color_slices(t_ray ray, mlx_image_t *slice, mlx_texture_t *texture)
+{
+	float	scale;
+
+	scale = ray.wall_height / (float)texture->height;
+	mlx_put_pixel(slice, 0, 0, texture->pixels[0]);
+}
 
 //make sure to apply texture correclty depending on whether wall is higher than
 //screen size or inside the drawing plane

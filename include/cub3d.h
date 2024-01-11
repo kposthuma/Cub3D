@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/11 17:12:31 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/11 17:42:50 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # endif
 
 # ifndef RAYS
-#  define RAYS 400
+#  define RAYS 800
 # endif
 
 typedef enum e_flag
