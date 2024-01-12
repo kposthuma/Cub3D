@@ -1,4 +1,38 @@
 #include "cub3d.h"
+#include "flags.h"
+
+static int	_compare(char *str, char *flag)
+{
+	size_t	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i] && flag[i])
+	{
+		if (str[i] != flag[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	is_flag(char *str)
+{
+	if (_compare(str, NORTH_TEXTURE_FLAG))
+		return (1);
+	if (_compare(str, SOUTH_TEXTURE_FLAG))
+		return (1);
+	if (_compare(str, WEST_TEXTURE_FLAG))
+		return (1);
+	if (_compare(str, EAST_TEXTURE_FLAG))
+		return (1);
+	if (_compare(str, FLOOR_COLOR_FLAG))
+		return (1);
+	if (_compare(str, CEILING_COLOR_FLAG))
+		return (1);
+	return (0);
+}
 
 char	*find_flag(char **arr, const char *flag)
 {
@@ -11,7 +45,8 @@ char	*find_flag(char **arr, const char *flag)
 	{
 		if (ft_strncmp(arr[i], flag, len) == 0
 			&& ft_isspace(arr[i][len])
-			&& !ft_isempty(&arr[i][len]))
+			&& !ft_isempty(&arr[i][len])
+			&& is_flag(arr[i]))
 		{
 			while (ft_isspace(arr[i][len]))
 				len++;
@@ -37,7 +72,8 @@ int	validate_flag(char **arr, const char *flag)
 			return (0);
 		if (ft_strncmp(arr[i], flag, len) == 0
 			&& ft_isspace(arr[i][len])
-			&& !ft_isempty(&arr[i][len]))
+			&& !ft_isempty(&arr[i][len])
+			&& is_flag(arr[i]))
 			found++;
 		i++;
 	}

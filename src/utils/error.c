@@ -12,6 +12,8 @@ static void	invalid_map_parsing(t_cuberror_type type)
 		ft_putendl_fd(ERR_INVALID_MAP, STDERR_FILENO);
 	if (type == INVALID_FLAGS)
 		ft_putendl_fd(ERR_INVALID_FLAGS, STDERR_FILENO);
+	if (type == WEIRD_FLAGS)
+		ft_putendl_fd(ERR_WEIRD_FLAGS, STDERR_FILENO);
 	if (type == INVALID_TEXTURE_FILES)
 		ft_putendl_fd(ERR_INVALID_TEXTURES, STDERR_FILENO);
 }

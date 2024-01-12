@@ -39,14 +39,13 @@
 
 typedef enum e_flag
 {
-	C_COLOR = 0,
-	F_COLOR = 1,
-	N_TEXTURE = 2,
-	E_TEXTURE = 3,
-	S_TEXTURE = 4,
-	W_TEXTURE = 5,
-	MAP_START = 6,
-	TO_CLEAR = 7,
+	C_COLOR = 1,
+	F_COLOR,
+	N_TEXTURE,
+	E_TEXTURE,
+	S_TEXTURE,
+	W_TEXTURE,
+	MAP_START,
 }	t_flag;
 
 typedef enum e_wall
@@ -109,20 +108,33 @@ typedef struct s_player
 	t_ray		ray[RAYS];
 }	t_player;
 
+typedef	struct s_image
+{
+	mlx_texture_t	*texture;
+	mlx_image_t		*image;
+	char			*filename;
+}	t_image;
+
+typedef struct s_map
+{
+	t_data	*flags;
+	t_data	*map;
+	int		size;
+}	t_map;
+
 typedef struct s_cub3d
 {
-	t_data		**data;
+	t_map		*map;
 	mlx_t		*mlx;
 	mlx_image_t	*ceiling;
 	mlx_image_t	*floor;
 	t_player	*player;
+	t_data		**data;
 	bool		moved;
 }	t_cub3d;
 
 // err3d.c
 void		errmsg(char *msg);
-// parse3d.c
-t_data		**parse_input(int count, char **arg);
 // flag3d.c
 void		assign_flag(t_data **head);
 void		set_flag_rest(t_data *node);
@@ -143,7 +155,7 @@ bool		validate_texture(t_data **head, int flag);
 size_t		determine_height(t_data **start);
 size_t		determine_length(t_data **start);
 // init3d.c
-t_cub3d		*cub3d_init(mlx_t *mlx, t_data **head);
+bool		cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data);
 void		set_color(mlx_image_t *image, int *value, size_t size);
 void		init_rays(t_player *player, char **map);
 // destroy3d.c
@@ -160,21 +172,25 @@ void		draw_slices(mlx_t *mlx, t_player *player);
 // keyhooks3d.c
 void		move_player(mlx_key_data_t keydata, void *param);
 // display3d.c
-void		redisplay(void *param);
+void		redisplay(t_cub3d *cub3d);
 // ray3d.c
 float		ray_len(t_player *player, size_t i, char **map);
 
 int			ft_strmapiteri(char **arr, int (*f)(char *, int));
 int			ft_access(char *filename);
+int			ft_accesstype(char *filename, char *expected_type);
 int			ft_isempty(char *str);
 char		**read_from_file(int fd);
 void		*ft_realloc(void *ptr, size_t oldsize, size_t size);
 char		**import_map(char *filename);
 char		*find_flag(char **arr, const char *flag_type);
+int			is_flag(char *str);
 
 int			check_map(char **map);
 int			find_player(char *str, int index);
-t_data		*read_map_from_file(char *filename);
+t_map		*read_map_from_file(char *filename);
 int			validate_flag(char **arr, const char *flag_type);
+
+bool		test_init(t_cub3d *cub, mlx_t *mlx, t_map *data);
 
 #endif

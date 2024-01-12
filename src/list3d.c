@@ -1,21 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   list3d.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/12/12 18:00:15 by kposthum      #+#    #+#                 */
-/*   Updated: 2023/12/23 19:59:09 by koen          ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <cub3d.h>
+#include "cub3d.h"
 
 t_data	*find_node(t_data **head, int flag)
 {
 	t_data	*node;
 
+	if (!head || !*head)
+		return (NULL);
 	node = *head;
 	while (node->flag != flag)
 		node = node->next;

@@ -6,7 +6,7 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2024/01/11 15:08:26 by cbijman       ########   odam.nl          #
+#    Updated: 2024/01/12 19:17:54 by cbijman       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ LIBMLX = ./MLX42/build/libmlx42.a
 FILES	=	ft_strmapiteri \
 			ft_isempty \
 			ft_access \
+			ft_accesstype \
 			error \
 			ft_color \
 			ft_realloc \
@@ -34,10 +35,8 @@ FILES	=	ft_strmapiteri \
 			list3d \
 			destroy3d \
 			keyhooks3d \
-			parse3d \
 			display3d \
 			ray3d \
-			map3d \
 			init3d \
 			color_texture3d \
 			parser \
@@ -45,7 +44,6 @@ FILES	=	ft_strmapiteri \
 			flags \
 			validation \
 			validation_utils \
-			utils3d \
 
 vpath %.c	$(SRC_DIR) \
 			$(SRC_DIR)/parser \

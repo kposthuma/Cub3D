@@ -13,7 +13,6 @@ static bool	init_vector(t_vector *vec, int type_size, int size)
 	return (true);
 }
 
-//TODO Skip spaces before letters?
 static bool	append_vector(t_vector *vec, char *str)
 {
 	size_t	i;
@@ -28,8 +27,10 @@ static bool	append_vector(t_vector *vec, char *str)
 		if (!vec->content)
 			return (false);
 	}
-	while (!ft_strchr("10", str[i]) && ft_isspace(str[i]))
+	while (ft_isspace(str[i]))
 		i++;
+	if (str[i] == '1' || str[i] == '0')
+		i = 0;
 	vec->content[vec->index] = ft_strtrim(&str[i], "\n");
 	if (!vec->content[vec->index])
 		return (false);
@@ -61,7 +62,7 @@ char	**read_from_file(int fd)
 	while (str)
 	{
 		str = get_next_line(fd);
-		if (!str || *str == '#' || ft_isempty(str))
+		if (!str || ft_isempty(str))
 		{
 			free(str);
 			continue ;

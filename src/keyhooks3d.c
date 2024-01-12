@@ -1,16 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   keyhooks3d.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: koen <koen@student.codam.nl>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/12/29 18:42:05 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/11 13:30:22 by kposthum      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <cub3d.h>
+#include "cub3d.h"
 
 void	determine_xy(t_player *player, bool hor)
 {
@@ -51,7 +39,7 @@ void	walk_player(t_cub3d *cub3d, bool forward)
 		[(size_t)cub3d->player->location[0] / BLOCKSIZE] == '1')
 		cub3d->player->dy = 0;
 	cub3d->player->location[1] += cub3d->player->dy;
-	cub3d->moved = true;
+	redisplay(cub3d);
 }
 
 void	strafe_player(t_cub3d *cub3d, bool left)
@@ -79,7 +67,7 @@ void	strafe_player(t_cub3d *cub3d, bool left)
 		[(size_t)cub3d->player->location[0] / BLOCKSIZE] == '1')
 		cub3d->player->dy = 0;
 	cub3d->player->location[1] += cub3d->player->dy;
-	cub3d->moved = true;
+	redisplay(cub3d);
 }
 
 void	turn_player(t_cub3d *cub3d, bool left)
@@ -92,7 +80,9 @@ void	turn_player(t_cub3d *cub3d, bool left)
 		cub3d->player->angle -= (2 * PI);
 	else if (cub3d->player->angle < 0)
 		cub3d->player->angle += (2 * PI);
-	cub3d->moved = true;
+	// cub3d->moved = true;
+	redisplay(cub3d);
+
 }
 
 void	move_player(mlx_key_data_t keydata, void *param)
