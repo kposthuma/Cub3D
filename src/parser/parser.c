@@ -31,6 +31,19 @@ static bool	_init_textures(t_data **data, char *str, t_flag flag)
 	return (true);
 }
 
+static t_map	*_create_map(t_data *textures, t_data *cont)
+{
+	t_map	*map;
+
+	map = malloc(sizeof(t_map));
+	if (!map)
+		return (NULL);
+	map->flags = textures;
+	map->map = cont;
+	map->size = strofstrlen((char **)map->map->cont);
+	return (map);
+}
+
 t_map	*read_map_from_file(char *filename)
 {
 	const int	color[3] = {120, 120, 120};
@@ -59,11 +72,8 @@ t_map	*read_map_from_file(char *filename)
 		return (NULL);
 	if (!_add_node(&map_struct, &map[6], MAP_START))
 		return (NULL);
-	data = ft_calloc(1, sizeof(t_map));
+	data = _create_map(textures, map_struct);
 	if (!data)
 		return (NULL);
-	data->flags = textures;
-	data->map = map_struct;
-	data->size = strofstrlen(map);
 	return (data);
 }
