@@ -6,7 +6,7 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2024/01/12 19:17:54 by cbijman       ########   odam.nl          #
+#    Updated: 2024/01/16 14:34:40 by cbijman       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ FILES	=	ft_strmapiteri \
 			error \
 			ft_color \
 			ft_realloc \
-			flag3d \
 			maputils3d \
 			main \
 			window3d \

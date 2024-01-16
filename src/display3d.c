@@ -22,8 +22,9 @@ void	draw_slices(mlx_t *mlx, t_player *player)
 			height = HEIGHT;
 		else
 			height = player->ray[r].wall_height;
-		player->ray[r].slice_new = mlx_new_image(mlx, (uint32_t)(WIDTH / RAYS),
-				(uint32_t)roundf(height));
+		player->ray[r].slice_new = mlx_new_image(mlx, (WIDTH / RAYS), height);
+		if (!player->ray[r].slice_new)
+			return ((void) ft_printf("Cannot mkae new image\n"));
 		if (player->ray[r].wall == NORTH)
 		{
 			val[0] = 250;
@@ -74,14 +75,12 @@ static void	_init_rays(t_player *player, char **map)
 		if (player->ray[i].angle > (2 * PI))
 			player->ray[i].angle -= (2 * PI);
 		player->ray[i].len = ray_len(player, i, map);
-		player->ray[i].corr_len = player->ray[i].len
-			* cos((((float)i / (float)RAYS * PI / 3) - (PI / 6)));
+		player->ray[i].corr_len = player->ray[i].len * cos((((float)i / (float)RAYS * PI / 3) - (PI / 6)));
 		player->ray[i].x = player->ray[i].len * cos(player->ray[i].angle);
 		player->ray[i].y = player->ray[i].len * sin(player->ray[i].angle);
 		player->ray[i].x += player->location[0];
 		player->ray[i].y += player->location[1];
-		player->ray[i].wall_height = ((float)(HEIGHT * PI)
-				/ player->ray[i].corr_len) * (player->plane_dist);
+		player->ray[i].wall_height = ((float)(HEIGHT * PI) / player->ray[i].corr_len) * (player->plane_dist);
 		if (player->ray[i].wall_height > HEIGHT)
 			player->ray[i].wall_height = HEIGHT;
 		i++;
@@ -90,8 +89,7 @@ static void	_init_rays(t_player *player, char **map)
 
 void	redisplay(t_cub3d *cub3d)
 {
-	_init_rays(cub3d->player,
-		(char **)((find_node(cub3d->data, MAP_START))->cont));
+	_init_rays(cub3d->player, (char **)cub3d->map->map->cont);
 	draw_slices(cub3d->mlx, cub3d->player);
 	cub3d->player->dx = 0;
 	cub3d->player->dy = 0;

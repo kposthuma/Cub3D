@@ -34,7 +34,7 @@
 # endif
 
 # ifndef RAYS
-#  define RAYS 320
+#  define RAYS 800
 # endif
 
 typedef enum e_flag
