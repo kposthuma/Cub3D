@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/11 17:00:50 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/16 14:19:10 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	init_rays(t_player *player, char **map)
 		player->ray[i].y += player->location[1];
 		player->ray[i].wall_height = (float)(HEIGHT * PI)
 			/ player->ray[i].corr_len * (player->plane_dist);
-		player->ray[i].slice_old = NULL;
 		i++;
 	}
 }
