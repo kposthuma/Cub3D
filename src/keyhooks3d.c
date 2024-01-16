@@ -80,7 +80,6 @@ void	turn_player(t_cub3d *cub3d, bool left)
 		cub3d->player->angle -= (2 * PI);
 	else if (cub3d->player->angle < 0)
 		cub3d->player->angle += (2 * PI);
-	// cub3d->moved = true;
 	redisplay(cub3d);
 
 }

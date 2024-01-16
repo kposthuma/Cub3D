@@ -28,26 +28,26 @@ void	draw_slices(mlx_t *mlx, t_player *player)
 		if (player->ray[r].wall == NORTH)
 		{
 			val[0] = 250;
-			val[1] = 250 / (player->ray[r].corr_len / 100);
-			val[2] = 250 / (player->ray[r].corr_len / 100);
+			val[1] = 0;
+			val[2] = 0;
 		}
 		else if (player->ray[r].wall == EAST)
 		{
-			val[0] = 250 / (player->ray[r].corr_len / 100);
+			val[0] = 0;
 			val[1] = 250;
-			val[2] = 250 / (player->ray[r].corr_len / 100);
+			val[2] = 0;
 		}
 		else if (player->ray[r].wall == SOUTH)
 		{
-			val[0] = 250 / (player->ray[r].corr_len / 100);
-			val[1] = 250 / (player->ray[r].corr_len / 100);
+			val[0] = 0;
+			val[1] = 0;
 			val[2] = 250;
 		}
 		else
 		{
-			val[0] = 250 / (player->ray[r].corr_len / 100);
-			val[1] = 250 / (player->ray[r].corr_len / 100);
-			val[2] = 250 / (player->ray[r].corr_len / 100);
+			val[0] = 20;
+			val[1] = 20;
+			val[2] = 20;
 		}
 		set_color(player->ray[r].slice_new, val, WIDTH / RAYS
 			* (size_t)height * sizeof(int32_t));
@@ -61,35 +61,9 @@ void	draw_slices(mlx_t *mlx, t_player *player)
 	}
 }
 
-static void	_init_rays(t_player *player, char **map)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < RAYS)
-	{
-		player->ray[i].angle
-			= (player->angle + ((float)i / (float)RAYS * PI / 3)) - (PI / 6);
-		if (player->ray[i].angle < 0)
-			player->ray[i].angle += (2 * PI);
-		if (player->ray[i].angle > (2 * PI))
-			player->ray[i].angle -= (2 * PI);
-		player->ray[i].len = ray_len(player, i, map);
-		player->ray[i].corr_len = player->ray[i].len * cos((((float)i / (float)RAYS * PI / 3) - (PI / 6)));
-		player->ray[i].x = player->ray[i].len * cos(player->ray[i].angle);
-		player->ray[i].y = player->ray[i].len * sin(player->ray[i].angle);
-		player->ray[i].x += player->location[0];
-		player->ray[i].y += player->location[1];
-		player->ray[i].wall_height = ((float)(HEIGHT * PI) / player->ray[i].corr_len) * (player->plane_dist);
-		if (player->ray[i].wall_height > HEIGHT)
-			player->ray[i].wall_height = HEIGHT;
-		i++;
-	}
-}
-
 void	redisplay(t_cub3d *cub3d)
 {
-	_init_rays(cub3d->player, (char **)cub3d->map->map->cont);
+	init_rays(cub3d->player, (char **)cub3d->map->map->cont);
 	draw_slices(cub3d->mlx, cub3d->player);
 	cub3d->player->dx = 0;
 	cub3d->player->dy = 0;

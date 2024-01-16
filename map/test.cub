@@ -3,7 +3,7 @@ SO ./img/SO.png
 WE ./img/WE.png
 EA ./img/EA.png
 
-F                                         120, 1       20,120
+F 120,120,120
 C 60,60,60
 
 1111111111111111

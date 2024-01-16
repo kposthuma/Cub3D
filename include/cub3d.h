@@ -128,9 +128,9 @@ typedef struct s_cub3d
 	mlx_t		*mlx;
 	mlx_image_t	*ceiling;
 	mlx_image_t	*floor;
+	mlx_image_t	*screen;
 	t_player	*player;
 	t_data		**data;
-	bool		moved;
 }	t_cub3d;
 
 // err3d.c

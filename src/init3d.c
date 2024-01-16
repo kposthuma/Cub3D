@@ -1,4 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   init3d.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/01/16 14:59:51 by kposthum      #+#    #+#                 */
+/*   Updated: 2024/01/16 15:01:44 by kposthum      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <cub3d.h>
 
 void	init_rays(t_player *player, char **map)
 {
@@ -7,19 +19,21 @@ void	init_rays(t_player *player, char **map)
 	i = 0;
 	while (i < RAYS)
 	{
-		player->ray[i].angle = (player->angle + ((float)i / (float)RAYS * PI / 3)) - (PI / 6);
+		player->ray[i].angle
+			= (player->angle + ((float)i / (float)RAYS * PI / 3)) - (PI / 6);
 		if (player->ray[i].angle < 0)
 			player->ray[i].angle += (2 * PI);
 		if (player->ray[i].angle > (2 * PI))
 			player->ray[i].angle -= (2 * PI);
 		player->ray[i].len = ray_len(player, i, map);
-		player->ray[i].corr_len = player->ray[i].len * cos((((float)i / (float)RAYS * PI / 3) - (PI / 6)));
+		player->ray[i].corr_len = player->ray[i].len
+			* cos((((float)i / (float)RAYS * PI / 3) - (PI / 6)));
 		player->ray[i].x = player->ray[i].len * cos(player->ray[i].angle);
 		player->ray[i].y = player->ray[i].len * sin(player->ray[i].angle);
 		player->ray[i].x += player->location[0];
 		player->ray[i].y += player->location[1];
-		player->ray[i].wall_height = (float)(HEIGHT * PI) / player->ray[i].corr_len * (player->plane_dist);
-		player->ray[i].slice_old = NULL;
+		player->ray[i].wall_height = (float)(HEIGHT * PI)
+			/ player->ray[i].corr_len * (player->plane_dist);
 		i++;
 	}
 }
@@ -60,21 +74,23 @@ t_player	*init_player(t_data **head)
 
 mlx_image_t	*get_background(mlx_t *mlx, t_data **head, int flag)
 {
-	const int	*value = find_node(head, flag)->cont;
+	const int	*value = (int *)find_node(head, flag)->cont;
 	mlx_image_t	*image;
 
 	if (!value)
 		return (NULL);
+	printf("color values : R%i, G%i, B%i\n", value[0], value[1], value[2]);
 	image = mlx_new_image(mlx, mlx->width, (mlx->height / 2));
 	if (!image)
 		return (NULL);
-	set_color(image, (int *)value, image->height * image->width * sizeof(int32_t));
+	set_color(image, (int *)value,
+		image->height * image->width * sizeof(int32_t));
 	return (image);
 }
 
 bool	cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data)
 {
-	memset(cub, 0, sizeof(t_cub3d));
+	ft_memset(cub, 0, sizeof(t_cub3d));
 	cub->floor = get_background(mlx, &data->flags, F_COLOR);
 	if (!cub->floor)
 		return (false);
@@ -84,9 +100,11 @@ bool	cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data)
 	cub->player = init_player(&data->map);
 	if (!cub->player)
 		return (false);
+	cub->screen = mlx_new_image(mlx, mlx->width, mlx->height);
+	if (!cub->screen)
+		return (false);
 	cub->data = &data->map;
 	cub->mlx = mlx;
 	cub->map = data;
-	cub->moved = true;
 	return (true);
 }
