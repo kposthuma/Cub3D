@@ -31,7 +31,9 @@ static bool	append_vector(t_vector *vec, char *str)
 		i++;
 	if (str[i] == '1' || str[i] == '0')
 		i = 0;
-	vec->content[vec->index] = ft_strtrim(&str[i], "\n");
+	if (str[ft_strlen(str) - 1] == '\n')
+		str[ft_strlen(str) - 1] = '\0';
+	vec->content[vec->index] = str;
 	if (!vec->content[vec->index])
 		return (false);
 	vec->index++;
@@ -69,7 +71,6 @@ char	**read_from_file(int fd)
 		}
 		if (!append_vector(&vec, str))
 			return (free_vector(&vec), NULL);
-		free(str);
 	}
 	return (vec.content);
 }

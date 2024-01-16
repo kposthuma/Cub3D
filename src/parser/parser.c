@@ -13,20 +13,19 @@ static bool	_add_node(t_data **list, void *content, t_flag type)
 	return (true);
 }
 
-static bool	_init_data_textures(t_data **data, char *str, t_flag flag)
+static bool	_init_textures(t_data **data, char *str, t_flag flag)
 {
-	t_img_data	*image;
-	t_data		*new;
+	mlx_texture_t	*image;
+	t_data			*new;
 
-	image = ft_calloc(1, sizeof(t_img_data));
+	image = mlx_load_png(str);
 	if (!image)
 		return (false);
-	image->texture = mlx_load_png(str);
-	if (!image->texture)
-		return (false);
-	if (image->texture->width != image->texture->height)
+	if (image->width != IMAGE_SIZE
+		&& image->width != IMAGE_SIZE
+		&& image->width != image->height)
 	{
-		mlx_delete_texture(image->texture);
+		mlx_delete_texture(image);
 		return (false);
 	}
 	if (!_add_node(data, image, flag))
@@ -49,13 +48,13 @@ t_map	*read_map_from_file(char *filename)
 	map = import_map(filename);
 	if (!map)
 		return (NULL);
-	if (!_init_data_textures(&textures, find_flag(map, NORTH_TEXTURE_FLAG), N_TEXTURE))
+	if (!_init_textures(&textures, find_flag(map, NORTH_FLAG), N_TEXTURE))
 		return (NULL);
-	if (!_init_data_textures(&textures, find_flag(map, SOUTH_TEXTURE_FLAG), S_TEXTURE))
+	if (!_init_textures(&textures, find_flag(map, SOUTH_FLAG), S_TEXTURE))
 		return (NULL);
-	if (!_init_data_textures(&textures, find_flag(map, WEST_TEXTURE_FLAG), W_TEXTURE))
+	if (!_init_textures(&textures, find_flag(map, WEST_FLAG), W_TEXTURE))
 		return (NULL);
-	if (!_init_data_textures(&textures, find_flag(map, EAST_TEXTURE_FLAG), E_TEXTURE))
+	if (!_init_textures(&textures, find_flag(map, EAST_FLAG), E_TEXTURE))
 		return (NULL);
 	if (!_add_node(&textures, (void *)color, C_COLOR))
 		return (NULL);
@@ -68,6 +67,6 @@ t_map	*read_map_from_file(char *filename)
 		return (NULL);
 	data->flags = textures;
 	data->map = map_struct;
-	data->size = 1000;
+	data->size = strofstrlen(map);
 	return (data);
 }

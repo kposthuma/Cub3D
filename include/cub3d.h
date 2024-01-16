@@ -37,6 +37,10 @@
 #  define RAYS 800
 # endif
 
+# ifndef IMAGE_SIZE
+#  define IMAGE_SIZE 64
+# endif
+
 typedef enum e_flag
 {
 	C_COLOR = 1,
@@ -190,7 +194,6 @@ int			check_map(char **map);
 int			find_player(char *str, int index);
 t_map		*read_map_from_file(char *filename);
 int			validate_flag(char **arr, const char *flag_type);
-
-bool		test_init(t_cub3d *cub, mlx_t *mlx, t_map *data);
+char		**ft_arrdup(char **arr);
 
 #endif

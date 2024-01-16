@@ -36,13 +36,13 @@ static int	_validate_all_flags(char **map)
  */
 static int	_validate_textures(char **map)
 {
-	if (!ft_accesstype(find_flag(map, NORTH_TEXTURE_FLAG), IMAGE_FILE_TYPE))
+	if (!ft_accesstype(find_flag(map, NORTH_FLAG), IMAGE_FILE_TYPE))
 		return (0);
-	if (!ft_accesstype(find_flag(map, SOUTH_TEXTURE_FLAG), IMAGE_FILE_TYPE))
+	if (!ft_accesstype(find_flag(map, SOUTH_FLAG), IMAGE_FILE_TYPE))
 		return (0);
-	if (!ft_accesstype(find_flag(map, WEST_TEXTURE_FLAG), IMAGE_FILE_TYPE))
+	if (!ft_accesstype(find_flag(map, WEST_FLAG), IMAGE_FILE_TYPE))
 		return (0);
-	if (!ft_accesstype(find_flag(map, EAST_TEXTURE_FLAG), IMAGE_FILE_TYPE))
+	if (!ft_accesstype(find_flag(map, EAST_FLAG), IMAGE_FILE_TYPE))
 		return (0);
 	return (1);
 }
@@ -55,13 +55,13 @@ static int	_validate_textures(char **map)
  */
 static int	_validate_duplicate_flags(char **map)
 {
-	if (!validate_flag(map, NORTH_TEXTURE_FLAG))
+	if (!validate_flag(map, NORTH_FLAG))
 		return (0);
-	if (!validate_flag(map, SOUTH_TEXTURE_FLAG))
+	if (!validate_flag(map, SOUTH_FLAG))
 		return (0);
-	if (!validate_flag(map, WEST_TEXTURE_FLAG))
+	if (!validate_flag(map, WEST_FLAG))
 		return (0);
-	if (!validate_flag(map, EAST_TEXTURE_FLAG))
+	if (!validate_flag(map, EAST_FLAG))
 		return (0);
 	if (!validate_flag(map, FLOOR_COLOR_FLAG))
 		return (0);
@@ -80,8 +80,8 @@ static int	_validate_map(char **map)
 {
 	if (!ft_strmapiteri(map, find_player))
 		return (0);
-	//if (!check_map(map))
-	//	return (0);
+	if (!check_map(map))
+		return (0);
 	return (1);
 }
 
@@ -95,6 +95,7 @@ static int	_validate_map(char **map)
 char	**import_map(char *filename)
 {
 	char	**map;
+	char	**test_map;
 
 	if (!filename)
 		return (cuberr(NO_ARGUMENT), NULL);
@@ -109,7 +110,11 @@ char	**import_map(char *filename)
 		return (ft_free(map), cuberr(INVALID_FLAGS), NULL);
 	if (!_validate_textures(map))
 		return (ft_free(map), cuberr(INVALID_TEXTURE_FILES), NULL);
-	if (!_validate_map(&map[6])) //Find map position and make a seperate map for validation
-		return (ft_free(map), cuberr(INVALID_MAP), NULL);
+	test_map = ft_arrdup(&map[6]);
+	if (!test_map)
+		return (ft_free(map), cuberr(SPARERIB_EXPRESS), NULL);
+	if (!_validate_map(test_map))
+		return (ft_free(map), ft_free(test_map), cuberr(INVALID_MAP), NULL);
+	ft_free(test_map);
 	return (map);
 }

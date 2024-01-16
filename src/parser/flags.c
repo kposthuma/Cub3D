@@ -19,13 +19,13 @@ static int	_compare(char *str, char *flag)
 
 int	is_flag(char *str)
 {
-	if (_compare(str, NORTH_TEXTURE_FLAG))
+	if (_compare(str, NORTH_FLAG))
 		return (1);
-	if (_compare(str, SOUTH_TEXTURE_FLAG))
+	if (_compare(str, SOUTH_FLAG))
 		return (1);
-	if (_compare(str, WEST_TEXTURE_FLAG))
+	if (_compare(str, WEST_FLAG))
 		return (1);
-	if (_compare(str, EAST_TEXTURE_FLAG))
+	if (_compare(str, EAST_FLAG))
 		return (1);
 	if (_compare(str, FLOOR_COLOR_FLAG))
 		return (1);
