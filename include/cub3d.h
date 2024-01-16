@@ -43,7 +43,7 @@
 
 typedef enum e_flag
 {
-	C_COLOR = 1,
+	C_COLOR = 0,
 	F_COLOR,
 	N_TEXTURE,
 	E_TEXTURE,
@@ -54,10 +54,10 @@ typedef enum e_flag
 
 typedef enum e_wall
 {
-	EAST = 0,
-	SOUTH = 1,
-	WEST = 2,
-	NORTH = 3,
+	NORTH = 2,
+	EAST = 3,
+	SOUTH = 4,
+	WEST = 5,
 }	t_wall;
 
 typedef struct s_data
@@ -73,12 +73,6 @@ typedef struct s_location
 	size_t	x;
 	size_t	y;
 }	t_location;
-
-typedef struct s_img_data
-{
-	mlx_texture_t	*texture;
-	mlx_image_t		*image;
-}	t_img_data;
 
 typedef struct t_background
 {

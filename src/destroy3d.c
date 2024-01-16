@@ -62,7 +62,7 @@ void	clear_list_three(t_data **head)
 		node = node->next;
 		if (node->flag >= N_TEXTURE && node->flag <= W_TEXTURE
 			&& node->cont != NULL)
-			mlx_delete_texture(((t_img_data *)node->cont)->texture);
+			mlx_delete_texture((mlx_texture_t *)node->cont);
 		if (temp->flag == MAP_START)
 			ft_free((char **)temp->cont);
 		else
@@ -75,11 +75,7 @@ void	clear_list_three(t_data **head)
 static void	free_cont(mlx_t *mlx, t_data *node)
 {
 	if (node->flag >= N_TEXTURE && node->flag <= W_TEXTURE)
-	{
-		mlx_delete_texture(((t_img_data *)node->cont)->texture);
-		mlx_delete_image(mlx, ((t_img_data *)node->cont)->image);
-		free((t_img_data *)node->cont);
-	}
+		mlx_delete_texture((mlx_texture_t *)node->cont);
 	else if (node->flag == MAP_START)
 		ft_free((char **)node->cont);
 	else if (node->flag == C_COLOR || node->flag == F_COLOR)

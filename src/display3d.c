@@ -61,6 +61,21 @@ void	draw_slices(mlx_t *mlx, t_player *player)
 	}
 }
 
+void	draw_screen(mlx_image_t *screen, t_ray *rays, t_data **data)
+{
+	size_t			r;
+	mlx_texture_t	*tex;
+	float			scale;
+
+	r = 0;
+	ft_bzero(screen->pixels, screen->height * screen->width * sizeof(uint32_t));
+	while (r < RAYS)
+	{
+		tex = (mlx_texture_t *)((find_node(data, rays[r].wall))->cont);
+		scale = rays[r].wall_height / (float)tex->height;
+	}
+}
+
 void	redisplay(t_cub3d *cub3d)
 {
 	init_rays(cub3d->player, (char **)cub3d->map->map->cont);

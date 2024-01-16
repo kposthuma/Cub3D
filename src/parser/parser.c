@@ -24,10 +24,7 @@ static bool	_init_textures(t_data **data, char *str, t_flag flag)
 	if (image->width != IMAGE_SIZE
 		&& image->width != IMAGE_SIZE
 		&& image->width != image->height)
-	{
-		mlx_delete_texture(image);
-		return (false);
-	}
+		return (mlx_delete_texture(image), false);
 	if (!_add_node(data, image, flag))
 		return (false);
 	printf("Successfully loaded %s\n", str);
