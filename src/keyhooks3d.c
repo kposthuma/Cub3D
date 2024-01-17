@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:56 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 11:07:57 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/17 14:02:40 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	turn_player(t_cub3d *cub3d, bool left)
 	else if (cub3d->player->angle < 0)
 		cub3d->player->angle += (2 * PI);
 	redisplay(cub3d);
-
 }
 
 void	move_player(mlx_key_data_t keydata, void *param)

@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 11:07:50 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/17 15:09:48 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,16 @@ size_t	determine_tex_start(float pos, uint32_t width)
 	return (pos * width);
 }
 
+uint32_t	get_pixel(mlx_texture_t *tex, float scale, size_t x, size_t y)
+{
+	return 0;
+}
+
 void	draw_screen(mlx_image_t *screen, t_ray *rays, t_data **data)
 {
 	size_t			r;
-	size_t			i;
+	size_t			h;
+	size_t			w;
 	mlx_texture_t	*tex;
 	float			scale;
 	size_t			tex_start;
@@ -101,12 +107,22 @@ void	draw_screen(mlx_image_t *screen, t_ray *rays, t_data **data)
 			tex_start = determine_tex_start(rays[r].x, tex->width);
 		else
 			tex_start = determine_tex_start(rays[r].y, tex->width);
-		i = 0;
-		while (i < ray_width * rays[r].wall_height)
+		h = 0;
+		while (h < rays[r].wall_height)
 		{
-			mlx_put_pixel(screen, (r * (WIDTH / RAYS)),
-				HEIGHT / 2 - rays[r].wall / 2, tex->pixels[tex_start + i]);
-			i++;
+			w = 0;
+			while (w < ray_width)
+			{
+				if (h + (HEIGHT / 2 - rays[r].wall_height / 2) >= 0
+					&& h + (HEIGHT / 2 - rays[r].wall_height / 2) < HEIGHT)
+				{
+					mlx_put_pixel(screen, ((r * ray_width) + w),
+						(HEIGHT / 2 - rays[r].wall_height / 2) + h,
+						get_pixel(tex));
+				}
+				w++;
+			}
+			h++;
 		}
 		r++;
 	}
@@ -115,8 +131,8 @@ void	draw_screen(mlx_image_t *screen, t_ray *rays, t_data **data)
 void	redisplay(t_cub3d *cub3d)
 {
 	init_rays(cub3d->player, (char **)cub3d->map->map->cont);
+	draw_screen(cub3d->screen, cub3d->player->ray, &cub3d->map->flags);
 	// draw_slices(cub3d->mlx, cub3d->player);
-	draw_screen(cub3d->screen, cub3d->player->ray, cub3d->data);
 	cub3d->player->dx = 0;
 	cub3d->player->dy = 0;
 }
