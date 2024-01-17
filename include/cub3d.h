@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 15:39:17 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/17 16:43:42 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # endif
 
 # ifndef RAYS
-#  define RAYS 800
+#  define RAYS 1600
 # endif
 
 # ifndef IMAGE_SIZE

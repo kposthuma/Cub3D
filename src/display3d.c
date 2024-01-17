@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 15:39:27 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/17 17:00:44 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,8 @@ void	draw_slices(mlx_t *mlx, t_player *player)
 
 size_t	determine_tex_start(float pos, uint32_t width)
 {
-	int	x;
-
-	x = (int)pos;
-	pos = fmod(pos, (float)x);
-	return (pos * width);
+	pos = pos - floor(pos);
+	return ((size_t)(pos * width));
 }
 
 uint32_t	get_pixel(mlx_texture_t *tex, float scale, size_t x, size_t y)
@@ -100,15 +97,14 @@ uint32_t	get_pixel(mlx_texture_t *tex, float scale, size_t x, size_t y)
 	return (get_rgba(r, g, b, a));
 }
 
+// get_pixel(tex, scale, tex_start, h)
 void	draw_screen(mlx_image_t *screen, t_ray *rays, t_data **data)
 {
 	size_t			r;
 	size_t			h;
-	size_t			w;
 	mlx_texture_t	*tex;
 	float			scale;
 	size_t			tex_start;
-	const size_t	ray_width = WIDTH / RAYS;
 
 	r = 0;
 	ft_bzero(screen->pixels, screen->height * screen->width * sizeof(uint32_t));
@@ -123,17 +119,12 @@ void	draw_screen(mlx_image_t *screen, t_ray *rays, t_data **data)
 		h = 0;
 		while (h < rays[r].wall_height)
 		{
-			w = 0;
-			while (w < ray_width)
+			if (h + (HEIGHT / 2 - rays[r].wall_height / 2) >= 0
+				&& h + (HEIGHT / 2 - rays[r].wall_height / 2) < HEIGHT)
 			{
-				if (h + (HEIGHT / 2 - rays[r].wall_height / 2) >= 0
-					&& h + (HEIGHT / 2 - rays[r].wall_height / 2) < HEIGHT)
-				{
-					mlx_put_pixel(screen, ((r * ray_width) + w),
-						(HEIGHT / 2 - rays[r].wall_height / 2) + h,
-						get_pixel(tex, scale, tex_start + w, h));
-				}
-				w++;
+				mlx_put_pixel(screen, (r),
+					(HEIGHT / 2 - rays[r].wall_height / 2) + h,
+					get_pixel(tex, scale, tex_start, h));
 			}
 			h++;
 		}
