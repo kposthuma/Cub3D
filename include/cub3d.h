@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 16:58:52 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/11 17:42:50 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/16 14:42:59 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ typedef struct s_cub3d
 	mlx_image_t	*ceiling;
 	mlx_image_t	*floor;
 	t_player	*player;
-	bool		moved;
 }	t_cub3d;
 
 // err3d.c

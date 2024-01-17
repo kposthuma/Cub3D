@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/29 18:42:05 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/11 17:13:25 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/17 11:00:31 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	turn_player(t_cub3d *cub3d, bool left)
 		cub3d->player->angle -= (2 * PI);
 	else if (cub3d->player->angle < 0)
 		cub3d->player->angle += (2 * PI);
-	// cub3d->moved = true;
 	redisplay(cub3d);
 
 }

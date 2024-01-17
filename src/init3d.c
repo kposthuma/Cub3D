@@ -6,7 +6,7 @@
 /*   By: koen <koen@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/18 18:51:06 by koen          #+#    #+#                 */
-/*   Updated: 2024/01/16 14:19:10 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/16 14:59:27 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,5 @@ t_cub3d	*cub3d_init(mlx_t *mlx, t_data **head)
 	cub3d->mlx = mlx;
 	cub3d->data = head;
 	cub3d->player = init_player(head);
-	cub3d->moved = true;
 	return (cub3d);
 }
