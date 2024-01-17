@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 15:23:05 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/17 15:39:27 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,20 @@ size_t	determine_tex_start(float pos, uint32_t width)
 
 uint32_t	get_pixel(mlx_texture_t *tex, float scale, size_t x, size_t y)
 {
-	return (tex->pixels[(uint8_t)((x * scale) * (y * scale))]);
+	const uint8_t	r = tex->pixels[
+		(uint8_t)((x * scale * tex->bytes_per_pixel)
+		* (y * scale * tex->bytes_per_pixel))];
+	const uint8_t	g = tex->pixels[
+		(uint8_t)((x * scale * tex->bytes_per_pixel)
+		* (y * scale * tex->bytes_per_pixel)) + sizeof(uint8_t)];
+	const uint8_t	b = tex->pixels[
+		(uint8_t)((x * scale * tex->bytes_per_pixel)
+		* (y * scale * tex->bytes_per_pixel)) + 2 *sizeof(uint8_t)];
+	const uint8_t	a = tex->pixels[
+		(uint8_t)((x * scale * tex->bytes_per_pixel)
+		* (y * scale * tex->bytes_per_pixel)) + 3 *sizeof(uint8_t)];
+
+	return (get_rgba(r, g, b, a));
 }
 
 void	draw_screen(mlx_image_t *screen, t_ray *rays, t_data **data)

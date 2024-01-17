@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 15:02:16 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/17 15:39:17 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,8 @@ void		move_player(mlx_key_data_t keydata, void *param);
 void		redisplay(t_cub3d *cub3d);
 // ray3d.c
 float		ray_len(t_player *player, size_t i, char **map);
+
+int			get_rgba(int r, int g, int b, int a);
 
 int			ft_strmapiteri(char **arr, int (*f)(char *, int));
 int			ft_access(char *filename);
