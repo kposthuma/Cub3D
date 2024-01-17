@@ -61,11 +61,23 @@ void	draw_slices(mlx_t *mlx, t_player *player)
 	}
 }
 
+size_t	determine_tex_start(float pos, uint32_t width)
+{
+	int	x;
+
+	x = (int)pos;
+	pos = fmod(pos, (float)x);
+	return (pos * width);
+}
+
 void	draw_screen(mlx_image_t *screen, t_ray *rays, t_data **data)
 {
 	size_t			r;
+	size_t			i;
 	mlx_texture_t	*tex;
 	float			scale;
+	size_t			tex_start;
+	const size_t	ray_width = WIDTH / RAYS;
 
 	r = 0;
 	ft_bzero(screen->pixels, screen->height * screen->width * sizeof(uint32_t));
@@ -73,14 +85,26 @@ void	draw_screen(mlx_image_t *screen, t_ray *rays, t_data **data)
 	{
 		tex = (mlx_texture_t *)((find_node(data, rays[r].wall))->cont);
 		scale = rays[r].wall_height / (float)tex->height;
+		if (rays[r].wall == NORTH || rays[r].wall == SOUTH)
+			tex_start = determine_tex_start(rays[r].x, tex->width);
+		else
+			tex_start = determine_tex_start(rays[r].y, tex->width);
+		i = 0;
+		while (i < ray_width * rays[r].wall_height)
+		{
+			mlx_put_pixel(screen, (r * (WIDTH / RAYS)),
+				HEIGHT / 2 - rays[r].wall / 2, tex->pixels[tex_start + i]);
+			i++;
+		}
+		r++;
 	}
 }
 
 void	redisplay(t_cub3d *cub3d)
 {
 	init_rays(cub3d->player, (char **)cub3d->map->map->cont);
-	draw_slices(cub3d->mlx, cub3d->player);
+	// draw_slices(cub3d->mlx, cub3d->player);
+	draw_screen(cub3d->screen, cub3d->player->ray, cub3d->data);
 	cub3d->player->dx = 0;
 	cub3d->player->dy = 0;
 }
-
