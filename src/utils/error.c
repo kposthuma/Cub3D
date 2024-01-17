@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   error.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/01/17 11:03:31 by kposthum      #+#    #+#                 */
+/*   Updated: 2024/01/17 11:03:48 by kposthum      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cuberr.h"
 #include "libft.h"
 #include <unistd.h>
@@ -30,5 +42,5 @@ void	cuberr(t_cuberror_type type)
 
 void	errmsg(char *msg)
 {
-	// Do Nothing
+	(void)msg;
 }

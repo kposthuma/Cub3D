@@ -1,4 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ray3d.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/01/17 11:05:36 by kposthum      #+#    #+#                 */
+/*   Updated: 2024/01/17 11:05:45 by kposthum      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <cub3d.h>
 
 float	collision_left(t_player *player, size_t i, char **map)
 {
