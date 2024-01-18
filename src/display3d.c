@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 15:11:30 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 16:31:12 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,15 @@ uint32_t	get_pixel(mlx_texture_t *tex, size_t x, size_t y)
 	uint8_t	b;
 	uint8_t	a;
 
-	if (x < tex->width && y < tex->height)
-	{
-		r = tex->pixels[(y * tex->width + x) * tex->bytes_per_pixel];
-		g = tex->pixels[(y * tex->width + x) * tex->bytes_per_pixel + 1];
-		b = tex->pixels[(y * tex->width + x) * tex->bytes_per_pixel + 2];
-		a = tex->pixels[(y * tex->width + x) * tex->bytes_per_pixel + 3];
-		return (get_rgba(r, g, b, a));
-	}
-	else
-		return (get_rgba(0, 0, 0, 0));
+	if (x > tex->width || y > tex->height)
+		return (get_rgba(255, 255, 255, 0));
+	r = tex->pixels[(y * tex->width + x) * tex->bytes_per_pixel];
+	g = tex->pixels[(y * tex->width + x) * tex->bytes_per_pixel + 1];
+	b = tex->pixels[(y * tex->width + x) * tex->bytes_per_pixel + 2];
+	a = tex->pixels[(y * tex->width + x) * tex->bytes_per_pixel + 3];
+	return (get_rgba(r, g, b, a));
 }
 
-// get_pixel(tex, scale, tex_start, h)
 void	draw_screen(mlx_image_t *screen, t_ray *rays, t_data **data)
 {
 	size_t			r;

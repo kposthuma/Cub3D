@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:24 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 15:21:58 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/18 16:39:00 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static bool	_add_node(t_data **list, void *content, t_flag type)
 static bool	_init_textures(t_data **data, char *str, t_flag flag)
 {
 	mlx_texture_t	*image;
-	t_data			*new;
 
 	image = mlx_load_png(str);
 	if (!image)

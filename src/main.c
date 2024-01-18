@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:08:04 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 11:08:04 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 16:38:36 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	main(int ac, char **av)
 	t_map	*data;
 	mlx_t	*mlx;
 
+	if (ac != 2)
+		return (1);
 	data = read_map_from_file(av[1]);
 	if (!data)
 		return (1);

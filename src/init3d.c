@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/16 14:59:51 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 15:23:23 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/18 16:34:06 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_rays(t_player *player, char **map)
 			+ player->location[0];
 		player->ray[i].y = player->ray[i].len * sin(player->ray[i].angle)
 			+ player->location[1];
-		player->ray[i].wall_height = (float)(HEIGHT * PI)
+		player->ray[i].wall_height = (float)(HEIGHT) * PI
 			/ player->ray[i].corr_len * (player->plane_dist);
 		i++;
 	}
