@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 14:57:18 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/18 17:37:46 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,8 @@ void		trim_nl(char *line);
 void		init_window(t_cub3d *cub3d);
 void		draw_slices(mlx_t *mlx, t_player *player);
 // keyhooks3d.c
-void		move_player(mlx_key_data_t keydata, void *param);
+// void		move_player(mlx_key_data_t keydata, void *param);
+void		move_player(void *param);
 // display3d.c
 void		redisplay(t_cub3d *cub3d);
 // ray3d.c

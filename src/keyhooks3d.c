@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:56 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 14:02:40 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 17:40:09 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ void	strafe_player(t_cub3d *cub3d, bool left)
 void	turn_player(t_cub3d *cub3d, bool left)
 {
 	if (!left)
-		cub3d->player->angle += (PI / 12);
+		cub3d->player->angle += (PI / 24);
 	else
-		cub3d->player->angle -= (PI / 12);
+		cub3d->player->angle -= (PI / 24);
 	if (cub3d->player->angle >= (2 * PI))
 		cub3d->player->angle -= (2 * PI);
 	else if (cub3d->player->angle < 0)
@@ -95,29 +95,50 @@ void	turn_player(t_cub3d *cub3d, bool left)
 	redisplay(cub3d);
 }
 
-void	move_player(mlx_key_data_t keydata, void *param)
+// void	move_player(mlx_key_data_t keydata, void *param)
+// {
+// 	t_cub3d	*cub3d;
+
+// 	cub3d = (t_cub3d *)param;
+// 	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+// 		&& keydata.key == MLX_KEY_W)
+// 		walk_player(cub3d, true);
+// 	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+// 		&& keydata.key == MLX_KEY_S)
+// 		walk_player(cub3d, false);
+// 	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+// 		&& keydata.key == MLX_KEY_A)
+// 		strafe_player(cub3d, true);
+// 	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+// 		&& keydata.key == MLX_KEY_D)
+// 		strafe_player(cub3d, false);
+// 	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+// 		&& keydata.key == MLX_KEY_LEFT)
+// 		turn_player(cub3d, true);
+// 	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+// 		&& keydata.key == MLX_KEY_RIGHT)
+// 		turn_player(cub3d, false);
+// 	if (keydata.key == MLX_KEY_ESCAPE)
+// 		mlx_close_window(cub3d->mlx);
+// }
+
+void	move_player(void *param)
 {
 	t_cub3d	*cub3d;
 
 	cub3d = (t_cub3d *)param;
-	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-		&& keydata.key == MLX_KEY_W)
+	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_W))
 		walk_player(cub3d, true);
-	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-		&& keydata.key == MLX_KEY_S)
+	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_S))
 		walk_player(cub3d, false);
-	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-		&& keydata.key == MLX_KEY_A)
+	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_A))
 		strafe_player(cub3d, true);
-	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-		&& keydata.key == MLX_KEY_D)
+	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_D))
 		strafe_player(cub3d, false);
-	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-		&& keydata.key == MLX_KEY_LEFT)
+	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_LEFT))
 		turn_player(cub3d, true);
-	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-		&& keydata.key == MLX_KEY_RIGHT)
+	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_RIGHT))
 		turn_player(cub3d, false);
-	if (keydata.key == MLX_KEY_ESCAPE)
+	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub3d->mlx);
 }
