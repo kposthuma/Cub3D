@@ -6,42 +6,26 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:06:45 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 11:06:47 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 14:59:03 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "flags.h"
 
-static int	_compare(char *str, char *flag)
-{
-	size_t	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i] && flag[i])
-	{
-		if (str[i] != flag[i])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 int	is_flag(char *str)
 {
-	if (_compare(str, NORTH_FLAG))
+	if (ft_strcmp(str, NORTH_FLAG))
 		return (1);
-	if (_compare(str, SOUTH_FLAG))
+	if (ft_strcmp(str, SOUTH_FLAG))
 		return (1);
-	if (_compare(str, WEST_FLAG))
+	if (ft_strcmp(str, WEST_FLAG))
 		return (1);
-	if (_compare(str, EAST_FLAG))
+	if (ft_strcmp(str, EAST_FLAG))
 		return (1);
-	if (_compare(str, FLOOR_COLOR_FLAG))
+	if (ft_strcmp(str, FLOOR_FLAG))
 		return (1);
-	if (_compare(str, CEILING_COLOR_FLAG))
+	if (ft_strcmp(str, CEILING_FLAG))
 		return (1);
 	return (0);
 }

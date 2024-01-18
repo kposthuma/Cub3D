@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:24 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 14:08:24 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 14:37:33 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define WEST_FLAG "WE"
 # define EAST_FLAG "EA"
 
-# define FLOOR_COLOR_FLAG "F"
-# define CEILING_COLOR_FLAG "C"
+# define FLOOR_FLAG "F"
+# define CEILING_FLAG "C"
 
 #endif

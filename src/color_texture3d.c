@@ -6,24 +6,43 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:34 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 11:07:35 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 14:53:26 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "color.h"
 
-void	set_color(mlx_image_t *image, int *value, size_t size)
+void	set_color(mlx_image_t *image, int *color, size_t size)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < size)
 	{
-		image->pixels[i] = value[0];
+		image->pixels[i] = color[0];
 		i += sizeof(int8_t);
-		image->pixels[i] = value[1];
+		image->pixels[i] = color[1];
 		i += sizeof(int8_t);
-		image->pixels[i] = value[2];
+		image->pixels[i] = color[2];
+		i += sizeof(int8_t);
+		image->pixels[i] = 255;
+		i += sizeof(int8_t);
+	}
+}
+
+void	set_colorc(mlx_image_t *image, t_color *color, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size)
+	{
+		image->pixels[i] = color->r;
+		i += sizeof(int8_t);
+		image->pixels[i] = color->g;
+		i += sizeof(int8_t);
+		image->pixels[i] = color->b;
 		i += sizeof(int8_t);
 		image->pixels[i] = 255;
 		i += sizeof(int8_t);

@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:13 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 11:04:13 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 14:37:33 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ static int	_validate_duplicate_flags(char **map)
 		return (0);
 	if (!validate_flag(map, EAST_FLAG))
 		return (0);
-	if (!validate_flag(map, FLOOR_COLOR_FLAG))
+	if (!validate_flag(map, FLOOR_FLAG))
 		return (0);
-	if (!validate_flag(map, CEILING_COLOR_FLAG))
+	if (!validate_flag(map, CEILING_FLAG))
 		return (0);
 	return (1);
 }

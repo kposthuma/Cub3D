@@ -6,11 +6,11 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:03:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 11:03:16 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 14:14:39 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "color.h"
 
 int	get_r(int rgba)
 {

@@ -6,12 +6,11 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:06 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 11:04:06 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 14:57:14 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <string.h>
 
 /**
  * @brief Finds the player character in a string.

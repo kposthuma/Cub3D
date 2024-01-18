@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 11:04:19 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 14:56:35 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	**read_from_file(int fd)
 		return (NULL);
 	if (!init_vector(&vec, sizeof(char *), 32))
 		return (NULL);
-	str = ft_strdup("\0");
+	str = "\0";
 	if (!str)
 		return (free_vector(&vec), NULL);
 	while (str)

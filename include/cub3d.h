@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 16:43:42 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 14:57:18 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <libft.h>
+# include <string.h>
 # include <math.h>
 # include <stdbool.h>
 # include <limits.h>
@@ -24,6 +25,8 @@
 # include <glad/glad.h>
 # include <KHR/khrplatform.h>
 # include <lodepng/lodepng.h>
+
+# include "color.h"
 
 # ifndef PI
 #  define PI 3.14159265358979323846
@@ -129,7 +132,6 @@ typedef struct s_map
 {
 	t_data	*flags;
 	t_data	*map;
-	int		size;
 }	t_map;
 
 typedef struct s_cub3d
@@ -203,5 +205,7 @@ int			find_player(char *str, int index);
 t_map		*read_map_from_file(char *filename);
 int			validate_flag(char **arr, const char *flag_type);
 char		**ft_arrdup(char **arr);
+
+void		set_colorc(mlx_image_t *image, t_color *color, size_t size);
 
 #endif

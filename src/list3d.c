@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:08:00 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 11:08:01 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 14:47:26 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_data	*find_node(t_data **head, int flag)
 	if (!head || !*head)
 		return (NULL);
 	node = *head;
-	while (node->flag != flag)
+	while (node && node->flag != flag)
 		node = node->next;
 	return (node);
 }

@@ -6,11 +6,12 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/16 14:59:51 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 15:14:38 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 15:23:23 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+#include "color.h"
 
 void	init_rays(t_player *player, char **map)
 {
@@ -74,17 +75,14 @@ t_player	*init_player(t_data **head)
 
 mlx_image_t	*get_background(mlx_t *mlx, t_data **head, int flag)
 {
-	const int	*value = (int *)find_node(head, flag)->cont;
-	mlx_image_t	*image;
+	const t_color	*value = (t_color *) find_node(head, flag)->cont;
+	mlx_image_t		*image;
 
-	if (!value)
-		return (NULL);
-	printf("color values : R%i, G%i, B%i\n", value[0], value[1], value[2]);
+	printf("color values : R%i, G%i, B%i\n", value->r, value->g, value->b);
 	image = mlx_new_image(mlx, mlx->width, (mlx->height / 2));
 	if (!image)
 		return (NULL);
-	set_color(image, (int *)value,
-		image->height * image->width * sizeof(int32_t));
+	set_colorc(image, (t_color *)value, image->height * image->width * sizeof(int32_t));
 	return (image);
 }
 
@@ -92,11 +90,7 @@ bool	cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data)
 {
 	ft_memset(cub, 0, sizeof(t_cub3d));
 	cub->floor = get_background(mlx, &data->flags, F_COLOR);
-	if (!cub->floor)
-		return (false);
 	cub->ceiling = get_background(mlx, &data->flags, C_COLOR);
-	if (!cub->ceiling)
-		return (false);
 	cub->player = init_player(&data->map);
 	if (!cub->player)
 		return (false);
