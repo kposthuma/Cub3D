@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:24 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 11:06:53 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 11:30:39 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ static bool	_init_textures(t_data **data, char *str, t_flag flag)
 
 	image = mlx_load_png(str);
 	if (!image)
-		return (false);
+		return (printf("which %s\n", str), false);
 	if (image->width != IMAGE_SIZE
 		&& image->width != IMAGE_SIZE
 		&& image->width != image->height)
 		return (mlx_delete_texture(image), false);
 	if (!_add_node(data, image, flag))
 		return (false);
-	printf("Successfully loaded %s\n", str);
+	// printf("Successfully loaded %s\n", str);
 	return (true);
 }
 

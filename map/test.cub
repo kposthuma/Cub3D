@@ -1,7 +1,7 @@
-NO ./img/NO.png
-SO ./img/SO.png
-WE ./img/WE.png
-EA ./img/EA.png
+NO ./img/grass.png
+SO ./img/wood.png
+WE ./img/brick.png
+EA ./img/chino.png
 
 F 120,120,120
 C 60,60,60
