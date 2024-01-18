@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 12:29:38 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/18 13:36:21 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,29 @@
 
 size_t	determine_tex_start(float pos, uint32_t width)
 {
-	pos = pos - floor(pos);
-	return ((size_t)(pos * width));
+	float	temp;
+
+	temp = pos / (float)BLOCKSIZE;
+	// printf("pos <%f>, temp <%f>, width <%u>\n", pos, temp, width);
+	temp = temp - floor(temp);
+	return ((size_t)(temp * width));
 }
 
-uint32_t	get_pixel(mlx_texture_t *tex, float scale, size_t x, size_t y, size_t t)
+uint32_t	get_pixel(mlx_texture_t *tex, size_t x, size_t y, size_t ray)
 {
-	// printf("\tscale <%f> x <%lu> y <%lu>\n", scale, x, y);
-	printf("last should be same <%f> <%d>\n", y * scale, tex->height);
-	const uint8_t	r = tex->pixels[
-		(uint8_t)(x * y * scale) * tex->bytes_per_pixel];
-	const uint8_t	g = tex->pixels[
-		(uint8_t)(x * y * scale) * tex->bytes_per_pixel + 1];
-	const uint8_t	b = tex->pixels[
-		(uint8_t)(x * y * scale) * tex->bytes_per_pixel + 2];
-	const uint8_t	a = tex->pixels[
-		(uint8_t)(x * y * scale) * tex->bytes_per_pixel + 3];
-	// if (t == 0)
-		// printf("test <%i %i %i %i>\n", r, g, b, a);
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+	uint8_t	a;
+
+	// if (ray == 0)
+	// 	printf("last should be same <%zu> <%d>\n<%lu>\n", y, tex->height, x);
+	// if (y == 0)
+	// 	printf("highest should be same <%lu> <%u>\n", x, tex->width);
+	r = tex->pixels[y * x * tex->bytes_per_pixel];
+	g = tex->pixels[y * x * tex->bytes_per_pixel + 1];
+	b = tex->pixels[y * x * tex->bytes_per_pixel + 2];
+	a = tex->pixels[y * x * tex->bytes_per_pixel + 3];
 	return (get_rgba(r, g, b, a));
 }
 
@@ -102,12 +107,6 @@ void	draw_screen(mlx_image_t *screen, t_ray *rays, t_data **data)
 	{
 		tex = (mlx_texture_t *)((find_node(data, rays[r].wall))->cont);
 		scale = (float)tex->height / rays[r].wall_height;
-		// if (r == 0)
-		// {
-		// 	for (size_t i = 0; i < tex->height * tex->width * tex->bytes_per_pixel; i += 4)
-		// 		printf("pixel value <%i %i %i %i>\n", tex->pixels[i], tex->pixels[i + 1], tex->pixels[i + 2], tex->pixels[i + 3]);
-		// 	printf("scale <%f>\n", scale);
-		// }
 		if (rays[r].wall == NORTH || rays[r].wall == SOUTH)
 			tex_start = determine_tex_start(rays[r].x, tex->width);
 		else
@@ -118,10 +117,9 @@ void	draw_screen(mlx_image_t *screen, t_ray *rays, t_data **data)
 			if (h + (HEIGHT / 2 - rays[r].wall_height / 2) >= 0
 				&& h + (HEIGHT / 2 - rays[r].wall_height / 2) < HEIGHT)
 			{
-				// printf("height <%f>", rays[r].wall_height);
-				mlx_put_pixel(screen, (r),
+				mlx_put_pixel(screen, r,
 					(HEIGHT / 2 - rays[r].wall_height / 2) + h,
-					get_pixel(tex, scale, tex_start, h, r));
+					get_pixel(tex, tex_start, h * scale, r));
 			}
 			h++;
 		}
