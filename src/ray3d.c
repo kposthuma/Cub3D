@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:05:36 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/19 01:48:53 by root          ########   odam.nl         */
+/*   Updated: 2024/01/19 19:19:13 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ float	collision_right(t_player *player, size_t i, char **map)
 	float	dy;
 
 	x = (size_t)(player->location[0] / (float)BLOCKSIZE) + 1;
-	while (x < ft_strlen(map[0]))
+	while (x < ft_strlen(map[(size_t)(player->location[1] / BLOCKSIZE)]))
 	{
 		dx = (player->location[0] - x * BLOCKSIZE);
 		dy = (dx * tan(player->ray[i].angle));
