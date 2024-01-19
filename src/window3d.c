@@ -6,11 +6,11 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:02:19 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 18:31:59 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/19 01:43:03 by root          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "cub3d.h"
 
 // void	fps(void *param)
 // {

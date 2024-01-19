@@ -6,11 +6,11 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:05:36 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 11:05:45 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/19 01:48:53 by root          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "cub3d.h"
 
 float	collision_left(t_player *player, size_t i, char **map)
 {
@@ -28,7 +28,7 @@ float	collision_left(t_player *player, size_t i, char **map)
 			y = (size_t)((player->location[1] - fabs(dy)) / (float)BLOCKSIZE);
 		else
 			y = (size_t)((player->location[1] + fabs(dy)) / (float)BLOCKSIZE);
-		if (y >= strofstrlen(map))
+		if (y >= ft_arrlen(map))
 			break ;
 		if (map[y][x - 1] == '1')
 			return (sqrt(pow(dx, 2) + pow(dy, 2)));
@@ -53,7 +53,7 @@ float	collision_right(t_player *player, size_t i, char **map)
 			y = (size_t)((player->location[1] - fabs(dy)) / (float)BLOCKSIZE);
 		else
 			y = (size_t)((player->location[1] + fabs(dy)) / (float)BLOCKSIZE);
-		if (y >= strofstrlen(map))
+		if (y >= ft_arrlen(map))
 			break ;
 		if (map[y][x] == '1')
 			return (sqrt(pow(dx, 2) + pow(dy, 2)));
@@ -70,7 +70,7 @@ float	collision_down(t_player *player, size_t i, char **map)
 	float	dy;
 
 	y = (size_t)(player->location[1] / (float)BLOCKSIZE) + 1;
-	while (y < strofstrlen(map))
+	while (y < ft_arrlen(map))
 	{
 		dy = (player->location[1] - y * BLOCKSIZE);
 		dx = (dy / tan(player->ray[i].angle));

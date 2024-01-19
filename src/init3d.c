@@ -6,12 +6,11 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/16 14:59:51 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 17:42:48 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/19 02:03:40 by root          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
-#include "color.h"
+#include "cub3d.h"
 
 void	init_rays(t_player *player, char **map)
 {
@@ -79,7 +78,7 @@ mlx_image_t	*get_background(mlx_t *mlx, t_data **head, int flag)
 	mlx_image_t		*image;
 
 	printf("color values : R%i, G%i, B%i\n", value->r, value->g, value->b);
-	image = mlx_new_image(mlx, mlx->width, (mlx->height / 2));
+	image = mlx_new_image(mlx, mlx->width, mlx->height / 2);
 	if (!image)
 		return (NULL);
 	set_colorc(image, (t_color *)value, image->height * image->width * sizeof(int32_t));
@@ -88,7 +87,7 @@ mlx_image_t	*get_background(mlx_t *mlx, t_data **head, int flag)
 
 bool	cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data)
 {
-	ft_memset(cub, 0, sizeof(t_cub3d));
+	ft_bzero(cub, sizeof(t_cub3d));
 	cub->floor = get_background(mlx, &data->flags, F_COLOR);
 	cub->ceiling = get_background(mlx, &data->flags, C_COLOR);
 	cub->player = init_player(&data->map);

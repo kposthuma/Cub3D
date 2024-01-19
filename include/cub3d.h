@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 17:37:46 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/19 01:51:49 by root          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <libft.h>
 # include <string.h>
 # include <math.h>
+# include <fcntl.h>
+# include <unistd.h>
 # include <stdbool.h>
 # include <limits.h>
 # include <float.h>
@@ -25,8 +27,6 @@
 # include <glad/glad.h>
 # include <KHR/khrplatform.h>
 # include <lodepng/lodepng.h>
-
-# include "color.h"
 
 # ifndef PI
 #  define PI 3.14159265358979323846
@@ -208,5 +208,6 @@ int			validate_flag(char **arr, const char *flag_type);
 char		**ft_arrdup(char **arr);
 
 void		set_colorc(mlx_image_t *image, t_color *color, size_t size);
+void		ft_free(char **arg);
 
 #endif

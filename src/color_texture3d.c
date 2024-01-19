@@ -6,12 +6,11 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:34 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 14:53:26 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/19 01:57:37 by root          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "color.h"
 
 void	set_color(mlx_image_t *image, int *color, size_t size)
 {
@@ -90,7 +89,7 @@ bool	validate_color(t_data **head, int flag)
 	while (ft_isspace(*str) == 1)
 		str++;
 	val = ft_split(str, ',');
-	if (!val || strofstrlen(val) != 3 || !validate_value(val))
+	if (!val || ft_arrlen(val) != 3 || !validate_value(val))
 		return (ft_free(val), false);
 	free((char *)node->cont);
 	arr = ft_calloc(3, sizeof(int));

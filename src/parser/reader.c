@@ -6,13 +6,12 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 14:56:35 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/19 02:00:29 by root          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "vector.h"
-#include "libft.h"
 
 static bool	init_vector(t_vector *vec, int type_size, int size)
 {

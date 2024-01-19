@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:06 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 14:57:14 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/19 01:48:53 by root          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	check_map(char **map)
 	t_location	loc;
 
 	loc = find_loc(map, "NESW");
-	while (loc.y != strofstrlen(map))
+	while (loc.y != ft_arrlen(map))
 	{
 		if (loc.x == 0 || loc.y == 0)
 			return (0);

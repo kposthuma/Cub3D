@@ -6,7 +6,7 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2024/01/18 18:30:25 by kposthum      ########   odam.nl          #
+#    Updated: 2024/01/19 01:52:11 by root          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ FILES	=	ft_strmapiteri \
 			ft_access \
 			ft_accesstype \
 			ft_arrdup \
+			ft_free \
 			error \
-			ft_color \
 			ft_realloc \
 			maputils3d \
 			main \

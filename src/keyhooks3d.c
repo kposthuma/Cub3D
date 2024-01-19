@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:56 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 17:40:09 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/19 02:05:41 by root          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	walk_player(t_cub3d *cub3d, bool forward)
 	cub3d->player->location[0] += cub3d->player->dx;
 	tempy = cub3d->player->location[1] + cub3d->player->dy;
 	if (map
-		[(size_t)(tempy) / BLOCKSIZE]
+		[(size_t)tempy / BLOCKSIZE]
 		[(size_t)cub3d->player->location[0] / BLOCKSIZE] == '1')
 		cub3d->player->dy = 0;
 	cub3d->player->location[1] += cub3d->player->dy;
@@ -94,33 +94,6 @@ void	turn_player(t_cub3d *cub3d, bool left)
 		cub3d->player->angle += (2 * PI);
 	redisplay(cub3d);
 }
-
-// void	move_player(mlx_key_data_t keydata, void *param)
-// {
-// 	t_cub3d	*cub3d;
-
-// 	cub3d = (t_cub3d *)param;
-// 	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-// 		&& keydata.key == MLX_KEY_W)
-// 		walk_player(cub3d, true);
-// 	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-// 		&& keydata.key == MLX_KEY_S)
-// 		walk_player(cub3d, false);
-// 	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-// 		&& keydata.key == MLX_KEY_A)
-// 		strafe_player(cub3d, true);
-// 	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-// 		&& keydata.key == MLX_KEY_D)
-// 		strafe_player(cub3d, false);
-// 	if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-// 		&& keydata.key == MLX_KEY_LEFT)
-// 		turn_player(cub3d, true);
-// 	else if ((keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-// 		&& keydata.key == MLX_KEY_RIGHT)
-// 		turn_player(cub3d, false);
-// 	if (keydata.key == MLX_KEY_ESCAPE)
-// 		mlx_close_window(cub3d->mlx);
-// }
 
 void	move_player(void *param)
 {

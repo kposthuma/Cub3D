@@ -6,12 +6,11 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:24 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 16:39:00 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/19 01:51:56 by root          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "color.h"
 #include "flags.h"
 
 static bool	_add_node(t_data **list, void *content, t_flag type)
