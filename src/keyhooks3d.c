@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:56 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/19 02:05:41 by root          ########   odam.nl         */
+/*   Updated: 2024/01/20 11:42:55 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,11 @@ void	walk_player(t_cub3d *cub3d, bool forward)
 	}
 	tempx = cub3d->player->location[0] + cub3d->player->dx;
 	if (map[(size_t)cub3d->player->location[1] / BLOCKSIZE]
-		[(size_t)(tempx) / BLOCKSIZE]
-		== '1')
+		[(size_t)(tempx) / BLOCKSIZE] == '1')
 		cub3d->player->dx = 0;
 	cub3d->player->location[0] += cub3d->player->dx;
 	tempy = cub3d->player->location[1] + cub3d->player->dy;
-	if (map
-		[(size_t)tempy / BLOCKSIZE]
+	if (map[(size_t)tempy / BLOCKSIZE]
 		[(size_t)cub3d->player->location[0] / BLOCKSIZE] == '1')
 		cub3d->player->dy = 0;
 	cub3d->player->location[1] += cub3d->player->dy;
@@ -69,13 +67,11 @@ void	strafe_player(t_cub3d *cub3d, bool left)
 	}
 	tempx = cub3d->player->location[0] + cub3d->player->dx;
 	if (map[(size_t)cub3d->player->location[1] / BLOCKSIZE]
-		[(size_t)(tempx) / BLOCKSIZE]
-		== '1')
+		[(size_t)(tempx) / BLOCKSIZE] == '1')
 		cub3d->player->dx = 0;
 	cub3d->player->location[0] += cub3d->player->dx;
 	tempy = cub3d->player->location[1] + cub3d->player->dy;
-	if (map
-		[(size_t)(tempy) / BLOCKSIZE]
+	if (map[(size_t)(tempy) / BLOCKSIZE]
 		[(size_t)cub3d->player->location[0] / BLOCKSIZE] == '1')
 		cub3d->player->dy = 0;
 	cub3d->player->location[1] += cub3d->player->dy;

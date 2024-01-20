@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:05:36 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/19 19:19:13 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/20 11:38:58 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,14 @@ float	collision_left(t_player *player, size_t i, char **map)
 
 float	collision_right(t_player *player, size_t i, char **map)
 {
-	size_t	x;
-	size_t	y;
-	float	dx;
-	float	dy;
+	size_t			x;
+	size_t			y;
+	float			dx;
+	float			dy;
+	const size_t	len = ft_strlen(map[(size_t)(player->location[1] / BLOCKSIZE)]);
 
 	x = (size_t)(player->location[0] / (float)BLOCKSIZE) + 1;
-	while (x < ft_strlen(map[(size_t)(player->location[1] / BLOCKSIZE)]))
+	while (x < len)
 	{
 		dx = (player->location[0] - x * BLOCKSIZE);
 		dy = (dx * tan(player->ray[i].angle));
@@ -64,13 +65,14 @@ float	collision_right(t_player *player, size_t i, char **map)
 
 float	collision_down(t_player *player, size_t i, char **map)
 {
-	size_t	x;
-	size_t	y;
-	float	dx;
-	float	dy;
+	size_t			x;
+	size_t			y;
+	float			dx;
+	float			dy;
+	const size_t	len = ft_arrlen(map);
 
 	y = (size_t)(player->location[1] / (float)BLOCKSIZE) + 1;
-	while (y < ft_arrlen(map))
+	while (y < len)
 	{
 		dy = (player->location[1] - y * BLOCKSIZE);
 		dx = (dy / tan(player->ray[i].angle));
