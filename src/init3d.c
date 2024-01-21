@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/16 14:59:51 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/19 02:03:40 by root          ########   odam.nl         */
+/*   Updated: 2024/01/21 14:12:58 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	init_rays(t_player *player, char **map)
 
 float	determine_angle(char **map, t_location loc)
 {
+	if (!map[loc.y])
+		return (-1);
 	if (map[loc.y][loc.x] == 'N')
 		return (3 * PI / 2);
 	if (map[loc.y][loc.x] == 'E')
@@ -63,6 +65,8 @@ t_player	*init_player(t_data **head)
 		return (NULL);
 	player->start = find_loc(map, "NESW");
 	player->angle = determine_angle(map, player->start);
+	if (player->angle < 0)
+		return (free(player), NULL);
 	player->location[0] = player->start.x * BLOCKSIZE + BLOCKSIZE / 2;
 	player->location[1] = player->start.y * BLOCKSIZE + BLOCKSIZE / 2;
 	player->dx = 0;
