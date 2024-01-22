@@ -6,13 +6,13 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2024/01/20 11:45:05 by koen          ########   odam.nl          #
+#    Updated: 2024/01/22 18:30:08 by cbijman       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub3d
 # CC := cc -Wall -Werror -Wextra -O3
-CC := cc -g3 -fsanitize=address -Wall -Werror -Wextra 
+CC := cc -g -fsanitize=address #-Wall -Werror -Wextra 
 
 SRC_DIR = ./src
 OBJ_DIR = ./obj
@@ -27,18 +27,21 @@ FILES	=	ft_strmapiteri \
 			ft_accesstype \
 			ft_arrdup \
 			ft_free \
+			ft_trimnl \
+			free \
 			error \
 			ft_realloc \
-			maputils3d \
+			maputils \
 			main \
-			window3d \
-			list3d \
-			destroy3d \
-			keyhooks3d \
-			display3d \
-			ray3d \
-			init3d \
-			color_texture3d \
+			window \
+			list \
+			collision \
+			destroy \
+			keyhook \
+			display \
+			ray \
+			init \
+			color_texture \
 			parser \
 			reader \
 			flags \
@@ -47,7 +50,7 @@ FILES	=	ft_strmapiteri \
 
 vpath %.c	$(SRC_DIR) \
 			$(SRC_DIR)/parser \
-			$(SRC_DIR)/renderer \
+			$(SRC_DIR)/display \
 			$(SRC_DIR)/utils \
 
 SRC 	= ${addsuffix .c, $(FILES)}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   list3d.c                                           :+:    :+:            */
+/*   list.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:08:00 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 14:47:26 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/22 16:55:53 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ t_data	*newnode(void *cont)
 {
 	t_data	*node;
 
-	node = ft_calloc(1, sizeof(t_data));
+	node = malloc(sizeof(t_data));
 	if (!node)
 		return (NULL);
 	node->next = NULL;
 	node->prev = NULL;
 	node->cont = cont;
+	node->flag = 0;
 	return (node);
 }
 

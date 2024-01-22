@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   keyhooks3d.c                                       :+:    :+:            */
+/*   keyhook.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:56 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/20 11:42:55 by koen          ########   odam.nl         */
+/*   Updated: 2024/01/22 18:03:18 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	walk_player(t_cub3d *cub3d, bool forward)
 	float	tempy;
 
 	determine_xy(cub3d->player, true);
-	map = (char **)((find_node(cub3d->data, MAP_START))->cont);
+	map = (char **) cub3d->map->map->cont;
 	if (!forward)
 	{
 		cub3d->player->dx *= -1;
@@ -49,7 +49,6 @@ void	walk_player(t_cub3d *cub3d, bool forward)
 		[(size_t)cub3d->player->location[0] / BLOCKSIZE] == '1')
 		cub3d->player->dy = 0;
 	cub3d->player->location[1] += cub3d->player->dy;
-	redisplay(cub3d);
 }
 
 void	strafe_player(t_cub3d *cub3d, bool left)
@@ -59,7 +58,7 @@ void	strafe_player(t_cub3d *cub3d, bool left)
 	float	tempy;
 
 	determine_xy(cub3d->player, false);
-	map = (char **)((find_node(cub3d->data, MAP_START))->cont);
+	map = (char **) cub3d->map->map->cont;
 	if (!left)
 	{
 		cub3d->player->dx *= -1;
@@ -75,7 +74,6 @@ void	strafe_player(t_cub3d *cub3d, bool left)
 		[(size_t)cub3d->player->location[0] / BLOCKSIZE] == '1')
 		cub3d->player->dy = 0;
 	cub3d->player->location[1] += cub3d->player->dy;
-	redisplay(cub3d);
 }
 
 void	turn_player(t_cub3d *cub3d, bool left)
@@ -88,7 +86,6 @@ void	turn_player(t_cub3d *cub3d, bool left)
 		cub3d->player->angle -= (2 * PI);
 	else if (cub3d->player->angle < 0)
 		cub3d->player->angle += (2 * PI);
-	redisplay(cub3d);
 }
 
 void	move_player(void *param)

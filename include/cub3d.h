@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/19 01:51:49 by root          ########   odam.nl         */
+/*   Updated: 2024/01/22 18:51:30 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,24 @@
 #  define RAYS 1600
 # endif
 
-# ifndef IMAGE_SIZE
-#  define IMAGE_SIZE 64
-# endif
-
 typedef enum e_flag
 {
-	C_COLOR = 0,
+	N_TEXTURE = 0,
+	E_TEXTURE = 1,
+	S_TEXTURE = 2,
+	W_TEXTURE = 3,
+	C_COLOR,
 	F_COLOR,
-	N_TEXTURE,
-	E_TEXTURE,
-	S_TEXTURE,
-	W_TEXTURE,
 	MAP_START,
 }	t_flag;
 
-typedef enum e_wall
+typedef enum e_direction
 {
-	NORTH = 2,
-	EAST = 3,
-	SOUTH = 4,
-	WEST = 5,
-}	t_wall;
+	NORTH	= 0,
+	EAST	= 1,
+	SOUTH	= 2,
+	WEST	= 3,
+}	t_direction;
 
 typedef struct s_data
 {
@@ -88,14 +84,6 @@ typedef struct s_location
 	size_t	x;
 	size_t	y;
 }	t_location;
-
-typedef struct t_background
-{
-	int			r;
-	int			g;
-	int			b;
-	mlx_image_t	*image;
-}	t_background;
 
 typedef struct s_ray
 {
@@ -121,17 +109,24 @@ typedef struct s_player
 	t_ray		ray[RAYS];
 }	t_player;
 
-typedef	struct s_image
+typedef union u_wall
 {
-	mlx_texture_t	*texture;
-	mlx_image_t		*image;
-	char			*filename;
-}	t_image;
+	struct
+	{
+		mlx_texture_t	*north;
+		mlx_texture_t	*south;
+		mlx_texture_t	*west;
+		mlx_texture_t	*east;
+	};
+	mlx_texture_t		*direction[4];
+}	t_wall;
 
 typedef struct s_map
 {
-	t_data	*flags;
-	t_data	*map;
+	t_wall		*walls;
+	t_color		*floor;
+	t_color		*ceiling;
+	t_data		*map;
 }	t_map;
 
 typedef struct s_cub3d
@@ -169,7 +164,7 @@ size_t		determine_length(t_data **start);
 // init3d.c
 bool		cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data);
 void		set_color(mlx_image_t *image, int *value, size_t size);
-void		init_rays(t_player *player, char **map);
+void		init_rays(mlx_image_t *screen, t_player *player, char **map);
 // destroy3d.c
 void		destroy_cub3d(t_cub3d *cub3d);
 void		clear_list_pre(t_data **head);
@@ -189,8 +184,6 @@ void		redisplay(t_cub3d *cub3d);
 // ray3d.c
 float		ray_len(t_player *player, size_t i, char **map);
 
-int			get_rgba(int r, int g, int b, int a);
-
 int			ft_strmapiteri(char **arr, int (*f)(char *, int));
 int			ft_access(char *filename);
 int			ft_accesstype(char *filename, char *expected_type);
@@ -205,9 +198,20 @@ int			check_map(char **map);
 int			find_player(char *str, int index);
 t_map		*read_map_from_file(char *filename);
 int			validate_flag(char **arr, const char *flag_type);
-char		**ft_arrdup(char **arr);
 
+void		ft_trimnl(char *str);
 void		set_colorc(mlx_image_t *image, t_color *color, size_t size);
 void		ft_free(char **arg);
+void		free_cub3d(t_cub3d *cub);
+void		free_player(t_player *player);
+void		free_map(t_map	*map);
+
+
+
+float		collision_up(t_player *player, size_t i, char **map);
+float		collision_down(t_player *player, size_t i, char **map);
+float		collision_right(t_player *player, size_t i, char **map);
+float		collision_left(t_player *player, size_t i, char **map);
+void		determine_wall(t_player *player, size_t i, float x, float y);
 
 #endif

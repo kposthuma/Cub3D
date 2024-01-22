@@ -6,14 +6,14 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/19 02:00:29 by root          ########   odam.nl         */
+/*   Updated: 2024/01/22 18:49:00 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "vector.h"
 
-static bool	init_vector(t_vector *vec, int type_size, int size)
+static bool	_init_vector(t_vector *vec, int type_size, int size)
 {
 	vec->index = 0;
 	vec->length = size;
@@ -24,7 +24,7 @@ static bool	init_vector(t_vector *vec, int type_size, int size)
 	return (true);
 }
 
-static bool	append_vector(t_vector *vec, char *str)
+static bool	_append_vector(t_vector *vec, char *str)
 {
 	size_t	i;
 
@@ -42,8 +42,7 @@ static bool	append_vector(t_vector *vec, char *str)
 		i++;
 	if (str[i] == '1' || str[i] == '0')
 		i = 0;
-	if (str[ft_strlen(str) - 1] == '\n')
-		str[ft_strlen(str) - 1] = '\0';
+	ft_trimnl(str);
 	vec->content[vec->index] = str;
 	if (!vec->content[vec->index])
 		return (false);
@@ -51,7 +50,7 @@ static bool	append_vector(t_vector *vec, char *str)
 	return (true);
 }
 
-static void	free_vector(t_vector *vec)
+static void	_free_vector(t_vector *vec)
 {
 	free(vec->content);
 	vec->content = NULL;
@@ -60,6 +59,14 @@ static void	free_vector(t_vector *vec)
 	vec->length = 0;
 }
 
+/**
+ * Reads data from a file descriptor and stores it in
+ * a dynamically allocated array of strings.
+ * 
+ * @param fd The file descriptor to read from.
+ * @return	A pointer to the array of strings containing
+ * 			the read data, or NULL if an error occurs.
+ */
 char	**read_from_file(int fd)
 {
 	t_vector	vec;
@@ -67,11 +74,11 @@ char	**read_from_file(int fd)
 
 	if (fd < 0)
 		return (NULL);
-	if (!init_vector(&vec, sizeof(char *), 32))
+	if (!_init_vector(&vec, sizeof(char *), 32))
 		return (NULL);
 	str = "\0";
 	if (!str)
-		return (free_vector(&vec), NULL);
+		return (_free_vector(&vec), NULL);
 	while (str)
 	{
 		str = get_next_line(fd);
@@ -80,8 +87,8 @@ char	**read_from_file(int fd)
 			free(str);
 			continue ;
 		}
-		if (!append_vector(&vec, str))
-			return (free_vector(&vec), NULL);
+		if (!_append_vector(&vec, str))
+			return (_free_vector(&vec), NULL);
 	}
 	return (vec.content);
 }

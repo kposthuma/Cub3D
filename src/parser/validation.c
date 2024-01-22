@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:13 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/18 14:37:33 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/22 18:48:12 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 	Werkt niet helemaal, Het validate nu nog steeds flags die beginnen
 	met een getal, zoals 1 en/of 0.
-
 */
 static int	_validate_all_flags(char **map)
 {
@@ -109,24 +108,22 @@ char	**import_map(char *filename)
 	char	**map;
 	char	**test_map;
 
-	if (!filename)
-		return (cuberr(NO_ARGUMENT), NULL);
 	if (!ft_accesstype(filename, MAP_FILE_TYPE))
 		return (cuberr(INVALID_FILE), NULL);
 	map = read_from_file(open(filename, O_RDONLY));
 	if (!map)
 		return (cuberr(INVALID_MAP), NULL);
 	if (!_validate_all_flags(map))
-		return (ft_free(map), cuberr(WEIRD_FLAGS), NULL);
+		return (cuberr(WEIRD_FLAGS), ft_free(map), NULL);
 	if (!_validate_duplicate_flags(map))
-		return (ft_free(map), cuberr(INVALID_FLAGS), NULL);
+		return (cuberr(INVALID_FLAGS), ft_free(map), NULL);
 	if (!_validate_textures(map))
-		return (ft_free(map), cuberr(INVALID_TEXTURE_FILES), NULL);
+		return (cuberr(INVALID_TEXTURE_FILES), ft_free(map), NULL);
 	test_map = ft_arrdup(&map[6]);
 	if (!test_map)
-		return (ft_free(map), cuberr(SPARERIB_EXPRESS), NULL);
+		return (cuberr(SPARERIB_EXPRESS), ft_free(map), NULL);
 	if (!_validate_map(test_map))
-		return (ft_free(map), ft_free(test_map), cuberr(INVALID_MAP), NULL);
+		return (cuberr(INVALID_MAP), ft_free(map), ft_free(test_map), NULL);
 	ft_free(test_map);
 	return (map);
 }

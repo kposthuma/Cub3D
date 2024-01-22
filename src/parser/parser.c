@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:24 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/19 01:51:56 by root          ########   odam.nl         */
+/*   Updated: 2024/01/22 18:53:05 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,79 +25,84 @@ static bool	_add_node(t_data **list, void *content, t_flag type)
 	return (true);
 }
 
-static bool	_init_textures(t_data **data, char *str, t_flag flag)
+static bool	_init_textures(t_wall *walls, char *str, t_flag flag)
 {
 	mlx_texture_t	*image;
 
+	if (!str)
+		return (false);
 	image = mlx_load_png(str);
 	if (!image)
 		return (false);
 	if (image->width != image->height)
 		return (mlx_delete_texture(image), false);
-	if (!_add_node(data, image, flag))
-		return (mlx_delete_texture(image), false);
+	walls->direction[flag] = image;
 	return (true);
 }
 
-static int	_get_color(const char *str)
+static t_color	*_init_color(char *str)
 {
-	printf("Color: [%s]\n", str);
-	return (ft_atoi(str));
-}
-
-static bool	_init_color(t_data **data, char *str, t_flag flag)
-{
-	char	**color_values;
 	t_color	*color;
+	char	**color_values;
 
+	if (!str)
+		return (NULL);
 	color_values = ft_split(str, ',');
 	if (!color_values)
-		return (false);
-	color = malloc(sizeof(t_color));
-	if (!color)
-		return (ft_free(color_values), false);
-	color->r = _get_color(color_values[0]);
-	color->g = _get_color(color_values[1]);
-	color->b = _get_color(color_values[2]);
-	color->a = 200;
-	if (!_add_node(data, color, flag))
-		return (ft_free(color_values), false);
-	return (ft_free(color_values), true);
+		return (NULL);
+	if (ft_arrlen(color_values) != 3)
+		return (ft_free(color_values), NULL);
+	color = ft_newcolor(
+		ft_atoi(color_values[0]),
+		ft_atoi(color_values[1]),
+		ft_atoi(color_values[2]), 0xFF);
+	return (ft_free(color_values), color);
 }
 
-static t_map	*_create_map(t_data *textures, t_data *cont)
+static bool	initialize_map(t_map *map, char **flags)
 {
-	t_map	*map;
-
-	map = ft_calloc(1, sizeof(t_map));
-	if (!map)
+	if (!map->walls)
+		return (false);
+	if (!_init_textures(map->walls, find_flag(flags, NORTH_FLAG), N_TEXTURE))
+		return (false);
+	if (!_init_textures(map->walls, find_flag(flags, SOUTH_FLAG), S_TEXTURE))
+		return (false);
+	if (!_init_textures(map->walls, find_flag(flags, WEST_FLAG), W_TEXTURE))
+		return (false);
+	if (!_init_textures(map->walls, find_flag(flags, EAST_FLAG), E_TEXTURE))
+		return (false);
+	map->floor = _init_color(find_flag(flags, FLOOR_FLAG));
+	if (!map->floor)
 		return (NULL);
-	map->flags = textures;
-	map->map = cont;
-	return (map);
+	map->ceiling = _init_color(find_flag(flags, CEILING_FLAG));
+	if (!map->ceiling)
+		return (NULL);
+	return (true);
 }
 
 t_map	*read_map_from_file(char *filename)
 {
-	char		**map;
-	t_data		*textures;
-	t_data		*map_struct;
-	t_map		*data;
+	char	**map;
+	char	**mapdup;
+	t_map	*data;
 
-	textures = NULL;
-	map_struct = NULL;
 	map = import_map(filename);
 	if (!map)
 		return (NULL);
-	_init_textures(&textures, find_flag(map, NORTH_FLAG), N_TEXTURE);
-	_init_textures(&textures, find_flag(map, SOUTH_FLAG), S_TEXTURE);
-	_init_textures(&textures, find_flag(map, WEST_FLAG), W_TEXTURE);
-	_init_textures(&textures, find_flag(map, EAST_FLAG), E_TEXTURE);
-	_init_color(&textures, find_flag(map, FLOOR_FLAG), F_COLOR);
-	_init_color(&textures, find_flag(map, CEILING_FLAG), C_COLOR);
-	_add_node(&map_struct, &map[6], MAP_START);
-	data = _create_map(textures, map_struct);
+	data = ft_calloc(1, sizeof(t_map));
 	if (!data)
-		return (NULL);
-	return (data);
+		return (ft_free(map), NULL);
+	data->walls = ft_calloc(1, sizeof(t_wall));
+	if (!initialize_map(data, map))
+		return (ft_free(map), free_map(data), NULL);
+	mapdup = ft_arrdup(&map[6]);
+	if (!mapdup)
+		return (ft_free(map), free_map(data), NULL);
+	if (!_add_node(&data->map, mapdup, MAP_START))
+	{
+		ft_free(map);
+		ft_free(mapdup);
+		return (free_map(data), NULL);
+	}
+	return (ft_free(map), data);
 }

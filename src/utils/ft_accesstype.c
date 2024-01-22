@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:01 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/17 11:04:02 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/22 18:47:52 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	ft_accesstype(char *filename, char *expected_type)
 {
 	int	fd;
 
+	if (!filename)
+		return (0);
 	if (!_validate_filename(filename, expected_type))
 		return (0);
 	fd = open(filename, O_RDONLY);
