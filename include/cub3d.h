@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 13:40:55 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:59:00 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <limits.h>
-# include <float.h>
 # include <MLX42/MLX42.h>
 # include <MLX42/MLX42_Int.h>
 # include <glad/glad.h>
@@ -51,6 +50,10 @@
 
 # ifndef RAYS
 #  define RAYS 1600
+# endif
+
+# ifndef FLT_MAX
+#  define FLT_MAX 3.40282347e+38F
 # endif
 
 typedef enum e_flag

@@ -6,10 +6,9 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/16 14:59:51 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 13:39:28 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:57:24 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d.h"
 
