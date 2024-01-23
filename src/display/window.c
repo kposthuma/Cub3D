@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:02:19 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 14:21:59 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 15:09:57 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 static void	fps(void *param)
 {
-	static	mlx_image_t	*fps_counter = NULL;
-	mlx_t				*mlx = ((t_cub3d *)param)->mlx;
-	static double	old;
-	double			new;
-	int				num;
-	char			*text;
+	static mlx_image_t	*fps_counter = NULL;
+	const mlx_t			*mlx = ((t_cub3d *)param)->mlx;
+	static double		old;
+	double				new;
+	char				*text;
 
 	new = mlx_get_time();
 	if (new > 0)
 	{
-		num = (int)1.0 / (new - old);
-		text = ft_itoa(num);
+		text = ft_itoa((int)1.0 / (new - old));
 		mlx_delete_image(mlx, fps_counter);
 		if (text)
 			fps_counter = mlx_put_string((mlx_t *)mlx, text, 10, 10);
