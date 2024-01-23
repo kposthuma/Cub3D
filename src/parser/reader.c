@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:42:32 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 14:58:05 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ static bool	_append_vector(t_vector *vec, char *str)
 		i++;
 	if (str[i] == '1' || str[i] == '0')
 		i = 0;
-	vec->content[vec->index] = ft_strtrim(&str[i], "\t\n\v\f\r ");
+	if (ft_isspace(str[ft_strlen(str) - 1]))
+		str[ft_strlen(str) - 1] = '\0';
+	vec->content[vec->index] = &str[i]; //ft_strtrim(&str[i], "\t\n\v\f\r ");
 	if (!vec->content[vec->index])
 		return (false);
 	vec->index++;
@@ -70,6 +72,7 @@ char	**read_from_file(int fd)
 {
 	t_vector	vec;
 	char		*str;
+	static char	*lstr = NULL;
 
 	if (fd < 0)
 		return (NULL);
@@ -81,13 +84,15 @@ char	**read_from_file(int fd)
 	while (str)
 	{
 		str = get_next_line(fd);
-		if (!str || ft_isempty(str))
+		if (!str || (*str == '\n' && lstr && !ft_strchr(lstr, '1')))
 		{
 			free(str);
 			continue ;
 		}
 		if (!_append_vector(&vec, str))
 			return (_free_vector(&vec), NULL);
+		free(lstr);
+		lstr = ft_strdup(str);
 	}
-	return (vec.content);
+	return (free(lstr), vec.content);
 }

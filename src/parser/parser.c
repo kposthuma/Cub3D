@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:24 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:38:15 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 14:49:35 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,13 @@ static t_color	*_init_color(char *str)
 		return (NULL);
 	if (ft_arrlen(color_values) != 3)
 		return (ft_free(color_values), NULL);
+	if (!ft_isnumber(color_values[0])
+		|| !ft_isnumber(color_values[1])
+		|| !ft_isnumber(color_values[2]))
+		return (NULL);
 	color = ft_newcolor(ft_atoi(color_values[0]),
-			ft_atoi(color_values[1]), ft_atoi(color_values[2]), 0xFF);
+			ft_atoi(color_values[1]),
+			ft_atoi(color_values[2]), 0xFF);
 	return (ft_free(color_values), color);
 }
 
