@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/22 18:51:30 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 11:02:58 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,44 +140,25 @@ typedef struct s_cub3d
 	t_data		**data;
 }	t_cub3d;
 
-// err3d.c
-void		errmsg(char *msg);
-// flag3d.c
-void		assign_flag(t_data **head);
-void		set_flag_rest(t_data *node);
-bool		count_flag(t_data **head);
 // list3d.c
 t_data		*find_node(t_data **head, int flag);
 t_data		*newnode(void *cont);
 void		clear_node(t_data **head, t_data *node);
 void		add_node(t_data **head, t_data *node);
-// map3d.c
-bool		validate_map(t_data **head);
 // maputils3d.c
-bool		player(char **map);
 t_location	find_loc(char **map, char *arr);
 // color_texture3d.c
 bool		validate_color(t_data **head, int flag);
 bool		validate_texture(t_data **head, int flag);
-size_t		determine_height(t_data **start);
-size_t		determine_length(t_data **start);
 // init3d.c
 bool		cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data);
 void		set_color(mlx_image_t *image, int *value, size_t size);
 void		init_rays(mlx_image_t *screen, t_player *player, char **map);
 // destroy3d.c
 void		destroy_cub3d(t_cub3d *cub3d);
-void		clear_list_pre(t_data **head);
-void		clear_list_two(t_data **head);
-void		clear_list_three(t_data **head);
-void		clear_list_post(mlx_t *mlx, t_data **head);
-// utils3d.c
-void		trim_nl(char *line);
 // window3d.c
 void		init_window(t_cub3d *cub3d);
-void		draw_slices(mlx_t *mlx, t_player *player);
 // keyhooks3d.c
-// void		move_player(mlx_key_data_t keydata, void *param);
 void		move_player(void *param);
 // display3d.c
 void		redisplay(t_cub3d *cub3d);
@@ -205,8 +186,6 @@ void		ft_free(char **arg);
 void		free_cub3d(t_cub3d *cub);
 void		free_player(t_player *player);
 void		free_map(t_map	*map);
-
-
 
 float		collision_up(t_player *player, size_t i, char **map);
 float		collision_down(t_player *player, size_t i, char **map);

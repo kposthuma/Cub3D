@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/16 14:59:51 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/22 18:41:25 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 10:57:29 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,21 @@ void	init_rays(mlx_image_t *screen, t_player *player, char **map)
 	i = 0;
 	while (i < RAYS)
 	{
-		player->ray[i].angle = (player->angle + ((float) i / RAYS * PI / 3)) - (PI / 6);
+		player->ray[i].angle = (player->angle + ((float) i / RAYS * PI / 3))
+			- (PI / 6);
 		if (player->ray[i].angle < 0)
 			player->ray[i].angle += (2 * PI);
 		if (player->ray[i].angle > (2 * PI))
 			player->ray[i].angle -= (2 * PI);
 		player->ray[i].len = ray_len(player, i, map);
-		player->ray[i].corr_len = player->ray[i].len * cos((((float)i / (float)RAYS * PI / 3) - (PI / 6)));
-		player->ray[i].x = player->ray[i].len * cos(player->ray[i].angle) + player->location[0];
-		player->ray[i].y = player->ray[i].len * sin(player->ray[i].angle) + player->location[1];
-		player->ray[i].wall_height = (float)(screen->height) * PI / player->ray[i].corr_len * (player->plane_dist);
+		player->ray[i].corr_len = player->ray[i].len
+			* cos((((float)i / (float)RAYS * PI / 3) - (PI / 6)));
+		player->ray[i].x = player->ray[i].len
+			* cos(player->ray[i].angle) + player->location[0];
+		player->ray[i].y = player->ray[i].len
+			* sin(player->ray[i].angle) + player->location[1];
+		player->ray[i].wall_height = (float)(screen->height)
+			* PI / player->ray[i].corr_len * (player->plane_dist);
 		i++;
 	}
 }
@@ -75,7 +80,7 @@ mlx_image_t	*get_background(mlx_t *mlx, t_color *color)
 {
 	mlx_image_t		*image;
 
-	printf("color values : R%i, G%i, B%i\n", color->r, color->g, color->b);
+	// printf("color values : R%i, G%i, B%i\n", color->r, color->g, color->b);
 	image = mlx_new_image(mlx, mlx->width, mlx->height / 2);
 	if (!image)
 		return (NULL);
@@ -86,10 +91,14 @@ mlx_image_t	*get_background(mlx_t *mlx, t_color *color)
 bool	cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data)
 {
 	ft_bzero(cub, sizeof(t_cub3d));
+	cub->player = init_player(cub, &data->map);
 	cub->screen = mlx_new_image(mlx, mlx->width, mlx->height);
 	cub->floor = get_background(mlx, data->floor);
 	cub->ceiling = get_background(mlx, data->ceiling);
-	cub->player = init_player(cub, &data->map);
+	if (!cub->player || !cub->screen || !cub->floor || !cub->ceiling)
+		return (free(cub->player), mlx_delete_image(mlx, cub->screen),
+			mlx_delete_image(mlx, cub->floor),
+			mlx_delete_image(mlx, cub->ceiling), false);
 	cub->map = data;
 	cub->data = &data->map;
 	cub->mlx = mlx;

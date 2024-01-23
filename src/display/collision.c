@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   collision.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/01/23 10:43:29 by kposthum      #+#    #+#                 */
+/*   Updated: 2024/01/23 10:43:31 by kposthum      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 float	collision_left(t_player *player, size_t i, char **map)

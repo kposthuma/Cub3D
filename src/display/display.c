@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/22 18:04:35 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 10:49:30 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ uint32_t	get_pixel(mlx_texture_t *tex, size_t x, size_t y)
 	return (ft_get_rgba(r, g, b, a));
 }
 
-void	draw_screen(mlx_image_t *screen, t_ray *rays, t_wall *wall)
+void	draw_screen(mlx_image_t *screen, t_ray *rays, t_wall *wall, uint32_t ht)
 {
 	size_t			r;
 	size_t			h;
@@ -49,7 +49,7 @@ void	draw_screen(mlx_image_t *screen, t_ray *rays, t_wall *wall)
 	size_t			tex_start;
 
 	r = 0;
-	ft_bzero(screen->pixels, screen->height * screen->width * sizeof(uint32_t));
+	ft_bzero(screen->pixels, ht * screen->width * sizeof(uint32_t));
 	while (r < RAYS)
 	{
 		h = 0;
@@ -58,11 +58,10 @@ void	draw_screen(mlx_image_t *screen, t_ray *rays, t_wall *wall)
 		tex_start = determine_tex_start(rays[r], tex->width);
 		while (h < rays[r].wall_height)
 		{
-			if (h + ((screen->height / 2) - rays[r].wall_height / 2) >= 0
-				&& h + ((screen->height / 2) - rays[r].wall_height / 2) < screen->height)
-				mlx_put_pixel(screen, r,
-					(screen->height / 2 - rays[r].wall_height / 2) + h,
-					get_pixel(tex, tex_start, (h + 1) * scale));
+			if (h + ((ht / 2) - rays[r].wall_height / 2) >= 0
+				&& h + ((ht / 2) - rays[r].wall_height / 2) < ht)
+				mlx_put_pixel(screen, r, (ht / 2 - rays[r].wall_height / 2)
+					+ h, get_pixel(tex, tex_start, (h + 1) * scale));
 			h++;
 		}
 		r++;
@@ -72,7 +71,8 @@ void	draw_screen(mlx_image_t *screen, t_ray *rays, t_wall *wall)
 void	redisplay(t_cub3d *cub3d)
 {
 	init_rays(cub3d->screen, cub3d->player, (char **)cub3d->map->map->cont);
-	draw_screen(cub3d->screen, cub3d->player->ray, cub3d->map->walls);
+	draw_screen(cub3d->screen, cub3d->player->ray,
+		cub3d->map->walls, cub3d->screen->height);
 	cub3d->player->dx = 0;
 	cub3d->player->dy = 0;
 }

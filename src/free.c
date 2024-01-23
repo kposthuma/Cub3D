@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   free.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/01/23 10:41:41 by kposthum      #+#    #+#                 */
+/*   Updated: 2024/01/23 10:41:47 by kposthum      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	free_map(t_map	*map)
-{	
+{
 	if (map->walls->north)
 		mlx_delete_texture(map->walls->north);
 	if (map->walls->south)
