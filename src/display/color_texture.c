@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:34 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:42:13 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:33:29 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,3 @@ bool	validate_color(t_data **head, int flag)
 	node->cont = (void *)arr;
 	return (ft_free(val), true);
 }
-

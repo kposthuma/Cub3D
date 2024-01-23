@@ -6,7 +6,7 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2024/01/23 12:44:05 by kposthum      ########   odam.nl          #
+#    Updated: 2024/01/23 13:17:22 by kposthum      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,9 +75,9 @@ $(LIBMLX):
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-# valgrind: CC += -O3
-# valgrind: re
-#	# valgrind --leak-check=full --suppressions=mlx42.supp ./cub3d map/test.cub
+valgrind: CC += -O3
+valgrind: re
+	valgrind --leak-check=full --suppressions=mlx42.supp ./cub3d map/test.cub
 	
 
 clean:

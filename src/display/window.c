@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:02:19 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:41:46 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:33:29 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	game_loop(void *param)
 		x = player->dx;
 		y = player->dy;
 	}
-		redisplay((t_cub3d *)cub);
+	redisplay((t_cub3d *)cub);
 }
 
 	// mlx_loop_hook(cub3d->mlx, &fps, (void *)cub3d);

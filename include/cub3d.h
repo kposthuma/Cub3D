@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:43:37 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:34:07 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <limits.h>
-# include <float.h>
 # include <MLX42/MLX42.h>
 # include <MLX42/MLX42_Int.h>
 # include <glad/glad.h>
@@ -51,6 +50,10 @@
 
 # ifndef RAYS
 #  define RAYS 1600
+# endif
+
+# ifndef FLT_MAX
+#  define FLT_MAX 3.40282347e+38F
 # endif
 
 typedef enum e_flag
@@ -150,7 +153,6 @@ void		add_node(t_data **head, t_data *node);
 t_location	find_loc(char **map, char *arr);
 // color_texture3d.c
 bool		validate_color(t_data **head, int flag);
-bool		validate_texture(t_data **head, int flag);
 // init3d.c
 bool		cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data);
 void		set_color(mlx_image_t *image, int *value, size_t size);

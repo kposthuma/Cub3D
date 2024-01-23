@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:41:56 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:33:29 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	draw_screen(mlx_image_t *screen, t_ray *rays, t_wall *wall, uint32_t ht)
 			if (h + ((ht / 2) - rays[r].wall_height / 2) >= 0
 				&& h + ((ht / 2) - rays[r].wall_height / 2) < ht)
 				mlx_put_pixel(screen, r, (ht / 2 - rays[r].wall_height / 2) + h,
-						get_pixel(tex, tex_start, (h + 1) * scale));
+					get_pixel(tex, tex_start, (h + 1) * scale));
 			h++;
 		}
 		r++;

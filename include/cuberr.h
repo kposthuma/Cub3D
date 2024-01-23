@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:20 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/22 18:45:01 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 13:24:11 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define ERR_NO_ARGUMENT		"Invalid/No argument"
 # define ERR_INVALID_FILE		"Invalid file/permissions"
 # define ERR_INVALID_MAP		"Invalid map"
-# define ERR_INVALID_FLAGS		"Invalid flags or not every necessary flag defined"
+# define ERR_INVALID_FLAGS		"Invalid flags or not all necessary flags"
 # define ERR_WEIRD_FLAGS		"Invalid flag found"
 # define ERR_INVALID_TEXTURES	"textures are not found or cannot be loaded"
 # define ERR_NO_MEMORY			"Not enough memory for allocation"
