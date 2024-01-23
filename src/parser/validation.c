@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:13 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 11:58:08 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 12:10:32 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,9 @@ char	**import_map(char *filename)
 	if (!test_map)
 		return (cuberr(SPARERIB_EXPRESS), ft_free(map), NULL);
 	if (!_validate_map(test_map))
-		return (cuberr(INVALID_MAP), ft_free(map), ft_free(test_map), NULL);
+		return (cuberr(INVALID_MAP),
+			ft_free(map), ft_free(test_map),
+			NULL);
 	ft_free(test_map);
 	return (map);
 }

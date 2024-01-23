@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:02:48 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 12:08:51 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 # endif
 
 # ifndef STEPSIZE
-#  define STEPSIZE 16
+#  define STEPSIZE 8
 # endif
 
 # ifndef RAYS
