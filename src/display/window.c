@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:02:19 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/22 18:40:37 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 11:23:05 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	fps(void *param)
 	(void)param;
 	new = mlx_get_time();
 	if (new > 0)
-		printf("time <%f>\n", 1.0 / (new - old));
+		printf("fps <%f>\n", 1.0 / (new - old));
 	old = new;
 }
 

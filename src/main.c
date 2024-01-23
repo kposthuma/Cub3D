@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:08:04 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/22 18:41:45 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 11:13:32 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	main(int ac, char **av)
 	if (!mlx)
 		return (free_map(data), 1);
 	if (!cub3d_init(&cub3d, mlx, data))
-		return (free_map(data), mlx_terminate(mlx), 1);
+		return (cuberr(NOT_ENOUGH_MEMORY), free_map(data),
+			mlx_terminate(mlx), 1);
 	init_window(&cub3d);
 	free_cub3d(&cub3d);
 	return (EXIT_SUCCESS);

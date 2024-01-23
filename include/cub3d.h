@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 11:02:58 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 11:10:35 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include <glad/glad.h>
 # include <KHR/khrplatform.h>
 # include <lodepng/lodepng.h>
+
+#include <cuberr.h>
 
 # ifndef PI
 #  define PI 3.14159265358979323846
