@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:13 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:38:15 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:42:54 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "flags.h"
 
 /*
-
 	Werkt niet helemaal, Het validate nu nog steeds flags die beginnen
 	met een getal, zoals 1 en/of 0.
 */
@@ -89,7 +88,7 @@ static int	_validate_duplicate_flags(char **map)
  */
 static int	_validate_map(char **map)
 {
-	if (!find_player(map))
+	if (find_player(map) != 1)
 		return (0);
 	if (!check_map(map))
 		return (0);

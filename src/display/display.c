@@ -6,13 +6,13 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:41:56 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:52:14 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-size_t	determine_tex_start(t_ray ray, uint32_t width)
+static size_t	determine_tex_start(t_ray ray, uint32_t width)
 {
 	float	temp;
 
@@ -24,7 +24,7 @@ size_t	determine_tex_start(t_ray ray, uint32_t width)
 	return ((size_t)(temp * width));
 }
 
-uint32_t	get_pixel(mlx_texture_t *tex, size_t x, size_t y)
+static uint32_t	get_pixel(mlx_texture_t *tex, size_t x, size_t y)
 {
 	uint8_t	r;
 	uint8_t	g;
@@ -40,7 +40,8 @@ uint32_t	get_pixel(mlx_texture_t *tex, size_t x, size_t y)
 	return (ft_get_rgba(r, g, b, a));
 }
 
-void	draw_screen(mlx_image_t *screen, t_ray *rays, t_wall *wall, uint32_t ht)
+static void	draw_screen(mlx_image_t *screen, t_ray *rays,
+	t_wall *wall, uint32_t ht)
 {
 	size_t			r;
 	size_t			h;
@@ -61,7 +62,7 @@ void	draw_screen(mlx_image_t *screen, t_ray *rays, t_wall *wall, uint32_t ht)
 			if (h + ((ht / 2) - rays[r].wall_height / 2) >= 0
 				&& h + ((ht / 2) - rays[r].wall_height / 2) < ht)
 				mlx_put_pixel(screen, r, (ht / 2 - rays[r].wall_height / 2) + h,
-						get_pixel(tex, tex_start, (h + 1) * scale));
+					get_pixel(tex, tex_start, (h + 1) * scale));
 			h++;
 		}
 		r++;

@@ -6,13 +6,13 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:56 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:38:15 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:51:29 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	determine_xy(t_player *player, bool hor)
+static void	determine_xy(t_player *player, bool hor)
 {
 	if (hor)
 	{
@@ -26,13 +26,13 @@ void	determine_xy(t_player *player, bool hor)
 	}
 }
 
-void	turn_around(t_cub3d *cub3d)
+static void	turn_around(t_cub3d *cub3d)
 {
 	cub3d->player->dx *= -1;
 	cub3d->player->dy *= -1;
 }
 
-void	walk_player(t_cub3d *cub3d, bool forward, bool hor)
+static void	walk_player(t_cub3d *cub3d, bool forward, bool hor)
 {
 	char	**map;
 	float	tempx;
@@ -60,7 +60,7 @@ void	walk_player(t_cub3d *cub3d, bool forward, bool hor)
 	cub3d->player->location[1] += cub3d->player->dy;
 }
 
-void	turn_player(t_cub3d *cub3d, bool left)
+static void	turn_player(t_cub3d *cub3d, bool left)
 {
 	if (!left)
 		cub3d->player->angle += (PI / 24);

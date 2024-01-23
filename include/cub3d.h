@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:43:37 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:40:55 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,13 +150,10 @@ void		add_node(t_data **head, t_data *node);
 t_location	find_loc(char **map, char *arr);
 // color_texture3d.c
 bool		validate_color(t_data **head, int flag);
-bool		validate_texture(t_data **head, int flag);
 // init3d.c
 bool		cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data);
 void		set_color(mlx_image_t *image, int *value, size_t size);
 void		init_rays(mlx_image_t *screen, t_player *player, char **map);
-// destroy3d.c
-void		destroy_cub3d(t_cub3d *cub3d);
 // window3d.c
 void		init_window(t_cub3d *cub3d);
 // keyhooks3d.c

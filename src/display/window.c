@@ -6,25 +6,25 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:02:19 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:41:46 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:53:08 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	fps(void *param)
-{
-	static double	old;
-	double			new;
+// static void	fps(void *param)
+// {
+// 	static double	old;
+// 	double			new;
 
-	(void)param;
-	new = mlx_get_time();
-	if (new > 0)
-		printf("fps <%f>\n", 1.0 / (new - old));
-	old = new;
-}
+// 	(void)param;
+// 	new = mlx_get_time();
+// 	if (new > 0)
+// 		printf("fps <%f>\n", 1.0 / (new - old));
+// 	old = new;
+// }
 
-void	game_loop(void *param)
+static void	game_loop(void *param)
 {
 	const t_cub3d	*cub = (t_cub3d *)param;
 	const t_player	*player = cub->player;
@@ -37,7 +37,7 @@ void	game_loop(void *param)
 		x = player->dx;
 		y = player->dy;
 	}
-		redisplay((t_cub3d *)cub);
+	redisplay((t_cub3d *)cub);
 }
 
 	// mlx_loop_hook(cub3d->mlx, &fps, (void *)cub3d);

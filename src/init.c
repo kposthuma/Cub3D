@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/16 14:59:51 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:38:15 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:39:28 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_rays(mlx_image_t *screen, t_player *player, char **map)
 	}
 }
 
-float	determine_angle(char **map, t_location loc)
+static float	determine_angle(char **map, t_location loc)
 {
 	if (!map[loc.y])
 		return (-1);
@@ -55,7 +55,7 @@ float	determine_angle(char **map, t_location loc)
 		return (-1);
 }
 
-t_player	*init_player(t_cub3d *cub, t_data **head)
+static t_player	*init_player(t_cub3d *cub, t_data **head)
 {
 	t_player	*player;
 	char		**map;
@@ -77,7 +77,7 @@ t_player	*init_player(t_cub3d *cub, t_data **head)
 	return (player);
 }
 
-mlx_image_t	*get_background(mlx_t *mlx, t_color *color)
+static mlx_image_t	*get_background(mlx_t *mlx, t_color *color)
 {
 	mlx_image_t		*image;
 
@@ -92,7 +92,6 @@ bool	cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data)
 {
 	ft_bzero(cub, sizeof(t_cub3d));
 	cub->screen = mlx_new_image(mlx, mlx->width, mlx->height);
-	cub->player = init_player(cub, &data->map);
 	cub->floor = get_background(mlx, data->floor);
 	cub->ceiling = get_background(mlx, data->ceiling);
 	cub->player = init_player(cub, &data->map);
