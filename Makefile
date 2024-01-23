@@ -6,13 +6,13 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2024/01/23 12:21:41 by cbijman       ########   odam.nl          #
+#    Updated: 2024/01/23 12:44:05 by kposthum      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub3d
-#CC := cc -Wall -Werror -Wextra -O3
-CC := cc -Wall -Werror -Wextra #-fsanitize=address #-Wall -Werror -Wextra 
+CC := cc -Wall -Werror -Wextra -O3
+# CC := cc -Wall -Werror -Wextra #-fsanitize=address #-Wall -Werror -Wextra 
 
 SRC_DIR = ./src
 OBJ_DIR = ./obj
@@ -75,9 +75,9 @@ $(LIBMLX):
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-valgrind: CC += -O3
-valgrind: re
-	valgrind --leak-check=full --suppressions=mlx42.supp ./cub3d map/test.cub
+# valgrind: CC += -O3
+# valgrind: re
+#	# valgrind --leak-check=full --suppressions=mlx42.supp ./cub3d map/test.cub
 	
 
 clean:
@@ -89,7 +89,7 @@ clean:
 fclean: clean
 	@echo Removing $(NAME)
 	@rm -f $(NAME)
-	@$(MAKE) fclean -C ./libftmap/test.cub
+	@$(MAKE) fclean -C ./libft
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:02:19 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:03:35 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 12:41:46 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,13 @@
 
 void	fps(void *param)
 {
-	const t_player	*player = ((t_cub3d *)param)->player;
 	static double	old;
 	double			new;
 
-	
+	(void)param;
 	new = mlx_get_time();
 	if (new > 0)
-		printf("time <%f> X: %f, Y: %f\n",
-			1.0 / (new - old),
-			player->location[0],
-			player->location[1]);
+		printf("fps <%f>\n", 1.0 / (new - old));
 	old = new;
 }
 
@@ -44,6 +40,7 @@ void	game_loop(void *param)
 		redisplay((t_cub3d *)cub);
 }
 
+	// mlx_loop_hook(cub3d->mlx, &fps, (void *)cub3d);
 void	init_window(t_cub3d *cub3d)
 {
 	mlx_image_to_window(cub3d->mlx, cub3d->ceiling, 0, 0);
@@ -51,6 +48,5 @@ void	init_window(t_cub3d *cub3d)
 	mlx_image_to_window(cub3d->mlx, cub3d->screen, 0, 0);
 	mlx_loop_hook(cub3d->mlx, &game_loop, (void *)cub3d);
 	mlx_loop_hook(cub3d->mlx, &move_player, (void *)cub3d);
-	mlx_loop_hook(cub3d->mlx, &fps, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
 }

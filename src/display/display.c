@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 11:47:44 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 12:41:56 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ size_t	determine_tex_start(t_ray ray, uint32_t width)
 	float	temp;
 
 	if (ray.wall == NORTH || ray.wall == SOUTH)
-		temp = ray.x / (float)BLOCKSIZE;
+		temp = ray.x / (float)BLOCK;
 	else
-		temp = ray.y / (float)BLOCKSIZE;
-	temp -= floor(temp);
+		temp = ray.y / (float)BLOCK;
+	temp = temp - floor(temp);
 	return ((size_t)(temp * width));
 }
 

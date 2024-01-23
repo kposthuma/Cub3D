@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:56 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/22 18:03:18 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 12:38:15 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,52 +26,36 @@ void	determine_xy(t_player *player, bool hor)
 	}
 }
 
-void	walk_player(t_cub3d *cub3d, bool forward)
+void	turn_around(t_cub3d *cub3d)
 {
-	char	**map;
-	float	tempx;
-	float	tempy;
-
-	determine_xy(cub3d->player, true);
-	map = (char **) cub3d->map->map->cont;
-	if (!forward)
-	{
-		cub3d->player->dx *= -1;
-		cub3d->player->dy *= -1;
-	}
-	tempx = cub3d->player->location[0] + cub3d->player->dx;
-	if (map[(size_t)cub3d->player->location[1] / BLOCKSIZE]
-		[(size_t)(tempx) / BLOCKSIZE] == '1')
-		cub3d->player->dx = 0;
-	cub3d->player->location[0] += cub3d->player->dx;
-	tempy = cub3d->player->location[1] + cub3d->player->dy;
-	if (map[(size_t)tempy / BLOCKSIZE]
-		[(size_t)cub3d->player->location[0] / BLOCKSIZE] == '1')
-		cub3d->player->dy = 0;
-	cub3d->player->location[1] += cub3d->player->dy;
+	cub3d->player->dx *= -1;
+	cub3d->player->dy *= -1;
 }
 
-void	strafe_player(t_cub3d *cub3d, bool left)
+void	walk_player(t_cub3d *cub3d, bool forward, bool hor)
 {
 	char	**map;
 	float	tempx;
 	float	tempy;
 
-	determine_xy(cub3d->player, false);
+	determine_xy(cub3d->player, hor);
 	map = (char **) cub3d->map->map->cont;
-	if (!left)
-	{
-		cub3d->player->dx *= -1;
-		cub3d->player->dy *= -1;
-	}
+	if (!forward)
+		turn_around(cub3d);
 	tempx = cub3d->player->location[0] + cub3d->player->dx;
-	if (map[(size_t)cub3d->player->location[1] / BLOCKSIZE]
-		[(size_t)(tempx) / BLOCKSIZE] == '1')
+	if (cub3d->player->dx > 0 && map[(size_t)cub3d->player->location[1] / BLOCK]
+		[(size_t)(tempx + cub3d->player->plane_dist) / BLOCK] == '1')
+		cub3d->player->dx = 0;
+	if (cub3d->player->dx < 0 && map[(size_t)cub3d->player->location[1] / BLOCK]
+		[(size_t)(tempx - cub3d->player->plane_dist) / BLOCK] == '1')
 		cub3d->player->dx = 0;
 	cub3d->player->location[0] += cub3d->player->dx;
 	tempy = cub3d->player->location[1] + cub3d->player->dy;
-	if (map[(size_t)(tempy) / BLOCKSIZE]
-		[(size_t)cub3d->player->location[0] / BLOCKSIZE] == '1')
+	if (cub3d->player->dy < 0 && map[(size_t)(tempy - cub3d->player->plane_dist)
+		/ BLOCK][(size_t)cub3d->player->location[0] / BLOCK] == '1')
+		cub3d->player->dy = 0;
+	if (cub3d->player->dy > 0 && map[(size_t)(tempy + cub3d->player->plane_dist)
+		/ BLOCK][(size_t)cub3d->player->location[0] / BLOCK] == '1')
 		cub3d->player->dy = 0;
 	cub3d->player->location[1] += cub3d->player->dy;
 }
@@ -94,13 +78,13 @@ void	move_player(void *param)
 
 	cub3d = (t_cub3d *)param;
 	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_W))
-		walk_player(cub3d, true);
+		walk_player(cub3d, true, true);
 	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_S))
-		walk_player(cub3d, false);
+		walk_player(cub3d, false, true);
 	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_A))
-		strafe_player(cub3d, true);
+		walk_player(cub3d, true, false);
 	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_D))
-		strafe_player(cub3d, false);
+		walk_player(cub3d, false, false);
 	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_LEFT))
 		turn_player(cub3d, true);
 	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_RIGHT))

@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_strmapiteri.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/01/17 11:08:04 by kposthum      #+#    #+#                 */
+/*   Created: 2024/01/17 11:02:54 by kposthum      #+#    #+#                 */
 /*   Updated: 2024/01/23 12:38:15 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int ac, char **av)
+/**
+ * Applies a function to each element of a string array, along with its index.
+ *
+ * @param arr The string array to iterate over.
+ * @param f   The function to apply to each element.
+ *
+ * @return 1 if all iterations were successful, 0 otherwise.
+ */
+int	ft_strmapiteri(char **arr, int (*f)(char *, int))
 {
-	t_cub3d	cub3d;
-	t_map	*data;
-	mlx_t	*mlx;
+	size_t	i;
 
-	if (ac != 2)
-		return (1);
-	data = read_map_from_file(av[1]);
-	if (!data)
-		return (1);
-	mlx = mlx_init(WIDTH, HEIGHT, "cub3d", false);
-	if (!mlx)
-		return (free_map(data), 1);
-	if (!cub3d_init(&cub3d, mlx, data))
-		return (cuberr(NOT_ENOUGH_MEMORY), free_map(data),
-			mlx_terminate(mlx), 1);
-	init_window(&cub3d);
-	free_cub3d(&cub3d);
-	return (EXIT_SUCCESS);
+	if (!*arr)
+		return (0);
+	i = 0;
+	while (arr[i])
+	{
+		if (!f(arr[i], i))
+			return (0);
+		i++;
+	}
+	return (1);
 }

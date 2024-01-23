@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/23 10:43:29 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 10:43:31 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 12:38:15 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ float	collision_left(t_player *player, size_t i, char **map)
 	float	dx;
 	float	dy;
 
-	x = (size_t)(player->location[0] / (float)BLOCKSIZE);
+	x = (size_t)(player->location[0] / (float)BLOCK);
 	while (x > 0)
 	{
-		dx = (player->location[0] - x * BLOCKSIZE);
+		dx = (player->location[0] - x * BLOCK);
 		dy = (dx * tan(player->ray[i].angle));
 		if (player->ray[i].angle > PI)
-			y = (size_t)((player->location[1] - fabs(dy)) / (float)BLOCKSIZE);
+			y = (size_t)((player->location[1] - fabs(dy)) / (float)BLOCK);
 		else
-			y = (size_t)((player->location[1] + fabs(dy)) / (float)BLOCKSIZE);
+			y = (size_t)((player->location[1] + fabs(dy)) / (float)BLOCK);
 		if (y >= ft_arrlen(map))
 			break ;
 		if (map[y][x - 1] == '1')
@@ -39,21 +39,21 @@ float	collision_left(t_player *player, size_t i, char **map)
 
 float	collision_right(t_player *player, size_t i, char **map)
 {
-	const size_t	len = ft_strlen(map[(int)player->location[1] / BLOCKSIZE]);
+	const size_t	len = ft_strlen(map[(int)player->location[1] / BLOCK]);
 	size_t			x;
 	size_t			y;
 	float			dx;
 	float			dy;
 
-	x = (size_t)(player->location[0] / (float)BLOCKSIZE) + 1;
+	x = (size_t)(player->location[0] / (float)BLOCK) + 1;
 	while (x < len)
 	{
-		dx = (player->location[0] - x * BLOCKSIZE);
+		dx = (player->location[0] - x * BLOCK);
 		dy = (dx * tan(player->ray[i].angle));
 		if (player->ray[i].angle > PI)
-			y = (size_t)((player->location[1] - fabs(dy)) / (float)BLOCKSIZE);
+			y = (size_t)((player->location[1] - fabs(dy)) / (float)BLOCK);
 		else
-			y = (size_t)((player->location[1] + fabs(dy)) / (float)BLOCKSIZE);
+			y = (size_t)((player->location[1] + fabs(dy)) / (float)BLOCK);
 		if (y >= ft_arrlen(map))
 			break ;
 		if (map[y][x] == '1')
@@ -71,16 +71,16 @@ float	collision_down(t_player *player, size_t i, char **map)
 	float			dx;
 	float			dy;
 
-	y = (size_t)(player->location[1] / (float)BLOCKSIZE) + 1;
+	y = (size_t)(player->location[1] / (float)BLOCK) + 1;
 	while (y < len)
 	{
-		dy = (player->location[1] - y * BLOCKSIZE);
+		dy = (player->location[1] - y * BLOCK);
 		dx = (dy / tan(player->ray[i].angle));
 		if (player->ray[i].angle > (PI / 2)
 			&& player->ray[i].angle < (3 * PI / 2))
-			x = (size_t)((player->location[0] - fabs(dx)) / (float)BLOCKSIZE);
+			x = (size_t)((player->location[0] - fabs(dx)) / (float)BLOCK);
 		else
-			x = (size_t)((player->location[0] + fabs(dx)) / (float)BLOCKSIZE);
+			x = (size_t)((player->location[0] + fabs(dx)) / (float)BLOCK);
 		if (x >= ft_strlen(map[y]))
 			break ;
 		if (map[y][x] == '1')
@@ -97,16 +97,16 @@ float	collision_up(t_player *player, size_t i, char **map)
 	float	dx;
 	float	dy;
 
-	y = (size_t)(player->location[1] / (float)BLOCKSIZE);
+	y = (size_t)(player->location[1] / (float)BLOCK);
 	while (y > 0)
 	{
-		dy = (player->location[1] - y * BLOCKSIZE);
+		dy = (player->location[1] - y * BLOCK);
 		dx = (dy / tan(player->ray[i].angle));
 		if (player->ray[i].angle > (PI / 2)
 			&& player->ray[i].angle < (3 * PI / 2))
-			x = (size_t)((player->location[0] - fabs(dx)) / (float)BLOCKSIZE);
+			x = (size_t)((player->location[0] - fabs(dx)) / (float)BLOCK);
 		else
-			x = (size_t)((player->location[0] + fabs(dx)) / (float)BLOCKSIZE);
+			x = (size_t)((player->location[0] + fabs(dx)) / (float)BLOCK);
 		if (x >= ft_strlen(map[y]))
 			break ;
 		if (map[y -1][x] == '1')

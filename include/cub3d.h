@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:08:51 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 12:43:37 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@
 # include <glad/glad.h>
 # include <KHR/khrplatform.h>
 # include <lodepng/lodepng.h>
-
-#include <cuberr.h>
+# include <cuberr.h>
 
 # ifndef PI
 #  define PI 3.14159265358979323846
@@ -42,12 +41,12 @@
 #  define WIDTH 1600
 # endif
 
-# ifndef BLOCKSIZE
-#  define BLOCKSIZE 128
+# ifndef BLOCK
+#  define BLOCK 128
 # endif
 
 # ifndef STEPSIZE
-#  define STEPSIZE 8
+#  define STEPSIZE 16
 # endif
 
 # ifndef RAYS

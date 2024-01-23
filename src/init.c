@@ -6,9 +6,10 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/16 14:59:51 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:03:23 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 12:38:15 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d.h"
 
@@ -67,11 +68,11 @@ t_player	*init_player(t_cub3d *cub, t_data **head)
 	player->angle = determine_angle(map, player->start);
 	if (player->angle < 0)
 		return (free(player), NULL);
-	player->location[0] = (player->start.x * BLOCKSIZE) + (BLOCKSIZE / 2);
-	player->location[1] = (player->start.y * BLOCKSIZE) + (BLOCKSIZE / 2);
+	player->location[0] = (player->start.x * BLOCK) + (BLOCK / 2);
+	player->location[1] = (player->start.y * BLOCK) + (BLOCK / 2);
 	player->dx = 0;
 	player->dy = 0;
-	player->plane_dist = BLOCKSIZE / 2;
+	player->plane_dist = BLOCK / 2;
 	init_rays(cub->screen, player, map);
 	return (player);
 }
@@ -80,7 +81,6 @@ mlx_image_t	*get_background(mlx_t *mlx, t_color *color)
 {
 	mlx_image_t		*image;
 
-	// printf("color values : R%i, G%i, B%i\n", color->r, color->g, color->b);
 	image = mlx_new_image(mlx, mlx->width, mlx->height / 2);
 	if (!image)
 		return (NULL);

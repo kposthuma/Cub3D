@@ -1,52 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_arrdup.c                                        :+:    :+:            */
+/*   ft_trimnl.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cbijman <cbijman@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/01/16 14:44:17 by cbijman       #+#    #+#                 */
+/*   Created: 2024/01/22 18:19:31 by cbijman       #+#    #+#                 */
 /*   Updated: 2024/01/23 12:38:15 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	_free_array(char **arg)
+void	ft_trimnl(char *str)
 {
 	size_t	i;
 
 	i = 0;
-	while (arg && arg[i])
-	{
-		if (arg[i])
-			free(arg[i]);
+	if (!str)
+		return ;
+	while (str[i])
 		i++;
-	}
-	if (arg)
-		free(arg);
-	arg = NULL;
-}
-
-char	**ft_arrdup(char **arr)
-{
-	size_t	i;
-	char	**narr;
-
-	if (!arr || !*arr)
-		return (NULL);
-	i = 0;
-	while (arr[i])
-		i++;
-	narr = ft_calloc(i + 1, sizeof(char *));
-	i = 0;
-	while (arr[i])
-	{
-		narr[i] = ft_strdup(arr[i]);
-		if (!narr[i])
-			_free_array(narr);
-		i++;
-	}
-	narr[i] = NULL;
-	return (narr);
+	if (str[i - 1] == '\n')
+		str[i - 1] = '\0';
 }

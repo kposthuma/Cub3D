@@ -6,11 +6,29 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:34 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 11:55:27 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 12:42:13 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	set_color(mlx_image_t *image, int *color, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size)
+	{
+		image->pixels[i] = color[0];
+		i += sizeof(int8_t);
+		image->pixels[i] = color[1];
+		i += sizeof(int8_t);
+		image->pixels[i] = color[2];
+		i += sizeof(int8_t);
+		image->pixels[i] = 255;
+		i += sizeof(int8_t);
+	}
+}
 
 void	set_colorc(mlx_image_t *image, t_color *color, size_t size)
 {

@@ -6,27 +6,18 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/23 10:41:41 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:13:40 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 12:41:09 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void _cub3d_delete_texture(mlx_texture_t	*texture)
-{
-	if (texture)
-	{
-		free(texture->pixels);
-		free(texture);
-	}
-}
-
 void	free_map(t_map	*map)
 {
-	_cub3d_delete_texture(map->walls->north);
-	_cub3d_delete_texture(map->walls->south);
-	_cub3d_delete_texture(map->walls->west);
-	_cub3d_delete_texture(map->walls->east);
+	mlx_delete_texture(map->walls->north);
+	mlx_delete_texture(map->walls->south);
+	mlx_delete_texture(map->walls->west);
+	mlx_delete_texture(map->walls->east);
 	if (map->walls)
 		free(map->walls);
 	if (map->floor)
