@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 11:10:35 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 12:02:48 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,17 +172,15 @@ int			ft_access(char *filename);
 int			ft_accesstype(char *filename, char *expected_type);
 int			ft_isempty(char *str);
 char		**read_from_file(int fd);
-void		*ft_realloc(void *ptr, size_t oldsize, size_t size);
 char		**import_map(char *filename);
 char		*find_flag(char **arr, const char *flag_type);
 int			is_flag(char *str);
 
 int			check_map(char **map);
-int			find_player(char *str, int index);
+int			find_player(char **str);
 t_map		*read_map_from_file(char *filename);
 int			validate_flag(char **arr, const char *flag_type);
 
-void		ft_trimnl(char *str);
 void		set_colorc(mlx_image_t *image, t_color *color, size_t size);
 void		ft_free(char **arg);
 void		free_cub3d(t_cub3d *cub);

@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   color_texture3d.c                                  :+:    :+:            */
+/*   color_texture.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:34 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/19 01:57:37 by root          ########   odam.nl         */
+/*   Updated: 2024/01/23 11:55:27 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	set_color(mlx_image_t *image, int *color, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < size)
-	{
-		image->pixels[i] = color[0];
-		i += sizeof(int8_t);
-		image->pixels[i] = color[1];
-		i += sizeof(int8_t);
-		image->pixels[i] = color[2];
-		i += sizeof(int8_t);
-		image->pixels[i] = 255;
-		i += sizeof(int8_t);
-	}
-}
 
 void	set_colorc(mlx_image_t *image, t_color *color, size_t size)
 {
@@ -103,10 +85,3 @@ bool	validate_color(t_data **head, int flag)
 	return (ft_free(val), true);
 }
 
-bool	validate_texture(t_data **head, int flag)
-{
-	(void)head;
-	(void)flag;
-	printf("validate_texture called\n");
-	return (true);
-}

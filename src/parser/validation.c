@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:13 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/22 18:48:12 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 11:58:08 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	_validate_duplicate_flags(char **map)
  */
 static int	_validate_map(char **map)
 {
-	if (!ft_strmapiteri(map, find_player))
+	if (!find_player(map))
 		return (0);
 	if (!check_map(map))
 		return (0);

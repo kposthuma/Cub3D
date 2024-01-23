@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:06 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 11:16:08 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 12:02:27 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,29 @@
  * @param index The index of the string (unused).
  * @return Returns 1 if a single player character is found, otherwise returns 0.
  */
-int	find_player(char *str, int index)
+int	find_player(char **str)
 {
 	static int	found = 0;
 	size_t		i;
+	size_t		j;
 
-	(void)index;
 	i = 0;
+	j = 0;
 	while (str[i])
 	{
-		if (strchr("NEWS", str[i]))
+		j = 0;
+		while (str[i][j])
 		{
-			if (found)
-				return (0);
-			found++;
+			if (ft_strchr("NEWS", str[i][j]))
+			{
+				if (found)
+					return (0);
+				found++;
+			}
+			j++;
 		}
 		i++;
 	}
-	// if (found == 0)
-	// 	return (printf("test\n"), 0);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 10:49:30 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 11:47:44 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ size_t	determine_tex_start(t_ray ray, uint32_t width)
 		temp = ray.x / (float)BLOCKSIZE;
 	else
 		temp = ray.y / (float)BLOCKSIZE;
-	temp = temp - floor(temp);
+	temp -= floor(temp);
 	return ((size_t)(temp * width));
 }
 
@@ -49,19 +49,19 @@ void	draw_screen(mlx_image_t *screen, t_ray *rays, t_wall *wall, uint32_t ht)
 	size_t			tex_start;
 
 	r = 0;
-	ft_bzero(screen->pixels, ht * screen->width * sizeof(uint32_t));
+	ft_bzero(screen->pixels, screen->height * screen->width * sizeof(uint32_t));
 	while (r < RAYS)
 	{
 		h = 0;
 		tex = wall->direction[rays[r].wall];
 		scale = (float)tex->height / (float)rays[r].wall_height;
-		tex_start = determine_tex_start(rays[r], tex->width);
 		while (h < rays[r].wall_height)
 		{
+			tex_start = determine_tex_start(rays[r], tex->width);
 			if (h + ((ht / 2) - rays[r].wall_height / 2) >= 0
 				&& h + ((ht / 2) - rays[r].wall_height / 2) < ht)
-				mlx_put_pixel(screen, r, (ht / 2 - rays[r].wall_height / 2)
-					+ h, get_pixel(tex, tex_start, (h + 1) * scale));
+				mlx_put_pixel(screen, r, (ht / 2 - rays[r].wall_height / 2) + h,
+						get_pixel(tex, tex_start, (h + 1) * scale));
 			h++;
 		}
 		r++;

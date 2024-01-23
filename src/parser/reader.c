@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/22 18:49:00 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/23 11:56:43 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ static bool	_append_vector(t_vector *vec, char *str)
 		i++;
 	if (str[i] == '1' || str[i] == '0')
 		i = 0;
-	ft_trimnl(str);
-	vec->content[vec->index] = str;
+	vec->content[vec->index] = ft_strtrim(&str[i], "\t\n\v\f\r ");
 	if (!vec->content[vec->index])
 		return (false);
 	vec->index++;

@@ -6,7 +6,7 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2024/01/23 11:18:32 by kposthum      ########   odam.nl          #
+#    Updated: 2024/01/23 12:03:02 by cbijman       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,11 @@ HEADERS = -I ./libft/include -I ./include -I ./MLX42/include
 LIBFT = ./libft/libft.a
 LIBMLX = ./MLX42/build/libmlx42.a
 
-FILES	=	ft_strmapiteri \
-			ft_isempty \
+FILES	=	ft_isempty \
 			ft_access \
 			ft_accesstype \
 			ft_arrdup \
 			ft_free \
-			ft_trimnl \
 			free \
 			error \
 			ft_realloc \

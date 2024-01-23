@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/16 14:59:51 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 11:17:07 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/23 12:03:23 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ bool	cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data)
 {
 	ft_bzero(cub, sizeof(t_cub3d));
 	cub->screen = mlx_new_image(mlx, mlx->width, mlx->height);
+	cub->player = init_player(cub, &data->map);
 	cub->floor = get_background(mlx, data->floor);
 	cub->ceiling = get_background(mlx, data->ceiling);
 	cub->player = init_player(cub, &data->map);
