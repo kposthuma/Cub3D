@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:08:04 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 13:54:02 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:05:22 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 	data = read_map_from_file(av[1]);
 	if (!data)
 		return (1);
-	mlx = mlx_init(WIDTH, HEIGHT, "cub3d", false);
+	mlx = mlx_init(WIDTH, HEIGHT, "cub3d", true);
 	if (!mlx)
 		return (free_map(data), 1);
 	if (!cub3d_init(&cub3d, mlx, data))

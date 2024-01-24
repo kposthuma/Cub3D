@@ -1,7 +1,7 @@
 *.o
 libft/libft.a
 cub3d
-
+norme
 # Folders
 **/.vscode
 **/obj

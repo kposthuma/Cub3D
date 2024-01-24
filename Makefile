@@ -6,13 +6,13 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2024/01/24 11:16:22 by kposthum      ########   odam.nl          #
+#    Updated: 2024/01/24 14:14:26 by kposthum      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub3d
 CC := cc -Wall -Werror -Wextra -O3
-# CC := cc -Wall -Werror -Wextra #-fsanitize=address #-Wall -Werror -Wextra 
+# CC := cc -g3 -fsanitize=address
 
 SRC_DIR = ./src
 OBJ_DIR = ./obj
@@ -23,7 +23,6 @@ LIBMLX = ./MLX42/build/libmlx42.a
 
 FILES	=	ft_isempty \
 			ft_access \
-			ft_accesstype \
 			ft_arrdup \
 			ft_free \
 			free \
@@ -38,7 +37,7 @@ FILES	=	ft_isempty \
 			display \
 			ray \
 			init \
-			color_utils \
+			utils \
 			parser \
 			reader \
 			flags \

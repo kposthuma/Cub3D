@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/23 10:41:41 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:41:09 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:10:29 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	free_player(t_player *player)
 {
 	if (player)
 	{
+		free(player->ray);
 		free(player);
 	}
 }

@@ -6,26 +6,29 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:02:19 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 11:48:06 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:14:51 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// void	resize(int32_t width, int32_t height, void *param)
-// {
-// 	t_cub3d	*cub3d;
+void	resize(int32_t width, int32_t height, void *param)
+{
+	t_cub3d	*cub3d;
 
-// 	cub3d = (t_cub3d *)param;
-// 	mlx_resize_image(cub3d->screen, width, height);
-// 	mlx_resize_image(cub3d->ceiling, width, height / 2);
-// 	mlx_resize_image(cub3d->floor, width, height / 2);
-// 	cub3d->floor->instances->y = height / 2;
-// 	free(cub3d->player->ray);
-// 	cub3d->player->ray = ft_calloc(width, sizeof(t_ray));
-// 	cub3d->player->raycount = width;
-// 	redisplay(cub3d);
-// }
+	cub3d = (t_cub3d *)param;
+	cub3d->floor->instances->y = height / 2;
+	cub3d->player->raycount = width;
+	free(cub3d->player->ray);
+	cub3d->player->ray = ft_calloc(width, sizeof(t_ray));
+	if (!mlx_resize_image(cub3d->screen, width, height)
+		|| !mlx_resize_image(cub3d->ceiling, width, height / 2)
+		|| !mlx_resize_image(cub3d->floor, width, height / 2)
+		|| !cub3d->player->ray)
+		mlx_close_window(cub3d->mlx);
+	else
+		redisplay(cub3d);
+}
 
 void	mouse(void *param)
 {
@@ -48,6 +51,8 @@ void	mouse(void *param)
 		mlx_set_mouse_pos(cub3d->mlx, cub3d->mlx->width / 2,
 			cub3d->mlx->height / 2);
 	}
+	else
+		mlx_set_cursor_mode(cub3d->mlx, MLX_MOUSE_NORMAL);
 }
 
 static void	fps(void *param)
@@ -96,6 +101,6 @@ void	init_window(t_cub3d *cub3d)
 	mlx_loop_hook(cub3d->mlx, &move_player, (void *)cub3d);
 	mlx_loop_hook(cub3d->mlx, &fps, (void *)cub3d);
 	mlx_loop_hook(cub3d->mlx, &mouse, (void *)cub3d);
-	// mlx_resize_hook(cub3d->mlx, &resize, (void *)cub3d);
+	mlx_resize_hook(cub3d->mlx, &resize, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
 }
