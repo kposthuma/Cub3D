@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:02:19 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 11:15:13 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/24 11:48:06 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,22 @@ void	mouse(void *param)
 	t_cub3d			*cub3d;
 	static int32_t	x;
 	static int32_t	y;
+	static bool		enable = true;
 
 	cub3d = (t_cub3d *)param;
-	mlx_get_mouse_pos(cub3d->mlx, &x, &y);
-	if (x < cub3d->mlx->width / 2)
-		turn_player(cub3d, true);
-	else if (x > cub3d->mlx->width / 2)
-		turn_player(cub3d, false);
-	mlx_set_mouse_pos(cub3d->mlx, cub3d->mlx->width / 2,
-		cub3d->mlx->height / 2);
+	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_Q))
+		enable = !enable;
+	if (enable)
+	{
+		mlx_set_cursor_mode(cub3d->mlx, MLX_MOUSE_HIDDEN);
+		mlx_get_mouse_pos(cub3d->mlx, &x, &y);
+		if (x < cub3d->mlx->width / 2)
+			turn_player(cub3d, true);
+		else if (x > cub3d->mlx->width / 2)
+			turn_player(cub3d, false);
+		mlx_set_mouse_pos(cub3d->mlx, cub3d->mlx->width / 2,
+			cub3d->mlx->height / 2);
+	}
 }
 
 static void	fps(void *param)
