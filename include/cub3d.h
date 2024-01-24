@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 13:59:00 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/24 11:33:21 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,6 @@
 
 # ifndef STEPSIZE
 #  define STEPSIZE 16
-# endif
-
-# ifndef RAYS
-#  define RAYS 1600
 # endif
 
 # ifndef FLT_MAX
@@ -96,7 +92,7 @@ typedef struct s_ray
 	float		angle;
 	float		x;
 	float		y;
-	float		wall_height;
+	float		wall_ht;
 	uint8_t		wall;
 	mlx_image_t	*slice_old;
 	mlx_image_t	*slice_new;
@@ -110,7 +106,8 @@ typedef struct s_player
 	float		dx;
 	float		dy;
 	float		plane_dist;
-	t_ray		ray[RAYS];
+	t_ray		*ray;
+	size_t		raycount;
 }	t_player;
 
 typedef union u_wall
@@ -151,16 +148,16 @@ void		clear_node(t_data **head, t_data *node);
 void		add_node(t_data **head, t_data *node);
 // maputils3d.c
 t_location	find_loc(char **map, char *arr);
-// color_texture3d.c
-bool		validate_color(t_data **head, int flag);
+// color_utils.c
+char		*ft_trim_whitespace(char *s);
 // init3d.c
 bool		cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data);
-void		set_color(mlx_image_t *image, int *value, size_t size);
 void		init_rays(mlx_image_t *screen, t_player *player, char **map);
 // window3d.c
 void		init_window(t_cub3d *cub3d);
 // keyhooks3d.c
 void		move_player(void *param);
+void		turn_player(t_cub3d *cub3d, bool left);
 // display3d.c
 void		redisplay(t_cub3d *cub3d);
 // ray3d.c

@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:56 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 13:51:29 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/24 11:37:58 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ static void	walk_player(t_cub3d *cub3d, bool forward, bool hor)
 	cub3d->player->location[1] += cub3d->player->dy;
 }
 
-static void	turn_player(t_cub3d *cub3d, bool left)
+void	turn_player(t_cub3d *cub3d, bool left)
 {
 	if (!left)
-		cub3d->player->angle += (PI / 24);
+		cub3d->player->angle += (PI / 48);
 	else
-		cub3d->player->angle -= (PI / 24);
+		cub3d->player->angle -= (PI / 48);
 	if (cub3d->player->angle >= (2 * PI))
 		cub3d->player->angle -= (2 * PI);
 	else if (cub3d->player->angle < 0)

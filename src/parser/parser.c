@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:24 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 14:49:35 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/24 11:19:10 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static bool	_init_textures(t_wall *walls, char *str, t_flag flag)
 
 	if (!str)
 		return (false);
-	image = mlx_load_png(str);
+	image = mlx_load_png(ft_trim_whitespace(str));
 	if (!image)
 		return (false);
 	if (image->width != image->height)
@@ -47,7 +47,7 @@ static t_color	*_init_color(char *str)
 
 	if (!str)
 		return (NULL);
-	color_values = ft_split(str, ',');
+	color_values = ft_split(ft_trim_whitespace(str), ',');
 	if (!color_values)
 		return (NULL);
 	if (ft_arrlen(color_values) != 3)

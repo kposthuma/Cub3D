@@ -6,20 +6,52 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:02:19 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 15:09:57 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/24 11:15:13 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// void	resize(int32_t width, int32_t height, void *param)
+// {
+// 	t_cub3d	*cub3d;
+
+// 	cub3d = (t_cub3d *)param;
+// 	mlx_resize_image(cub3d->screen, width, height);
+// 	mlx_resize_image(cub3d->ceiling, width, height / 2);
+// 	mlx_resize_image(cub3d->floor, width, height / 2);
+// 	cub3d->floor->instances->y = height / 2;
+// 	free(cub3d->player->ray);
+// 	cub3d->player->ray = ft_calloc(width, sizeof(t_ray));
+// 	cub3d->player->raycount = width;
+// 	redisplay(cub3d);
+// }
+
+void	mouse(void *param)
+{
+	t_cub3d			*cub3d;
+	static int32_t	x;
+	static int32_t	y;
+
+	cub3d = (t_cub3d *)param;
+	mlx_get_mouse_pos(cub3d->mlx, &x, &y);
+	if (x < cub3d->mlx->width / 2)
+		turn_player(cub3d, true);
+	else if (x > cub3d->mlx->width / 2)
+		turn_player(cub3d, false);
+	mlx_set_mouse_pos(cub3d->mlx, cub3d->mlx->width / 2,
+		cub3d->mlx->height / 2);
+}
+
 static void	fps(void *param)
 {
 	static mlx_image_t	*fps_counter = NULL;
-	const mlx_t			*mlx = ((t_cub3d *)param)->mlx;
+	mlx_t				*mlx;
 	static double		old;
 	double				new;
 	char				*text;
 
+	mlx = ((t_cub3d *)param)->mlx;
 	new = mlx_get_time();
 	if (new > 0)
 	{
@@ -56,5 +88,7 @@ void	init_window(t_cub3d *cub3d)
 	mlx_loop_hook(cub3d->mlx, &game_loop, (void *)cub3d);
 	mlx_loop_hook(cub3d->mlx, &move_player, (void *)cub3d);
 	mlx_loop_hook(cub3d->mlx, &fps, (void *)cub3d);
+	mlx_loop_hook(cub3d->mlx, &mouse, (void *)cub3d);
+	// mlx_resize_hook(cub3d->mlx, &resize, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
 }

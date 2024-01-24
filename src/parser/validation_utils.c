@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:06 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 13:52:53 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/24 11:22:54 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ static bool	_check_map(char **map, size_t x, size_t y)
 		if (!_check_map(map, x, y + 1))
 			return (false);
 	}
-	if (map[y][x + 1] == ' ' || map[y + 1][x] == ' ' || !map[y][x + 1] || !map[y
-		+ 1][x] || map[y][x - 1] == ' ' || map[y - 1][x] == ' ')
+	if (!map[y][x + 1] || !map[y + 1][x]
+		|| map[y][x + 1] == ' ' || map[y + 1][x] == ' '
+		|| map[y][x - 1] == ' ' || map[y - 1][x] == ' ')
 		return (false);
 	return (true);
 }
