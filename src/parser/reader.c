@@ -6,24 +6,12 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 16:10:30 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/24 16:13:09 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "vector.h"
-
-static bool	is_map(char *str)
-{
-	size_t	i;
-
-	i = 0;
-	if (!str)
-		return (false);
-	while (ft_isspace(str[i]))
-		i++;
-	return (str[i] == '1' || str[i] == '0');
-}
 
 static bool	_init_vector(t_vector *vec, int type_size, int size)
 {
@@ -72,6 +60,18 @@ static void	_free_vector(t_vector *vec)
 	vec->type_size = 0;
 	vec->index = 0;
 	vec->length = 0;
+}
+
+static bool	is_map(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	if (!str)
+		return (false);
+	while (ft_isspace(str[i]))
+		i++;
+	return (str[i] == '1' || str[i] == '0');
 }
 
 /**
