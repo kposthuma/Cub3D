@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:02:19 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 14:14:51 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:31:10 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,31 +28,6 @@ void	resize(int32_t width, int32_t height, void *param)
 		mlx_close_window(cub3d->mlx);
 	else
 		redisplay(cub3d);
-}
-
-void	mouse(void *param)
-{
-	t_cub3d			*cub3d;
-	static int32_t	x;
-	static int32_t	y;
-	static bool		enable = true;
-
-	cub3d = (t_cub3d *)param;
-	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_Q))
-		enable = !enable;
-	if (enable)
-	{
-		mlx_set_cursor_mode(cub3d->mlx, MLX_MOUSE_HIDDEN);
-		mlx_get_mouse_pos(cub3d->mlx, &x, &y);
-		if (x < cub3d->mlx->width / 2)
-			turn_player(cub3d, true);
-		else if (x > cub3d->mlx->width / 2)
-			turn_player(cub3d, false);
-		mlx_set_mouse_pos(cub3d->mlx, cub3d->mlx->width / 2,
-			cub3d->mlx->height / 2);
-	}
-	else
-		mlx_set_cursor_mode(cub3d->mlx, MLX_MOUSE_NORMAL);
 }
 
 static void	fps(void *param)
@@ -88,6 +63,7 @@ static void	game_loop(void *param)
 	{
 		x = player->dx;
 		y = player->dy;
+		angle = player->angle;
 	}
 	redisplay((t_cub3d *)cub);
 }
@@ -102,5 +78,6 @@ void	init_window(t_cub3d *cub3d)
 	mlx_loop_hook(cub3d->mlx, &fps, (void *)cub3d);
 	mlx_loop_hook(cub3d->mlx, &mouse, (void *)cub3d);
 	mlx_resize_hook(cub3d->mlx, &resize, (void *)cub3d);
+	mlx_key_hook(cub3d->mlx, &disable, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
 }

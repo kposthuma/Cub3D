@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 11:33:21 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:31:02 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,29 +139,33 @@ typedef struct s_cub3d
 	mlx_image_t	*screen;
 	t_player	*player;
 	t_data		**data;
+	bool		mouse;
 }	t_cub3d;
 
-// list3d.c
+// list.c
 t_data		*find_node(t_data **head, int flag);
 t_data		*newnode(void *cont);
 void		clear_node(t_data **head, t_data *node);
 void		add_node(t_data **head, t_data *node);
-// maputils3d.c
+// maputils.c
 t_location	find_loc(char **map, char *arr);
 // color_utils.c
 char		*ft_trim_whitespace(char *s);
-// init3d.c
+// init.c
 bool		cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data);
 void		init_rays(mlx_image_t *screen, t_player *player, char **map);
-// window3d.c
+// window.c
 void		init_window(t_cub3d *cub3d);
-// keyhooks3d.c
+// keyhooks.c
 void		move_player(void *param);
 void		turn_player(t_cub3d *cub3d, bool left);
-// display3d.c
+// display.c
 void		redisplay(t_cub3d *cub3d);
-// ray3d.c
+// ray.c
 float		ray_len(t_player *player, size_t i, char **map);
+// mouse.c
+void		mouse(void *param);
+void		disable(mlx_key_data_t keydata, void *param);
 
 int			ft_strmapiteri(char **arr, int (*f)(char *, int));
 int			ft_access(char *filename);

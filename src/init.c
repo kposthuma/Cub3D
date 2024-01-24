@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/16 14:59:51 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 11:32:34 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:23:47 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ bool	cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data)
 	cub->map = data;
 	cub->data = &data->map;
 	cub->mlx = mlx;
+	cub->mouse = true;
 	return (true);
 }
