@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 14:37:23 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:49:57 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static bool	_append_vector(t_vector *vec, char *str)
 	size_t	i;
 
 	i = 0;
+	if (!str)
+		return (true);
 	if (vec->index == vec->length)
 	{
 		vec->length *= 2;
@@ -48,7 +50,7 @@ static bool	_append_vector(t_vector *vec, char *str)
 	if (!vec->content[vec->index])
 		return (false);
 	vec->index++;
-	return (true);
+	return (free(str), true);
 }
 
 static void	_free_vector(t_vector *vec)
@@ -74,17 +76,16 @@ char	**read_from_file(int fd)
 	char		*str;
 	static char	*lstr = NULL;
 
-	if (fd < 0)
-		return (NULL);
 	if (!_init_vector(&vec, sizeof(char *), 32))
 		return (NULL);
 	str = "\0";
-	if (!str)
-		return (_free_vector(&vec), NULL);
 	while (str)
 	{
 		str = get_next_line(fd);
-		if (!str || (*str == '\n' && lstr && !ft_strchr(lstr, '1')))
+		//if (!str
+		//	|| (str && ft_isempty(str))
+		//	|| (lstr && !ft_strchr(lstr, '1')))
+		if (!str || ft_isempty(str))
 		{
 			free(str);
 			continue ;
