@@ -6,13 +6,13 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:08:00 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:38:15 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 14:06:18 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_data	*find_node(t_data **head, int flag)
+t_data	*find_node(t_data **head, t_mapflag flag)
 {
 	t_data	*node;
 
@@ -24,48 +24,30 @@ t_data	*find_node(t_data **head, int flag)
 	return (node);
 }
 
-t_data	*newnode(void *cont)
+t_data	*new_node(void *content, t_mapflag flag)
 {
 	t_data	*node;
 
 	node = malloc(sizeof(t_data));
 	if (!node)
 		return (NULL);
+	node->content = content;
+	node->flag = flag;
 	node->next = NULL;
-	node->prev = NULL;
-	node->cont = cont;
-	node->flag = 0;
 	return (node);
-}
-
-void	clear_node(t_data **head, t_data *node)
-{
-	t_data	*temp;
-
-	temp = node->next;
-	if (node->prev == NULL)
-		*head = temp;
-	else if (temp != NULL)
-	{
-		temp->prev = node->prev;
-		temp->prev->next = temp;
-	}
-	free((char *)node->cont);
-	free(node);
 }
 
 void	add_node(t_data **head, t_data *node)
 {
-	t_data	*temp;
+	t_data	*tmp;
 
-	temp = *head;
-	if (!temp)
-		*head = node;
-	else
+	if (!*head)
 	{
-		while (temp->next != NULL)
-			temp = temp->next;
-		temp->next = node;
-		node->prev = temp;
+		*head = node;
+		return ;
 	}
+	tmp = *head;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = node;
 }

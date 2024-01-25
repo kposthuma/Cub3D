@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 14:31:02 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 14:02:50 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@
 #  define STEPSIZE 16
 # endif
 
+# ifndef MAX_FLAG_SIZE
+#  define MAX_FLAG_SIZE 6
+# endif
+
 # ifndef FLT_MAX
 #  define FLT_MAX 3.40282347e+38F
 # endif
@@ -60,8 +64,14 @@ typedef enum e_flag
 	W_TEXTURE = 3,
 	C_COLOR,
 	F_COLOR,
-	MAP_START,
 }	t_flag;
+
+typedef enum e_mapflag
+{
+	MAP,
+	FLAG,
+	UNKNOWN_BUT_COOL
+}	t_mapflag;
 
 typedef enum e_direction
 {
@@ -73,10 +83,9 @@ typedef enum e_direction
 
 typedef struct s_data
 {
-	int				flag;
-	void			*cont;
+	char			*content;
+	t_mapflag		flag;
 	struct s_data	*next;
-	struct s_data	*prev;
 }	t_data;
 
 typedef struct s_location
@@ -127,7 +136,7 @@ typedef struct s_map
 	t_wall		*walls;
 	t_color		*floor;
 	t_color		*ceiling;
-	t_data		*map;
+	char		**map;
 }	t_map;
 
 typedef struct s_cub3d
@@ -138,19 +147,19 @@ typedef struct s_cub3d
 	mlx_image_t	*floor;
 	mlx_image_t	*screen;
 	t_player	*player;
-	t_data		**data;
 	bool		mouse;
 }	t_cub3d;
 
 // list.c
-t_data		*find_node(t_data **head, int flag);
-t_data		*newnode(void *cont);
+t_data		*find_node(t_data **head, t_mapflag flag);
+t_data		*new_node(void *cont, t_mapflag flag);
 void		clear_node(t_data **head, t_data *node);
 void		add_node(t_data **head, t_data *node);
 // maputils.c
 t_location	find_loc(char **map, char *arr);
 // color_utils.c
 char		*ft_trim_whitespace(char *s);
+void		ft_trimnl(char *str);
 // init.c
 bool		cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data);
 void		init_rays(mlx_image_t *screen, t_player *player, char **map);
@@ -192,5 +201,8 @@ float		collision_down(t_player *player, size_t i, char **map);
 float		collision_right(t_player *player, size_t i, char **map);
 float		collision_left(t_player *player, size_t i, char **map);
 void		determine_wall(t_player *player, size_t i, float x, float y);
+
+t_data		*read_map_to_struct(int fd);
+int	count_flags(t_data **head, t_mapflag type);
 
 #endif

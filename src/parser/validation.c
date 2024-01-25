@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:13 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 11:27:17 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 14:32:25 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,6 @@
 #include "cuberr.h"
 #include "libft.h"
 #include "flags.h"
-
-/*
-	Werkt niet helemaal, Het validate nu nog steeds flags die beginnen
-	met een getal, zoals 1 en/of 0.
-*/
-static int	_validate_all_flags(char **map)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (ft_isspace(map[i][j]))
-			j++;
-		if (!is_flag(&map[i][j]) && !ft_isdigit(map[i][j]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 /**
  * Validates the textures used in the map.
@@ -63,7 +40,7 @@ static int	_validate_textures(char **map)
  * @param map The map containing the flags.
  * @return 1 if all required flags are present, 0 otherwise.
  */
-static int	_validate_duplicate_flags(char **map)
+static int	_validate_flags(char **map)
 {
 	if (!validate_flag(map, NORTH_FLAG))
 		return (0);
@@ -88,11 +65,16 @@ static int	_validate_duplicate_flags(char **map)
  */
 static int	_validate_map(char **map)
 {
-	if (find_player(map) != 1)
+	char **clone;
+	
+	clone = ft_arrdup(map);
+	if (!clone)
 		return (0);
-	if (!check_map(map))
-		return (0);
-	return (1);
+	if (find_player(clone) != 1)
+		return (ft_arrfree(clone), 0);
+	if (!check_map(clone))
+		return (ft_arrfree(clone), 0);
+	return (ft_arrfree(clone), 1);
 }
 
 /**
@@ -112,18 +94,11 @@ char	**import_map(char *filename)
 	map = read_from_file(open(filename, O_RDONLY));
 	if (!map)
 		return (cuberr(INVALID_MAP), NULL);
-	if (!_validate_all_flags(map))
-		return (cuberr(WEIRD_FLAGS), ft_free(map), NULL);
-	if (!_validate_duplicate_flags(map))
-		return (cuberr(INVALID_FLAGS), ft_free(map), NULL);
+	if (!_validate_flags(map))
+		return (cuberr(INVALID_FLAGS), ft_arrfree(map), NULL);
 	if (!_validate_textures(map))
-		return (cuberr(INVALID_TEXTURE_FILES), ft_free(map), NULL);
-	test_map = ft_arrdup(&map[6]);
-	if (!test_map)
-		return (cuberr(SPARERIB_EXPRESS), ft_free(map), NULL);
-	if (!_validate_map(test_map))
-		return (cuberr(INVALID_MAP), ft_free(map),
-			ft_free(test_map), NULL);
-	ft_free(test_map);
+		return (cuberr(INVALID_TEXTURE_FILES), ft_arrfree(map), NULL);
+	if (!_validate_map(&map[6]))
+		return (cuberr(INVALID_MAP), ft_arrfree(map), NULL);
 	return (map);
 }

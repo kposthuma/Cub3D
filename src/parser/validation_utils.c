@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:06 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 11:22:54 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 13:45:47 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,24 @@ int	find_player(char **str)
 		i++;
 	}
 	return (found);
+}
+
+int	count_flags(t_data **head, t_mapflag type)
+{
+	t_data	*tmp;
+	size_t	i;
+
+	i = 0;
+	if (!head && !*head)
+		return (0);
+	tmp = *head;
+	while (tmp)
+	{
+		if (tmp->flag == type)
+			i++;
+		tmp = tmp->next;
+	}
+	return (i);
 }
 
 static bool	_check_map(char **map, size_t x, size_t y)

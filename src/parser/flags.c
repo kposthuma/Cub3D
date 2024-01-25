@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:06:45 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 12:38:15 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 14:25:13 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char	*find_flag(char **arr, const char *flag)
 	while (arr[i])
 	{
 		if (ft_strncmp(arr[i], flag, len) == 0
-			&& ft_isspace(arr[i][len])
 			&& !ft_isempty(&arr[i][len])
 			&& is_flag(arr[i]))
 		{
@@ -67,7 +66,6 @@ int	validate_flag(char **arr, const char *flag)
 		if (found > 1)
 			return (0);
 		if (ft_strncmp(arr[i], flag, len) == 0
-			&& ft_isspace(arr[i][len])
 			&& !ft_isempty(&arr[i][len])
 			&& is_flag(arr[i]))
 			found++;

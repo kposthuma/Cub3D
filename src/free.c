@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/23 10:41:41 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 14:10:29 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 13:10:07 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ void	free_map(t_map	*map)
 	if (map->ceiling)
 		free(map->ceiling);
 	if (map->map)
-	{
-		ft_free((char **)map->map->cont);
-		free(map->map);
-	}
+		ft_arrfree(map->map);
 	if (map)
 		free(map);
 }

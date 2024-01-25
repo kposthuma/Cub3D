@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 16:13:09 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 14:36:06 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,6 @@ static bool	_init_vector(t_vector *vec, int type_size, int size)
 
 static bool	_append_vector(t_vector *vec, char *str)
 {
-	size_t	i;
-
-	i = 0;
-	if (!str)
-		return (true);
 	if (vec->index == vec->length)
 	{
 		vec->length *= 2;
@@ -40,17 +35,10 @@ static bool	_append_vector(t_vector *vec, char *str)
 		if (!vec->content)
 			return (false);
 	}
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i] == '1' || str[i] == '0')
-		i = 0;
-	if (ft_isspace(str[ft_strlen(str) - 1]))
-		str[ft_strlen(str) - 1] = '\0';
-	vec->content[vec->index] = ft_strdup(&str[i]);
-	if (!vec->content[vec->index])
-		return (false);
+	vec->content[vec->index] = str;
+	printf("%s\n", vec->content[vec->index]);
 	vec->index++;
-	return (free(str), true);
+	return (true);
 }
 
 static void	_free_vector(t_vector *vec)
@@ -60,18 +48,6 @@ static void	_free_vector(t_vector *vec)
 	vec->type_size = 0;
 	vec->index = 0;
 	vec->length = 0;
-}
-
-static bool	is_map(char *str)
-{
-	size_t	i;
-
-	i = 0;
-	if (!str)
-		return (false);
-	while (ft_isspace(str[i]))
-		i++;
-	return (str[i] == '1' || str[i] == '0');
 }
 
 /**
@@ -85,27 +61,27 @@ static bool	is_map(char *str)
 char	**read_from_file(int fd)
 {
 	t_vector	vec;
-	char		*str;
-	static char	*lstr = NULL;
-	static bool	map = false;
+	t_data		*map;
+	t_data		*tmp;
 
-	if (!_init_vector(&vec, sizeof(char *), 32))
+	map = read_map_to_struct(fd);
+	if (!map)
 		return (NULL);
-	str = "\0";
-	while (str)
+	if (count_flags(&map, FLAG) > MAX_FLAG_SIZE)
+		return (/* Clean link list */ NULL);
+	if (!_init_vector(&vec, sizeof(char *), 32))
+		return (/* Clean link list */ NULL);
+	tmp = map;
+	while (tmp)
 	{
-		str = get_next_line(fd);
-		if (is_map(str))
-			map = true;
-		if (!str || (ft_isempty(str) && map == false))
-		{
-			free(str);
-			continue ;
-		}
-		if (!_append_vector(&vec, str))
+		if (ft_isempty(tmp->content) && tmp->flag == MAP)
+			return (_free_vector(&vec), NULL); 
+		if (!_append_vector(&vec, tmp->content))
 			return (_free_vector(&vec), NULL);
-		free(lstr);
-		lstr = ft_strdup(str);
+		tmp = tmp->next;
 	}
-	return (free(lstr), vec.content);
+	for (int i = 0; vec.content[i]; i++)
+		printf("Map; %s\n", vec.content[i]);
+	/* Clean link list */
+	return (vec.content);
 }

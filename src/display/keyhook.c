@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:56 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 11:37:58 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 13:10:46 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	walk_player(t_cub3d *cub3d, bool forward, bool hor)
 	float	tempy;
 
 	determine_xy(cub3d->player, hor);
-	map = (char **) cub3d->map->map->cont;
+	map = (char **) cub3d->map->map;
 	if (!forward)
 		turn_around(cub3d);
 	tempx = cub3d->player->location[0] + cub3d->player->dx;

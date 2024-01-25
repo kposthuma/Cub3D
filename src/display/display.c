@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 11:35:48 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 14:34:41 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	draw_screen(mlx_image_t *scr, t_ray *rays,
 
 void	redisplay(t_cub3d *cub3d)
 {
-	init_rays(cub3d->screen, cub3d->player, (char **)cub3d->map->map->cont);
+	init_rays(cub3d->screen, cub3d->player, cub3d->map->map);
 	draw_screen(cub3d->screen, cub3d->player->ray,
 		cub3d->map->walls, cub3d->player->raycount);
 	cub3d->player->dx = 0;
