@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/16 14:59:51 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 13:11:31 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/25 15:10:15 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_rays(mlx_image_t *screen, t_player *player, char **map)
 		player->ray[i].y = player->ray[i].len
 			* sin(player->ray[i].angle) + player->location[1];
 		player->ray[i].wall_ht = (float)(screen->height)
-			* PI / player->ray[i].corr_len * (player->plane_dist);
+			* PI / player->ray[i].corr_len * (player->plane);
 		i++;
 	}
 }
@@ -57,7 +57,7 @@ static float	determine_angle(char **map, t_location loc)
 static t_player	*init_player(t_cub3d *cub, char **map)
 {
 	t_player	*player;
-	
+
 	player = ft_calloc(1, sizeof(t_player));
 	if (!player)
 		return (NULL);
@@ -73,7 +73,7 @@ static t_player	*init_player(t_cub3d *cub, char **map)
 	player->location[1] = (player->start.y * BLOCK) + (BLOCK / 2);
 	player->dx = 0;
 	player->dy = 0;
-	player->plane_dist = BLOCK / 2;
+	player->plane = BLOCK / 2;
 	init_rays(cub->screen, player, map);
 	return (player);
 }
@@ -108,5 +108,6 @@ bool	cub3d_init(t_cub3d *cub, mlx_t *mlx, t_map *data)
 	cub->map = data;
 	cub->mlx = mlx;
 	cub->mouse = true;
+	cub->fps = false;
 	return (true);
 }

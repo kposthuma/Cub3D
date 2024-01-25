@@ -6,16 +6,18 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/24 14:24:35 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 14:32:26 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 14:36:00 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	disable(mlx_key_data_t keydata, void *param)
+void	toggle(mlx_key_data_t keydata, void *param)
 {
 	if (keydata.key == MLX_KEY_Q && keydata.action == MLX_PRESS)
 		((t_cub3d *)param)->mouse = !((t_cub3d *)param)->mouse;
+	if (keydata.key == MLX_KEY_E && keydata.action == MLX_PRESS)
+		((t_cub3d *)param)->fps = !((t_cub3d *)param)->fps;
 }
 
 void	mouse(void *param)

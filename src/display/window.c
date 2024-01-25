@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:02:19 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 14:31:10 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 15:07:54 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,18 @@ static void	fps(void *param)
 
 	mlx = ((t_cub3d *)param)->mlx;
 	new = mlx_get_time();
-	if (new > 0)
+	mlx_delete_image(mlx, fps_counter);
+	if (new > 0 && ((t_cub3d *)param)->fps == true)
 	{
 		text = ft_itoa((int)1.0 / (new - old));
-		mlx_delete_image(mlx, fps_counter);
 		if (text)
 			fps_counter = mlx_put_string((mlx_t *)mlx, text, 10, 10);
+		if (!text || (text && !fps_counter))
+		{
+			mlx_delete_image(mlx, fps_counter);
+			free(text);
+			mlx_close_window(mlx);
+		}
 		free(text);
 	}
 	old = new;
@@ -78,6 +84,6 @@ void	init_window(t_cub3d *cub3d)
 	mlx_loop_hook(cub3d->mlx, &fps, (void *)cub3d);
 	mlx_loop_hook(cub3d->mlx, &mouse, (void *)cub3d);
 	mlx_resize_hook(cub3d->mlx, &resize, (void *)cub3d);
-	mlx_key_hook(cub3d->mlx, &disable, (void *)cub3d);
+	mlx_key_hook(cub3d->mlx, &toggle, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
 }

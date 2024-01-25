@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:56 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 13:10:46 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/25 15:10:39 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,18 @@ static void	walk_player(t_cub3d *cub3d, bool forward, bool hor)
 	if (!forward)
 		turn_around(cub3d);
 	tempx = cub3d->player->location[0] + cub3d->player->dx;
-	if (cub3d->player->dx > 0 && map[(size_t)cub3d->player->location[1] / BLOCK]
-		[(size_t)(tempx + cub3d->player->plane_dist) / BLOCK] == '1')
-		cub3d->player->dx = 0;
-	if (cub3d->player->dx < 0 && map[(size_t)cub3d->player->location[1] / BLOCK]
-		[(size_t)(tempx - cub3d->player->plane_dist) / BLOCK] == '1')
-		cub3d->player->dx = 0;
-	cub3d->player->location[0] += cub3d->player->dx;
 	tempy = cub3d->player->location[1] + cub3d->player->dy;
-	if (cub3d->player->dy < 0 && map[(size_t)(tempy - cub3d->player->plane_dist)
+	if ((cub3d->player->dx > 0 && map[(size_t)cub3d->player->location[1]
+		/ BLOCK][(size_t)(tempx + cub3d->player->plane) / BLOCK] == '1')
+		|| (cub3d->player->dx < 0 && map[(size_t)cub3d->player->location[1]
+		/ BLOCK][(size_t)(tempx - cub3d->player->plane) / BLOCK] == '1'))
+		cub3d->player->dx = 0;
+	if ((cub3d->player->dy < 0 && map[(size_t)(tempy - cub3d->player->plane)
 		/ BLOCK][(size_t)cub3d->player->location[0] / BLOCK] == '1')
+		|| (cub3d->player->dy > 0 && map[(size_t)(tempy + cub3d->player->plane)
+		/ BLOCK][(size_t)cub3d->player->location[0] / BLOCK] == '1'))
 		cub3d->player->dy = 0;
-	if (cub3d->player->dy > 0 && map[(size_t)(tempy + cub3d->player->plane_dist)
-		/ BLOCK][(size_t)cub3d->player->location[0] / BLOCK] == '1')
-		cub3d->player->dy = 0;
+	cub3d->player->location[0] += cub3d->player->dx;
 	cub3d->player->location[1] += cub3d->player->dy;
 }
 

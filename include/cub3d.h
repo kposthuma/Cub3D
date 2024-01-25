@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 14:55:10 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/25 15:12:04 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ typedef struct s_player
 	float		angle;
 	float		dx;
 	float		dy;
-	float		plane_dist;
+	float		plane;
 	t_ray		*ray;
 	size_t		raycount;
 }	t_player;
@@ -148,6 +148,7 @@ typedef struct s_cub3d
 	mlx_image_t	*screen;
 	t_player	*player;
 	bool		mouse;
+	bool		fps;
 }	t_cub3d;
 
 // list.c
@@ -174,7 +175,7 @@ void		redisplay(t_cub3d *cub3d);
 float		ray_len(t_player *player, size_t i, char **map);
 // mouse.c
 void		mouse(void *param);
-void		disable(mlx_key_data_t keydata, void *param);
+void		toggle(mlx_key_data_t keydata, void *param);
 
 int			ft_strmapiteri(char **arr, int (*f)(char *, int));
 int			ft_access(char *filename);
