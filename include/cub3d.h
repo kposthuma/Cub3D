@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 14:02:50 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/25 14:55:10 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,9 +152,9 @@ typedef struct s_cub3d
 
 // list.c
 t_data		*find_node(t_data **head, t_mapflag flag);
-t_data		*new_node(void *cont, t_mapflag flag);
-void		clear_node(t_data **head, t_data *node);
+t_data		*new_node(char *content, t_mapflag flag);
 void		add_node(t_data **head, t_data *node);
+void		clear_nodes(t_data **lst);
 // maputils.c
 t_location	find_loc(char **map, char *arr);
 // color_utils.c

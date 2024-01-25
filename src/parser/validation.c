@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:13 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 14:32:25 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/25 15:00:21 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ static int	_validate_map(char **map)
 char	**import_map(char *filename)
 {
 	char	**map;
-	char	**test_map;
 
 	if (!ft_accesstype(filename, MAP_FILE_TYPE))
 		return (cuberr(INVALID_FILE), NULL);

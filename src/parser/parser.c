@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:24 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 14:44:31 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/25 14:48:59 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static bool	_init_textures(t_wall *walls, char *str, t_direction flag)
 	image = mlx_load_png(str);
 	if (!image)
 		return (false);
-	printf("Texture: %s\n", str);
 	if (image->width != image->height)
 		return (mlx_delete_texture(image), false);
 	walls->direction[flag] = image;

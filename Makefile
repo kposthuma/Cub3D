@@ -6,13 +6,13 @@
 #    By: kposthum <kposthum@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/12/14 11:38:49 by kposthum      #+#    #+#                  #
-#    Updated: 2024/01/24 16:03:28 by kposthum      ########   odam.nl          #
+#    Updated: 2024/01/25 15:07:05 by cbijman       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := cub3d
 CC := cc -Wall -Werror -Wextra -O3
-# CC := cc -g3 -fsanitize=address
+#CC := cc -g3 -fsanitize=address
 
 SRC_DIR = ./src
 OBJ_DIR = ./obj
@@ -44,6 +44,7 @@ FILES	=	ft_isempty \
 			flags \
 			validation \
 			validation_utils \
+			lexer
 
 vpath %.c	$(SRC_DIR) \
 			$(SRC_DIR)/parser \
@@ -75,9 +76,9 @@ $(LIBMLX):
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-# valgrind: CC += -O3
-# valgrind: re
-#	# valgrind --leak-check=full --suppressions=mlx42.supp ./cub3d map/test.cub
+ valgrind: CC += -O3
+ valgrind: re
+	valgrind --leak-check=full --suppressions=mlx42.supp ./cub3d map/test.cub
 	
 
 clean:

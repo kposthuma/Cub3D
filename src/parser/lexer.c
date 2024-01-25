@@ -6,7 +6,7 @@
 /*   By: cbijman <cbijman@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 11:36:39 by cbijman       #+#    #+#                 */
-/*   Updated: 2024/01/25 14:38:48 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/25 14:59:27 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ static bool _add_flag(t_data **head, char *str)
 	t_data *nnode;
 
 	if (find_node(head, MAP))
-		return (false);
+		return (free(str), false);
 	if (ft_isempty(str))
-		return (true);
-	nnode = new_node(ft_trim_whitespace(ft_strdup(str)), FLAG);
+		return (free(str), true);
+	nnode = new_node(ft_trim_whitespace(str), FLAG);
 	if (!nnode)
-		return (false);
+		return (free(str), false);
 	add_node(head, nnode);
 	return (true);
 }
@@ -75,9 +75,9 @@ static bool _add_map(t_data **head, char *str)
 {
 	t_data *nnode;
 
-	nnode = new_node(ft_strdup(str), MAP);
+	nnode = new_node(str, MAP);
 	if (!nnode)
-		return (false);
+		return (free(str), false);
 	add_node(head, nnode);
 	return (true);
 }
@@ -104,10 +104,10 @@ t_data *read_map_to_struct(int fd)
 		if (_is_map_line(str))
 		{
 			if (!_add_map(&list, str))
-				return (free(str), /* Delete linklist */ NULL);
+				return (free(str), clear_nodes(&list), NULL);
 		}
 		else if (!_add_flag(&list, str))
-			return (free(str), /* Delete linklist */ NULL);
+			return (free(str), clear_nodes(&list), NULL);
 	}
 	return (list);
 }

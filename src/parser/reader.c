@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:18 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 14:36:06 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/25 14:58:20 by cbijman       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static bool	_append_vector(t_vector *vec, char *str)
 	if (vec->index == vec->length)
 	{
 		vec->length *= 2;
-		vec->content = ft_realloc(vec->content,
-				vec->index * vec->type_size,
+		vec->content = ft_realloc(vec->content, vec->index * vec->type_size,
 				vec->length * vec->type_size);
 		if (!vec->content)
 			return (false);
 	}
-	vec->content[vec->index] = str;
-	printf("%s\n", vec->content[vec->index]);
+	vec->content[vec->index] = ft_strdup(str);
+	if (!vec->content[vec->index])
+		return (NULL);
 	vec->index++;
 	return (true);
 }
@@ -53,7 +53,7 @@ static void	_free_vector(t_vector *vec)
 /**
  * Reads data from a file descriptor and stores it in
  * a dynamically allocated array of strings.
- * 
+ *
  * @param fd The file descriptor to read from.
  * @return	A pointer to the array of strings containing
  * 			the read data, or NULL if an error occurs.
@@ -68,20 +68,17 @@ char	**read_from_file(int fd)
 	if (!map)
 		return (NULL);
 	if (count_flags(&map, FLAG) > MAX_FLAG_SIZE)
-		return (/* Clean link list */ NULL);
+		return (clear_nodes(&map), NULL);
 	if (!_init_vector(&vec, sizeof(char *), 32))
-		return (/* Clean link list */ NULL);
+		return (clear_nodes(&map), NULL);
 	tmp = map;
 	while (tmp)
 	{
 		if (ft_isempty(tmp->content) && tmp->flag == MAP)
-			return (_free_vector(&vec), NULL); 
+			return (_free_vector(&vec), clear_nodes(&map), NULL);
 		if (!_append_vector(&vec, tmp->content))
-			return (_free_vector(&vec), NULL);
+			return (_free_vector(&vec), clear_nodes(&map), NULL);
 		tmp = tmp->next;
 	}
-	for (int i = 0; vec.content[i]; i++)
-		printf("Map; %s\n", vec.content[i]);
-	/* Clean link list */
-	return (vec.content);
+	return (clear_nodes(&map), vec.content);
 }
