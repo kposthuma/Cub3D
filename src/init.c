@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/16 14:59:51 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 15:10:15 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 17:14:48 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_rays(mlx_image_t *screen, t_player *player, char **map)
 		player->ray[i].y = player->ray[i].len
 			* sin(player->ray[i].angle) + player->location[1];
 		player->ray[i].wall_ht = (float)(screen->height)
-			* PI / player->ray[i].corr_len * (player->plane);
+			* 4 / player->ray[i].corr_len * (player->plane);
 		i++;
 	}
 }
@@ -73,7 +73,7 @@ static t_player	*init_player(t_cub3d *cub, char **map)
 	player->location[1] = (player->start.y * BLOCK) + (BLOCK / 2);
 	player->dx = 0;
 	player->dy = 0;
-	player->plane = BLOCK / 2;
+	player->plane = BLOCK / 2 - BLOCK / 10;
 	init_rays(cub->screen, player, map);
 	return (player);
 }

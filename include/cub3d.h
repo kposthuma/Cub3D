@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 16:48:37 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 17:17:59 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,9 @@ void		redisplay(t_cub3d *cub3d);
 // ray.c
 float		ray_len(t_player *player, size_t i, char **map);
 // mouse.c
-void		mouse(void *param);
 void		toggle(mlx_key_data_t keydata, void *param);
+bool		player_collision_y(t_cub3d *cub3d, char **map, float tempy);
+bool		player_collision_x(t_cub3d *cub3d, char **map, float tempx);
 
 int			ft_strmapiteri(char **arr, int (*f)(char *, int));
 int			ft_access(char *filename);

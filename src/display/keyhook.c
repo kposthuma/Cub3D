@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:56 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 16:48:53 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 17:18:50 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,9 @@ static void	walk_player(t_cub3d *cub3d, bool forward, bool hor)
 		turn_around(cub3d);
 	tempx = cub3d->player->location[0] + cub3d->player->dx;
 	tempy = cub3d->player->location[1] + cub3d->player->dy;
-	if ((cub3d->player->dx > 0 && map[(size_t)cub3d->player->location[1]
-				/ BLOCK][(size_t)(tempx + cub3d->player->plane) / BLOCK] == '1')
-		|| (cub3d->player->dx < 0 && map[(size_t)cub3d->player->location[1]
-		/ BLOCK][(size_t)(tempx - cub3d->player->plane) / BLOCK] == '1'))
+	if (player_collision_x(cub3d, map, tempx))
 		cub3d->player->dx = 0;
-	if ((cub3d->player->dy < 0 && map[(size_t)(tempy - cub3d->player->plane)
-			/ BLOCK][(size_t)cub3d->player->location[0] / BLOCK] == '1')
-		|| (cub3d->player->dy > 0 && map[(size_t)(tempy + cub3d->player->plane)
-		/ BLOCK][(size_t)cub3d->player->location[0] / BLOCK] == '1'))
+	if (player_collision_y(cub3d, map, tempy))
 		cub3d->player->dy = 0;
 	cub3d->player->location[0] += cub3d->player->dx;
 	cub3d->player->location[1] += cub3d->player->dy;
