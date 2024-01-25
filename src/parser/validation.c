@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:13 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 15:00:21 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/25 16:47:57 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ static int	_validate_flags(char **map)
  */
 static int	_validate_map(char **map)
 {
-	char **clone;
-	
+	char	**clone;
+
 	clone = ft_arrdup(map);
 	if (!clone)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: cbijman <cbijman@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 11:36:39 by cbijman       #+#    #+#                 */
-/*   Updated: 2024/01/25 14:59:27 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/25 16:47:39 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
  * @param str The string to be checked.
  * @return True if the string is a valid map line, false otherwise.
  */
-static bool _is_map_line(char *str)
+static bool	_is_map_line(char *str)
 {
-	static bool started = false;
-	size_t i;
+	static bool	started = false;
+	size_t		i;
 
 	if (!str)
 		return (false);
@@ -49,9 +49,9 @@ static bool _is_map_line(char *str)
  * @param str The string representing the flag to be added.
  * @return Returns true if the flag was successfully added, false otherwise.
  */
-static bool _add_flag(t_data **head, char *str)
+static bool	_add_flag(t_data **head, char *str)
 {
-	t_data *nnode;
+	t_data	*nnode;
 
 	if (find_node(head, MAP))
 		return (free(str), false);
@@ -71,9 +71,9 @@ static bool _add_flag(t_data **head, char *str)
  * @param str The string representing the map.
  * @return True if the map node was successfully added, false otherwise.
  */
-static bool _add_map(t_data **head, char *str)
+static bool	_add_map(t_data **head, char *str)
 {
-	t_data *nnode;
+	t_data	*nnode;
 
 	nnode = new_node(str, MAP);
 	if (!nnode)
@@ -86,12 +86,13 @@ static bool _add_map(t_data **head, char *str)
  * Reads the map from a file descriptor and stores it in a linked list structure.
  *
  * @param fd The file descriptor of the map file.
- * @return A pointer to the linked list structure containing the map data, or NULL if an error occurs.
+ * @return A pointer to the linked list structure containing the map data,
+ *  or NULL *  if an error occurs.
  */
-t_data *read_map_to_struct(int fd)
+t_data	*read_map_to_struct(int fd)
 {
-	t_data  *list;
-	char    *str;
+	t_data	*list;
+	char	*str;
 
 	list = NULL;
 	str = "\0";

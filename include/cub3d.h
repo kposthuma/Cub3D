@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 15:12:04 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/25 16:48:37 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,6 @@ float		collision_left(t_player *player, size_t i, char **map);
 void		determine_wall(t_player *player, size_t i, float x, float y);
 
 t_data		*read_map_to_struct(int fd);
-int	count_flags(t_data **head, t_mapflag type);
+int			count_flags(t_data **head, t_mapflag type);
 
 #endif
