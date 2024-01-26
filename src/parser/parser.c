@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:24 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 14:48:59 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/26 12:54:45 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,40 @@ static bool	_init_textures(t_wall *walls, char *str, t_direction flag)
 	return (true);
 }
 
+static size_t	count_char(char *str, char c)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			j++;
+		i++;
+	}
+	return (j);
+}
+
 static t_color	*_init_color(char *str)
 {
 	t_color	*color;
 	char	**color_values;
 
 	if (!str)
-		return (NULL);
+		return (cuberr(INVALID_COLOR), NULL);
+	if (count_char(str, ',') != 2)
+		return (cuberr(INVALID_COLOR), NULL);
 	color_values = ft_split(ft_trim_whitespace(str), ',');
 	if (!color_values)
-		return (NULL);
+		return (cuberr(NOT_ENOUGH_MEMORY), NULL);
 	if (ft_arrlen(color_values) != 3)
-		return (ft_free(color_values), NULL);
+		return (ft_free(color_values), cuberr(INVALID_COLOR), NULL);
 	if (!ft_isnumber(color_values[0])
 		|| !ft_isnumber(color_values[1])
 		|| !ft_isnumber(color_values[2]))
-		return (NULL);
+		return (cuberr(INVALID_COLOR), NULL);
 	color = ft_newcolor(ft_atoi(color_values[0]),
 			ft_atoi(color_values[1]),
 			ft_atoi(color_values[2]), 0xFF);
@@ -64,10 +82,10 @@ static bool	initialize_map(t_map *map, char **flags)
 		return (false);
 	map->floor = _init_color(find_flag(flags, FLOOR_FLAG));
 	if (!map->floor)
-		return (false);
+		return (cuberr(INVALID_COLOR), false);
 	map->ceiling = _init_color(find_flag(flags, CEILING_FLAG));
 	if (!map->ceiling)
-		return (false);
+		return (cuberr(INVALID_COLOR), false);
 	return (true);
 }
 

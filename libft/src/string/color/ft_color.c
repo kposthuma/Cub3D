@@ -6,7 +6,7 @@
 /*   By: cbijman <cbijman@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/18 15:03:14 by cbijman       #+#    #+#                 */
-/*   Updated: 2024/01/23 12:24:40 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/26 12:53:27 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@ static int	_is_color(int c)
 	if (c >= 0 && c <= 255)
 		return (1);
 	return (0);
-}
-
-//Not Implemented yet!
-t_color	*ft_str_newcolor(char **arr)
-{
-	(void) arr;
-	return (ft_newcolor(255, 255, 255, 255));
 }
 
 t_color	*ft_newcolor(int r, int g, int b, int a)

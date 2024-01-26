@@ -6,7 +6,7 @@
 /*   By: cbijman <cbijman@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/25 11:36:39 by cbijman       #+#    #+#                 */
-/*   Updated: 2024/01/25 16:47:39 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/26 13:29:45 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static bool	_add_flag(t_data **head, char *str)
 		return (free(str), true);
 	nnode = new_node(ft_trim_whitespace(str), FLAG);
 	if (!nnode)
-		return (free(str), false);
+		return (cuberr(NOT_ENOUGH_MEMORY), free(str), false);
 	add_node(head, nnode);
 	return (true);
 }
@@ -108,7 +108,7 @@ t_data	*read_map_to_struct(int fd)
 				return (free(str), clear_nodes(&list), NULL);
 		}
 		else if (!_add_flag(&list, str))
-			return (free(str), clear_nodes(&list), NULL);
+			return (clear_nodes(&list), NULL);
 	}
 	return (list);
 }

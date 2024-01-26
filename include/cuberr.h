@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:20 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/23 13:54:53 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/26 12:50:48 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # define ERR_INVALID_MAP		"Invalid map"
 # define ERR_INVALID_FLAGS		"Invalid flags or not all necessary flags"
 # define ERR_WEIRD_FLAGS		"Invalid flag found"
-# define ERR_INVALID_TEXTURES	"textures are not found or cannot be loaded"
+# define ERR_INVALID_TEXTURES	"Textures are not found or cannot be loaded"
+# define ERR_INVALID_COLOR		"Invalid color input"
 # define ERR_NO_MEMORY			"Not enough memory for allocation"
 # define ERR_NO_ERROR			"No Error just not working..."
 
@@ -32,6 +33,7 @@ typedef enum e_errortype
 	INVALID_FLAGS,
 	WEIRD_FLAGS,
 	INVALID_TEXTURE_FILES,
+	INVALID_COLOR,
 	NOT_ENOUGH_MEMORY,
 	SPARERIB_EXPRESS
 }	t_cuberror_type;

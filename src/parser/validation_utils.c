@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:06 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 13:45:47 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/26 12:26:02 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ int	count_flags(t_data **head, t_mapflag type)
 static bool	_check_map(char **map, size_t x, size_t y)
 {
 	map[y][x] = '1';
+	if (!map[y + 1] || !map[y][x + 1] || !map[y + 1][x]
+		|| map[y][x + 1] == ' ' || map[y + 1][x] == ' '
+		|| map[y][x - 1] == ' ' || map[y - 1][x] == ' ')
+		return (false);
 	if (map[y][x + 1] == '0')
 	{
 		if (!_check_map(map, x + 1, y))
@@ -77,10 +81,6 @@ static bool	_check_map(char **map, size_t x, size_t y)
 		if (!_check_map(map, x, y + 1))
 			return (false);
 	}
-	if (!map[y][x + 1] || !map[y + 1][x]
-		|| map[y][x + 1] == ' ' || map[y + 1][x] == ' '
-		|| map[y][x - 1] == ' ' || map[y - 1][x] == ' ')
-		return (false);
 	return (true);
 }
 

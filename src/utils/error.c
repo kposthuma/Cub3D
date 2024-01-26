@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:03:31 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/22 18:18:44 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/26 12:50:31 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	cuberr(t_cuberror_type type)
 		ft_putendl_fd(ERR_WEIRD_FLAGS, STDERR_FILENO);
 	if (type == INVALID_TEXTURE_FILES)
 		ft_putendl_fd(ERR_INVALID_TEXTURES, STDERR_FILENO);
+	if (type == INVALID_COLOR)
+		ft_putendl_fd(ERR_INVALID_COLOR, STDERR_FILENO);
 	if (type == NOT_ENOUGH_MEMORY)
 		ft_putendl_fd(ERR_NO_MEMORY, STDERR_FILENO);
 	if (type == SPARERIB_EXPRESS)
