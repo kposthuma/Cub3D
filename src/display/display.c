@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:48 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 14:34:41 by cbijman       ########   odam.nl         */
+/*   Updated: 2024/01/27 11:24:05 by koen          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ static size_t	determine_tex_start(t_ray ray, uint32_t width)
 	else
 		temp = ray.y / (float)BLOCK;
 	temp = temp - floor(temp);
-	return ((size_t)(temp * width));
+	if (ray.wall == NORTH || ray.wall == EAST)
+		return ((size_t)(temp * width));
+	else
+		return ((size_t)((1 - temp) * width));
 }
 
 static uint32_t	get_pixel(mlx_texture_t *tex, size_t x, size_t y)
