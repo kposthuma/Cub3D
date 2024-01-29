@@ -6,11 +6,27 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:07:34 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:58:27 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/29 11:27:48 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+size_t	count_char(char *str, char c)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			j++;
+		i++;
+	}
+	return (j);
+}
 
 char	*ft_trim_whitespace(char *s)
 {

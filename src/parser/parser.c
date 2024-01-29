@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 11:04:24 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/26 12:54:45 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/29 11:33:57 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,18 @@ static bool	_init_textures(t_wall *walls, char *str, t_direction flag)
 	return (true);
 }
 
-static size_t	count_char(char *str, char c)
+static bool	test_len(char **arr, size_t len)
 {
 	size_t	i;
-	size_t	j;
 
 	i = 0;
-	j = 0;
-	while (str[i])
+	while (arr[i])
 	{
-		if (str[i] == c)
-			j++;
+		if (ft_strlen(arr[i]) > len)
+			return (false);
 		i++;
 	}
-	return (j);
+	return (true);
 }
 
 static t_color	*_init_color(char *str)
@@ -50,18 +48,18 @@ static t_color	*_init_color(char *str)
 	char	**color_values;
 
 	if (!str)
-		return (cuberr(INVALID_COLOR), NULL);
+		return (NULL);
 	if (count_char(str, ',') != 2)
-		return (cuberr(INVALID_COLOR), NULL);
+		return (NULL);
 	color_values = ft_split(ft_trim_whitespace(str), ',');
 	if (!color_values)
 		return (cuberr(NOT_ENOUGH_MEMORY), NULL);
-	if (ft_arrlen(color_values) != 3)
-		return (ft_free(color_values), cuberr(INVALID_COLOR), NULL);
+	if (ft_arrlen(color_values) != 3 || !test_len(color_values, 3))
+		return (ft_free(color_values), NULL);
 	if (!ft_isnumber(color_values[0])
 		|| !ft_isnumber(color_values[1])
 		|| !ft_isnumber(color_values[2]))
-		return (cuberr(INVALID_COLOR), NULL);
+		return (ft_free(color_values), NULL);
 	color = ft_newcolor(ft_atoi(color_values[0]),
 			ft_atoi(color_values[1]),
 			ft_atoi(color_values[2]), 0xFF);

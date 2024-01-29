@@ -6,7 +6,7 @@
 /*   By: kposthum <kposthum@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 14:08:11 by kposthum      #+#    #+#                 */
-/*   Updated: 2024/01/25 17:17:59 by kposthum      ########   odam.nl         */
+/*   Updated: 2024/01/29 11:28:14 by kposthum      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@
 # endif
 
 # ifndef HEIGHT
-#  define HEIGHT 900
+#  define HEIGHT 450
 # endif
 
 # ifndef WIDTH
-#  define WIDTH 1600
+#  define WIDTH 800
 # endif
 
 # ifndef BLOCK
@@ -191,6 +191,7 @@ int			check_map(char **map);
 int			find_player(char **str);
 t_map		*read_map_from_file(char *filename);
 int			validate_flag(char **arr, const char *flag_type);
+size_t		count_char(char *str, char c);
 
 void		set_colorc(mlx_image_t *image, t_color *color, size_t size);
 void		ft_free(char **arg);

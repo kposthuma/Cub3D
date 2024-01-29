@@ -3,7 +3,7 @@ NO ./img/grass.png
 SO ./img/wood.png
 WE ./img/brick.png
 
-C 255,    206,235
+C 255,4294967296,235
 F 60,60,60
 
 1111111111111111
